@@ -1,11 +1,14 @@
 @import 'variables';
 
+body {
+  background-color: #30404d;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
-  color: $color;
 
   h1 {
-    color: #f00;
+    color: deeppink;
   }
 }
