@@ -8,9 +8,9 @@ React turn based tactics playground
 - Redux hooks api https://react-redux.js.org/api/hooks
 - no images, html and svg only
 - sass support
-- or better https://www.styled-components.com/
+- or better https://www.styled-components.com/ like here https://github.com/strapi/buffet
 - some new animation engine https://www.react-spring.io/ or https://github.com/FormidableLabs/react-animations
-- Blueprint (or AntDesign or antything other then Bootstrap to try and learn new tricks)
+- Blueprint (or AntDesign or antything other then Bootstrap/Reactstrap to try and learn new tricks)
 - [Blueprint colors](https://blueprintjs.com/docs/#core/colors)
 - edited and runing on public codesandbox
 - connected and hosted on public github repo

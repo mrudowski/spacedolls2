@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './brain/store';
 import CounterComponent from './Counter';
+import Board from './Board';
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <h1>SpaceDolls</h1>
         <h2>Start editing to see some magic happen!</h2>
         <CounterComponent />
+        <Board />
       </div>
     </Provider>
   );
