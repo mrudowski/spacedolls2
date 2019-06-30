@@ -26,12 +26,12 @@ React turn based tactics playground
 
 ## Basic
 
-screen:
+### Coordinates system
 
-- row, top, x(?)
-- col, left, y(?)
+**like screen (x,y)**
 
-chess board?
+- x from 0 to width (css left, column)
+- y from 0 to height (css top, row)
 
-- A, top?
-- 1
+https://koenig-media.raywenderlich.com/uploads/2013/05/Tiled-java-Coordinates.jpg
+https://omaharentalads.com/explore/Java-drawing-pixel/#gal_post_6051_java-drawing-pixel-3.png

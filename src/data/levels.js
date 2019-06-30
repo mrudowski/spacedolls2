@@ -7,7 +7,7 @@ const levels = {
       height: 5
     },
     tiles: {},
-    walls: [{ x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }],
+    walls: [{ tile: '2,1' }, { tile: '2,2' }, { tile: '2,3' }],
     dolls: [
       { id: 'toi', team: 'dolls', x: 1, y: 1 },
       { id: 'cleo', team: 'dolls', x: 0, y: 3 },
