@@ -9,9 +9,11 @@ const defaultProps = {};
 const TileInfo = ({ tile, levelData }) => {
   return (
     <Styled>
+      <h4>Selected</h4>
       tileId: {tile}
       <br />
-      occupiedBy/content:
+      occupiedBy/content:{' '}
+      {levelData.get(tile).occupiedBy.length > 0 ? 'yes' : 'none'}
     </Styled>
   );
 };
