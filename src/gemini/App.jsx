@@ -17,16 +17,43 @@ const getLevelData = level => {
   const board = levels[level];
   const boardSize = board.size.width * board.size.height;
 
-  const tiles = {};
-  for (let i = 0; i < boardSize; i++) {
-    const x = getTileX(board, i);
-    const y = getTileY(board, i);
-    const id = getTileId(x, y);
-    tiles[id] = {
-      id: id,
-      occupiedBy: []
-    };
-  }
+  // Map vs Object, mutation, spread, assign... with in depth discussion in comments section
+  // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
+
+  // [[ 1, 'one' ],[ 2, 'two' ]])
+
+  var tileMap = new Map(
+    Array(boardSize)
+      .fill()
+      .map((val, i) => {
+        const x = getTileX(board, i);
+        const y = getTileY(board, i);
+        const id = getTileId(x, y);
+        return [
+          id,
+          {
+            id: id,
+            occupiedBy: []
+          }
+        ];
+      })
+  );
+  console.log('tileMap', tileMap);
+  //  var result = new Map(arr.map(i => [i.key, i.val]));
+
+  const tiles = Array(boardSize)
+    .fill()
+    .reduce(function(map, obj, i) {
+      const x = getTileX(board, i);
+      const y = getTileY(board, i);
+      const id = getTileId(x, y);
+      map[id] = {
+        id: id,
+        occupiedBy: []
+      };
+      return map;
+    }, {});
+
   return tiles;
 
   // return Array(boardSize)
@@ -40,7 +67,7 @@ const getLevelData = level => {
 };
 
 let levelData = getLevelData(currentLevel);
-console.log('levelData', levelData);
+console.log('levelData1', levelData);
 
 export default function App() {
   return (
