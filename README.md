@@ -23,3 +23,15 @@ React turn based tactics playground
 - no ajax for now
 - with tests?
 - Redux hooks without any optimization (memoizing) for now
+
+## Basic
+
+screen:
+
+- row, top, x(?)
+- col, left, y(?)
+
+chess board?
+
+- A, top?
+- 1

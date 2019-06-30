@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StyledTile from './styled/Tile';
+import StyledWall from './styled/Wall';
 
 const propTypes = {};
 
@@ -9,17 +9,13 @@ const defaultProps = {};
 const getTileX = id => id.split(',')[0];
 const getTileY = id => id.split(',')[1];
 
-const Tile = ({ id }) => {
+const Wall = ({ id }) => {
   const x = getTileX(id);
   const y = getTileY(id);
-  return (
-    <StyledTile>
-      <div className="coordinates">{id}</div>
-    </StyledTile>
-  );
+  return <StyledWall posX={x} posY={y} />;
 };
 
-Tile.propTypes = propTypes;
-Tile.defaultProps = defaultProps;
+Wall.propTypes = propTypes;
+Wall.defaultProps = defaultProps;
 
-export default Tile;
+export default Wall;
