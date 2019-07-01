@@ -20,36 +20,26 @@ const getTileId = (x, y) => `${x},${y}`;
 // const getTileX = (board, tileId) => tileId % board.size.width;
 
 // floor
-const renderTiles = level => {
-  const board = levels[level];
-  const boardSize = board.size.width * board.size.height;
-  // for (let x=0; x<board.size.height; x++) {
-
-  // }
-  return Array(boardSize)
-    .fill()
-    .map((_, i) => {
-      const x = getTileX(board, i);
-      const y = getTileY(board, i);
-      const id = getTileId(x, y);
-      return <Tile id={id} />;
-    });
-};
-
-const renderWalls = level => {
-  const board = levels[level];
-  return board.walls.map((wall, index) => {
-    const id = wall.tile;
-    return <Wall id={id} />;
+const renderTiles = board => {
+  return [...board].map(([key, value]) => {
+    return <Tile id={key} key={`tile-${key}`} />;
   });
 };
 
+const renderWalls = level => {
+  // const board = levels[level];
+  // return board.walls.map((wall, index) => {
+  //   const id = wall.tile;
+  //   return <Wall id={id} key={`wall-${id}`} />;
+  // });
+};
+
 const Board = props => {
-  const { level } = props;
+  const { data } = props;
   return (
     <StyledBoard>
-      {renderTiles(level)}
-      {renderWalls(level)}
+      {renderTiles(data)}
+      {renderWalls(data)}
     </StyledBoard>
   );
 };

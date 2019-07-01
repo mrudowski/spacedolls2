@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Button } from '@blueprintjs/core';
+// import { Button } from '@blueprintjs/core';
 import {
   INCREMENT,
   increment,
   decrement
-} from './brain/reducers/counterActions';
+} from './redux/reducers/counterActions';
 
 const StyledCounter = styled.div`
   color: deeppink;
@@ -41,8 +41,8 @@ export default function CounterComponent({ className }) {
         Counter: {counter.count} {counter.test}
       </div>
       <StyledHr />
-      <Button onClick={increment3}>Increment counter</Button>
-      <Button onClick={() => dispatch(increment())}>Increment counter</Button>
+      <button onClick={increment3}>Increment counter</button>
+      <button onClick={() => dispatch(increment())}>Increment counter</button>
     </StyledCounter>
   );
 }

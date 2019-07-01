@@ -1,4 +1,4 @@
-import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE } from './levelActions';
+import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE } from '../actionTypes';
 
 const initialState = {
   currentLevelId: null,

@@ -1,6 +1,4 @@
-export const CHANGE_LEVEL = 'CHANGE_LEVEL';
-export const SET_BOARD = 'SET_BOARD';
-export const SELECT_TILE = 'SELECT_TILE';
+import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE } from './actionTypes';
 
 export const changeLevel = levelId => ({
   type: CHANGE_LEVEL,
