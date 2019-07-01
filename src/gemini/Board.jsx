@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import map from 'lodash/map';
 import levels from '../data/levels';
 import Tile from './Tile';
 import Wall from './Wall';
@@ -13,33 +14,32 @@ const defaultProps = {
   level: '1'
 };
 
-const getTileX = (board, tileId) => tileId % board.size.width;
-const getTileY = (board, tileId) => Math.floor(tileId / board.size.height);
-const getTileId = (x, y) => `${x},${y}`;
-
-// const getTileX = (board, tileId) => tileId % board.size.width;
-
 // floor
-const renderTiles = board => {
-  return [...board].map(([key, value]) => {
-    return <Tile id={key} key={`tile-${key}`} />;
-  });
+const renderTiles = tileMap => {
+  // tileMap - tileMap.entries()
+  //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
+  return map(tileMap, (tile, tileId) => <Tile id={tileId} key={`${tileId}`} />);
 };
 
-const renderWalls = level => {
-  // const board = levels[level];
-  // return board.walls.map((wall, index) => {
-  //   const id = wall.tile;
-  //   return <Wall id={id} key={`wall-${id}`} />;
+const renderWalls = tileMap => {
+  // return [...tileMap].map(([key, value]) => {
+  //   if (value.occupiedBy.indexOf('wall') !== -1) {
+  //     return <Wall id={key} key={`${key}`} />;
+  //   }
   // });
+  return map(tileMap, (tile, tileId) => {
+    if (tile.occupiedBy.indexOf('wall') !== -1) {
+      return <Wall id={tileId} key={`${tileId}`} />;
+    }
+  });
 };
 
 const Board = props => {
   const { data } = props;
   return (
     <StyledBoard>
-      {renderTiles(data)}
-      {renderWalls(data)}
+      <div>{renderTiles(data)}</div>
+      <div>{renderWalls(data)}</div>
     </StyledBoard>
   );
 };

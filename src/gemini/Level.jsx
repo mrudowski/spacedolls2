@@ -5,7 +5,7 @@ import TileInfo from './TileInfo';
 import levels from '../data/levels';
 import { changeLevel } from './redux/actions';
 import { getCurrentLevelId } from './redux/selectors';
-import { getLevel, prepareBoardData } from './brain/utils';
+import { getLevel, prepareBoardData, prepareBoardData2 } from './brain/utils';
 
 let selectedTile = '0,0';
 
@@ -23,16 +23,14 @@ export default function Level() {
   if (!currentLevelId) {
     return null;
   }
-
   let boardData = prepareBoardData(currentLevelId);
-  console.log('levelData1', boardData);
+  console.log('boardData', boardData);
   const levelData = getLevel(currentLevelId);
 
   return (
     <div>
       <h4>
-        level id: {levelData.id} _ level name:{' '}
-        {levelData.name}
+        level id: {levelData.id} _ level name: {levelData.name}
       </h4>
       <hr />
       <div style={{ position: 'relative', textAlign: 'left' }}>

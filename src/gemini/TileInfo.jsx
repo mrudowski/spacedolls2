@@ -13,7 +13,7 @@ const TileInfo = ({ tile, levelData }) => {
       tileId: {tile}
       <br />
       occupiedBy/content:{' '}
-      {levelData.get(tile).occupiedBy.length > 0 ? 'yes' : 'none'}
+      {levelData[tile].occupiedBy.length > 0 ? 'yes' : 'none'}
     </Styled>
   );
 };
