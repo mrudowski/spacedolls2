@@ -6,7 +6,7 @@ import {
   INCREMENT,
   increment,
   decrement
-} from './redux/reducers/counterActions';
+} from '../redux/reducers/counterActions';
 
 const StyledCounter = styled.div`
   color: deeppink;

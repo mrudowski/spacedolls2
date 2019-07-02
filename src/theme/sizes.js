@@ -1,5 +1,5 @@
 const sizes = {
-  tileSize: 40,
+  tileSize: '40px'
 };
 
 export default sizes;

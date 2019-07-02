@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 // import { FocusStyleManager } from '@blueprintjs/core';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme/theme';
-import GlobalStyle from './gemini/styled/GlobalStyle';
-import App from './gemini/App';
+import GlobalStyle from './styled/GlobalStyle';
+import App from './components/App';
 
 // import 'normalize.css/normalize.css';
 // import '@blueprintjs/core/src/components/button/_button.scss';

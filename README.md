@@ -17,12 +17,21 @@ React turn based tactics playground
 - with working Redux tools and history preview
 - for fun and learn
 
-## Secondary features
+### Secondary features
 
 - no font icons?
 - no ajax for now
 - with tests?
 - Redux hooks without any optimization (memoizing) for now
+
+### Other things (and thinks) that came out during the process
+
+- we need `polished` because styled component isn't enough :(
+- reboot, normalized, reset... we still do the same things in differents tech
+- `Immutable`, `Immer` ... - I finally understand the big 'Why' behind you
+- do I really still need `lodash`?
+- es6 `Map` is... but I will try again
+- `blueprintjs` is a complete solution not the simple set of components that we can grab and use outside of it
 
 ## Basic
 

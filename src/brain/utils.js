@@ -1,9 +1,12 @@
 import produce from 'immer';
-import levels from '../../data/levels';
+import levels from '../data/levels';
 
 export const getLevel = levelId => levels[levelId];
 // export const getLevelName = levelId => getLevel(levelId).name;
 // export const getBoardSize = levelId => getLevel(levelId).size;
+
+export const getTileXFromId = id => id.split(',')[0];
+export const getTileYFromId = id => id.split(',')[1];
 
 export const getTileXFromIndex = (index, width) => index % width;
 export const getTileYFromIndex = (index, height) => Math.floor(index / height);

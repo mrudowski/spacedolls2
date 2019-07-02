@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
-import levels from '../data/levels';
-import { changeLevel } from './redux/actions';
-import { getCurrentLevelId } from './redux/selectors';
-import { getLevel, prepareBoardData, prepareBoardData2 } from './brain/utils';
-
-let selectedTile = '0,0';
+import { changeLevel } from '../redux/actions';
+import { getCurrentLevelId, getSelectedTileId } from '../redux/selectors';
+import { getLevel, prepareBoardData } from '../brain/utils';
 
 export default function Level() {
+  const selectedTileId = useSelector(getSelectedTileId);
   const currentLevelId = useSelector(getCurrentLevelId);
   const dispatch = useDispatch();
 
@@ -34,8 +32,8 @@ export default function Level() {
       </h4>
       <hr />
       <div style={{ position: 'relative', textAlign: 'left' }}>
-        <Board data={boardData} />
-        <TileInfo tile={selectedTile} levelData={boardData} />
+        <Board data={boardData} selectedTileId={selectedTileId} />
+        <TileInfo tile={selectedTileId} levelData={boardData} />
       </div>
     </div>
   );

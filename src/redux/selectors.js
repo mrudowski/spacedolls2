@@ -1,5 +1,7 @@
 export const getCurrentLevelId = store => store.level.currentLevelId;
 
+export const getSelectedTileId = store => store.level.selectedTileId;
+
 //export const getTodoById = (store, id) => ({ ...store.todoMap[id], id });
 
 /**

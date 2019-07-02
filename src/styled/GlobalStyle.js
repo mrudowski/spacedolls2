@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 // import { normalize } from 'styled-normalize';
 // import reset from 'styled-reset';
 import reboot from 'styled-reboot';
-import colors from '../../theme/colors';
+import colors from '../theme/colors';
 
 const rebootOptions = {
   fontSizeBase: '12px', //1rem
