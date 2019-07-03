@@ -10,8 +10,8 @@ const Wall = styled.div`
   ${props => {
     // oh...
     return css`
-      left: ${math(`${props.posX} * ${props.theme.sizes.tileSize}`)};
-      top: ${math(`${props.posY} * ${props.theme.sizes.tileSize}`)};
+      left: ${math(`${props.$x} * ${props.theme.sizes.tileSize}`)};
+      top: ${math(`${props.$y} * ${props.theme.sizes.tileSize}`)};
     `;
   }}
 `;

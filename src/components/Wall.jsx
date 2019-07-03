@@ -1,20 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import StyledWall from '../styled/Wall';
-import wallStyle from '../styled/wallStyle';
+import StyledWall from '../styled/Wall';
+import { getTileXFromId, getTileYFromId } from '../brain/utils';
 
 const propTypes = {};
 
 const defaultProps = {};
 
-const Wall = ({ id }) => {
-  return <div />;
+const Wall = ({ tileId }) => {
+  const x = getTileXFromId(tileId);
+  const y = getTileYFromId(tileId);
+  return <StyledWall $x={x} $y={y} />;
 };
 
 Wall.propTypes = propTypes;
 Wall.defaultProps = defaultProps;
 
-const StyledWall = styled(Wall)(wallStyle);
-
-export default StyledWall;
+export default Wall;

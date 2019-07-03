@@ -9,10 +9,10 @@ const levels = {
     tiles: {},
     walls: [{ tile: '2,1' }, { tile: '2,2' }, { tile: '2,3' }],
     dolls: [
-      { id: 'toi', team: 'dolls', x: 1, y: 1 },
-      { id: 'cleo', team: 'dolls', x: 0, y: 3 },
-      { id: 'xantia', team: 'aliens', x: 4, y: 1 },
-      { id: 'io', team: 'aliens', x: 4, y: 2 }
+      { id: 'toi', team: 'dolls', tile: '1,1' },
+      { id: 'cleo', team: 'dolls', tile: '0,3' },
+      { id: 'xantia', team: 'aliens', tile: '4,1' },
+      { id: 'io', team: 'aliens', tile: '4,2' }
     ]
   }
 };

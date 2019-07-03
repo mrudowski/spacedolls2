@@ -5,6 +5,7 @@ export const getLevel = levelId => levels[levelId];
 // export const getLevelName = levelId => getLevel(levelId).name;
 // export const getBoardSize = levelId => getLevel(levelId).size;
 
+export const getXFromId = id => id.split(',')[0];
 export const getTileXFromId = id => id.split(',')[0];
 export const getTileYFromId = id => id.split(',')[1];
 
@@ -64,6 +65,7 @@ export const prepareBoardData = levelId => {
   // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
   // https://stackoverflow.com/questions/26264956/convert-object-array-to-hash-map-indexed-by-an-attribute-value-of-the-object
   // what about ImmutableJS (overkill?)
+  // and es6 Map?
 
   const tiles = Array(boardSize)
     .fill()
@@ -79,6 +81,9 @@ export const prepareBoardData = levelId => {
   const updatedTiles = produce(tiles, draft => {
     level.walls.forEach(wall => {
       draft[wall.tile].occupiedBy.push('wall');
+    });
+    level.dolls.forEach(doll => {
+      draft[doll.tile].occupiedBy.push('doll');
     });
   });
 

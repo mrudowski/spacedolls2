@@ -2,9 +2,8 @@ import styled, { css } from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
 import { rgba, math } from 'polished';
-import TileToStyle from '../components/Tile';
 
-const Tile = styled(TileToStyle)`
+const Tile = styled.div`
   width: ${sizes.tileSize};
   height: ${sizes.tileSize};
   line-height: ${sizes.tileSize};

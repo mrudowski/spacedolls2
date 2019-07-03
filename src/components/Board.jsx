@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-import Tile from '../styled/Tile';
+import foreach from 'lodash/each';
+import Tile from './Tile';
 import Wall from './Wall';
-import StyledBoard from '../styled/Board';
-import { getTileXFromId, getTileYFromId } from '../brain/utils';
+// https://medium.com/inturn-eng/naming-styled-components-d7097950a245
+import * as Styled from '../styled/Board';
 
 const propTypes = {
   level: PropTypes.string
@@ -14,38 +14,45 @@ const defaultProps = {
   level: '1'
 };
 
-// floor and hotspot for now
-const renderTiles = (tileMap, selectedTileId) => {
+// separate it?
+// tileData is not the best way
+// we could have walls, dolls and selected sepereted
+// we could create tileData with occupied flag only when needed
+
+
+const renderAll = (tileData, selectedTileId) => {
   // tileMap - tileMap.entries()
   //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
-  return map(tileMap, (tile, tileId) => {
-    const selected = tileId === selectedTileId;
-    return <Tile id={tileId} key={`${tileId}`} selected={selected} />;
-  });
-};
 
-const renderWalls = tileMap => {
-  // return [...tileMap].map(([key, value]) => {
-  //   if (value.occupiedBy.indexOf('wall') !== -1) {
-  //     return <Wall id={key} key={`${key}`} />;
-  //   }
-  // });
-  return map(tileMap, (tile, tileId) => {
+  const tiles = [];
+  const walls = [];
+  const dolls = [];
+  foreach(tileData, (tile, tileId) => {
+    const selected = tileId === selectedTileId;
+    tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
+
     if (tile.occupiedBy.indexOf('wall') !== -1) {
-      const x = getTileXFromId(tileId);
-      const y = getTileYFromId(tileId);
-      return <Wall id={tileId} key={`${tileId}`} posX={x} posY={y} />;
+      walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
+    }
+    if (tile.occupiedBy.indexOf('doll') !== -1) {
+      dolls.push(<Wall tileId={tileId} key={`doll-${tileId}`} />);
     }
   });
+  return (
+    <React.Fragment>
+      <div>{tiles}</div>
+      <div>{walls}</div>
+      <div>{dolls}</div>
+    </React.Fragment>
+  );
 };
 
 const Board = props => {
   const { data, selectedTileId } = props;
   return (
-    <StyledBoard>
-      <div>{renderTiles(data, selectedTileId)}</div>
-      <div>{renderWalls(data)}</div>
-    </StyledBoard>
+    <Styled.Board>
+      <div>{renderAll(data, selectedTileId)}</div>
+    </Styled.Board>
   );
 };
 
