@@ -1,4 +1,4 @@
-import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE } from './actionTypes';
+import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE, TOGGLE_WALL } from './actionTypes';
 
 export const changeLevel = levelId => ({
   type: CHANGE_LEVEL,
@@ -19,4 +19,8 @@ export const selectTile = tileId => ({
   payload: {
     tileId
   }
+});
+
+export const toggleWall = () => ({
+  type: TOGGLE_WALL
 });

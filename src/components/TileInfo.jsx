@@ -6,6 +6,13 @@ const propTypes = {};
 
 const defaultProps = {};
 
+const getOccupiedBy = list => {
+  const types = list.map(obj => {
+    return obj.type;
+  });
+  return types.join(', ') || 'nothing';
+};
+
 const TileInfo = ({ tile, levelData }) => {
   if (tile) {
     return (
@@ -13,7 +20,7 @@ const TileInfo = ({ tile, levelData }) => {
         <h4>Selected</h4>
         tileId: {tile}
         <br />
-        occupiedBy/content: {levelData[tile].occupiedBy.join(',') || 'nothing'}
+        occupiedBy/content: {getOccupiedBy(levelData[tile].occupiedBy)}
       </Styled>
     );
   } else {

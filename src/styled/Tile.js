@@ -15,11 +15,11 @@ const Tile = styled.div`
   &:before {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
+    top: -2px;
+    left: -2px;
     border-radius: 100%;
-    width: ${math(`${sizes.tileSize} + 8`)};
-    height: ${math(`${sizes.tileSize} + 8`)};
+    width: ${math(`${sizes.tileSize} + 4`)};
+    height: ${math(`${sizes.tileSize} + 4`)};
     border: 1px solid ${rgba(colors.active, 0.5)};
     transition: all 0.1s ease-in-out;
     display: none;
@@ -38,7 +38,7 @@ const Tile = styled.div`
         left: -6px;
         width: ${math(`${sizes.tileSize} + 12`)};
         height: ${math(`${sizes.tileSize} + 12`)};
-        border: 4px solid ${rgba(colors.active, 1)};
+        border: 2px solid ${rgba(colors.active, 1)};
       }
     `}
 

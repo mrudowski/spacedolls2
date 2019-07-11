@@ -11,6 +11,8 @@ export default function Level() {
   const currentLevelId = useSelector(getCurrentLevelId);
   const dispatch = useDispatch();
 
+  const toggleWall = () => dispatch(toggleWall());
+
   // for now only
   useEffect(() => {
     console.log('useEffect');
@@ -34,6 +36,7 @@ export default function Level() {
       <div style={{ position: 'relative', textAlign: 'left' }}>
         <Board data={boardData} selectedTileId={selectedTileId} />
         <TileInfo tile={selectedTileId} levelData={boardData} />
+        <button onClick={toggleWall}>toggle wall</button>
       </div>
     </div>
   );

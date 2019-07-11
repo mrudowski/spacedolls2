@@ -80,10 +80,14 @@ export const prepareBoardData = levelId => {
 
   const updatedTiles = produce(tiles, draft => {
     level.walls.forEach(wall => {
-      draft[wall.tile].occupiedBy.push('wall');
+      draft[wall.tile].occupiedBy.push({type: 'wall'});
     });
     level.dolls.forEach(doll => {
-      draft[doll.tile].occupiedBy.push('doll');
+      draft[doll.tile].occupiedBy.push({
+        type: 'doll',
+        id: doll.id,
+        team: doll.team
+      });
     });
   });
 

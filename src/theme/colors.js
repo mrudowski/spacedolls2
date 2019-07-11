@@ -3,7 +3,12 @@ const colors = {
   white: '#ffffff',
   dark: '#311e31',
   active: '#ff1493',
-  border: 'rgba(255,255,255,0.15)'
+  border: 'rgba(255,255,255,0.15)',
+
+  team: {
+    dolls: '#ff3d00',
+    aliens: '#77ff00'
+  }
 };
 
 export default colors;

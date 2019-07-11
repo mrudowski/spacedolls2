@@ -1,4 +1,9 @@
-import { CHANGE_LEVEL, SET_BOARD, SELECT_TILE } from '../actionTypes';
+import {
+  CHANGE_LEVEL,
+  SET_BOARD,
+  SELECT_TILE,
+  TOGGLE_WALL
+} from '../actionTypes';
 
 const initialState = {
   currentLevelId: null,
@@ -22,6 +27,11 @@ export default function level(state = initialState, action) {
       return {
         ...state,
         selectedTileId: action.payload.tileId
+      };
+    case TOGGLE_WALL:
+      return {
+        ...state,
+        boardData: action.payload.boardData
       };
     default:
       return state;

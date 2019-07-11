@@ -3,22 +3,13 @@ import PropTypes from 'prop-types';
 import foreach from 'lodash/each';
 import Tile from './Tile';
 import Wall from './Wall';
+import Doll from './Doll';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 
-const propTypes = {
-  level: PropTypes.string
-};
+const propTypes = {};
 
-const defaultProps = {
-  level: '1'
-};
-
-// separate it?
-// tileData is not the best way
-// we could have walls, dolls and selected sepereted
-// we could create tileData with occupied flag only when needed
-
+const defaultProps = {};
 
 const renderAll = (tileData, selectedTileId) => {
   // tileMap - tileMap.entries()
@@ -31,12 +22,19 @@ const renderAll = (tileData, selectedTileId) => {
     const selected = tileId === selectedTileId;
     tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
 
-    if (tile.occupiedBy.indexOf('wall') !== -1) {
-      walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
-    }
-    if (tile.occupiedBy.indexOf('doll') !== -1) {
-      dolls.push(<Wall tileId={tileId} key={`doll-${tileId}`} />);
-    }
+    tile.occupiedBy.forEach(obj => {
+      switch (obj.type) {
+        case 'wall':
+          walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
+          break;
+        case 'doll':
+          dolls.push(<Doll tileId={tileId} key={`doll-${tileId}`} team={obj.team} />);
+          break;
+        default:
+          //do nothing
+          break;
+      }
+    });
   });
   return (
     <React.Fragment>
