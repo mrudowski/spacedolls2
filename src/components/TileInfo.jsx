@@ -13,14 +13,14 @@ const getOccupiedBy = list => {
   return types.join(', ') || 'nothing';
 };
 
-const TileInfo = ({ tile, levelData }) => {
+const TileInfo = ({ tile, boardData }) => {
   if (tile) {
     return (
       <Styled>
         <h4>Selected</h4>
         tileId: {tile}
         <br />
-        occupiedBy/content: {getOccupiedBy(levelData[tile].occupiedBy)}
+        occupiedBy/content: {getOccupiedBy(boardData[tile].occupiedBy)}
       </Styled>
     );
   } else {
