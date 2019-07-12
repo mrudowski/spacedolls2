@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import foreach from 'lodash/each';
+import { getDollTeam } from '../brain/utils';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
@@ -11,7 +12,7 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const renderAll = (tileData, selectedTileId) => {
+const renderAll = (tileData, selectedTileId, currentLevelId) => {
   // tileMap - tileMap.entries()
   //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
 
@@ -22,19 +23,17 @@ const renderAll = (tileData, selectedTileId) => {
     const selected = tileId === selectedTileId;
     tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
 
-    tile.occupiedBy.forEach(obj => {
-      switch (obj.type) {
-        case 'wall':
-          walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
-          break;
-        case 'doll':
-          dolls.push(<Doll tileId={tileId} key={`doll-${tileId}`} team={obj.team} />);
-          break;
-        default:
-          //do nothing
-          break;
-      }
-    });
+    if (tile.wall) {
+      walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
+    } else if (tile.doll) {
+      dolls.push(
+        <Doll
+          tileId={tileId}
+          key={`doll-${tileId}`}
+          //team={getDollTeam(currentLevelId, tile.doll)}
+        />
+      );
+    }
   });
   return (
     <React.Fragment>
@@ -46,10 +45,10 @@ const renderAll = (tileData, selectedTileId) => {
 };
 
 const Board = props => {
-  const { data, selectedTileId } = props;
+  const { data, selectedTileId, currentLevelId } = props;
   return (
     <Styled.Board>
-      <div>{renderAll(data, selectedTileId)}</div>
+      <div>{renderAll(data, selectedTileId, currentLevelId)}</div>
     </Styled.Board>
   );
 };

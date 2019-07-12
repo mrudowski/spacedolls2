@@ -40,8 +40,12 @@ export default function Level() {
       </h4>
       <hr />
       <div style={{ position: 'relative', textAlign: 'left' }}>
-        <Board data={boardData} selectedTileId={selectedTileId} />
-        <TileInfo tile={selectedTileId} boardData={boardData} />
+        <Board
+          data={boardData}
+          selectedTileId={selectedTileId}
+          currentLevelId={currentLevelId}
+        />
+        <TileInfo tileId={selectedTileId} tiles={boardData} />
         <button onClick={dispatchToggleWall}>toggle wall</button>
       </div>
     </div>

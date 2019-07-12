@@ -7,17 +7,17 @@ export const changeLevel = levelId => ({
   }
 });
 
-export const setBoard = levelId => ({
-  type: SET_BOARD,
-  payload: {
-    levelId
-  }
-});
-
 export const selectTile = tileId => ({
   type: SELECT_TILE,
   payload: {
     tileId
+  }
+});
+
+export const setBoard = levelId => ({
+  type: SET_BOARD,
+  payload: {
+    levelId
   }
 });
 

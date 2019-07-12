@@ -6,21 +6,21 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const getOccupiedBy = list => {
-  const types = list.map(obj => {
-    return obj.type;
-  });
-  return types.join(', ') || 'nothing';
+const getOccupiedBy = tile => {
+  const elements = [];
+  if (tile.wall) elements.push('wall');
+  if (tile.doll) elements.push('doll');
+  return elements.join(', ') || 'nothing';
 };
 
-const TileInfo = ({ tile, boardData }) => {
-  if (tile) {
+const TileInfo = ({ tileId, tiles }) => {
+  if (tileId) {
     return (
       <Styled>
         <h4>Selected</h4>
-        tileId: {tile}
+        tileId: {tileId}
         <br />
-        occupiedBy/content: {getOccupiedBy(boardData[tile].occupiedBy)}
+        occupiedBy/content: {getOccupiedBy(tiles[tileId])}
       </Styled>
     );
   } else {

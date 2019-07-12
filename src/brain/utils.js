@@ -1,5 +1,6 @@
 import produce from 'immer';
 import levels from '../data/levels';
+import dolls from '../data/dolls';
 
 export const getLevel = levelId => levels[levelId];
 // export const getLevelName = levelId => getLevel(levelId).name;
@@ -17,6 +18,9 @@ export const getTileIdFromIndex = (index, size) =>
     index,
     size.height
   )}`;
+
+// should be reducer doll.byId
+export const getDollTeam = (levelId, id) => getLevel(levelId).dolls[id].team;
 
 // export const prepareBoardData = levelId => {
 //   console.log('prepareBoardData');
@@ -72,30 +76,19 @@ export const prepareBoardData = levelId => {
     .reduce(function(map, currentValue, index) {
       const id = getTileIdFromIndex(index, level.size);
       map[id] = {
-        id: id,
-        occupiedBy: []
+        id: id
       };
       return map;
     }, {});
 
   const updatedTiles = produce(tiles, draft => {
     level.walls.forEach(wall => {
-      draft[wall.tile].occupiedBy.push({type: 'wall'});
+      draft[wall.tile].wall = true;
     });
     level.dolls.forEach(doll => {
-      draft[doll.tile].occupiedBy.push({
-        type: 'doll',
-        id: doll.id,
-        team: doll.team
-      });
+      draft[doll.tile].doll = doll.id;
     });
   });
-
-  // level.walls.forEach((wall, index) => {
-  //   const updatedTiles = produce(tiles, draft => {
-  //     draft[wall.tile].occupiedBy.push('wall');
-  //   })
-  // });
 
   return updatedTiles;
 };
