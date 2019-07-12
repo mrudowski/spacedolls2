@@ -6,6 +6,6 @@ import board from './board';
 //rootReducer
 export default combineReducers({
   counter,
-  level,
+  level: level.reducer,
   board
 });

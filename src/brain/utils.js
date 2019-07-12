@@ -20,7 +20,10 @@ export const getTileIdFromIndex = (index, size) =>
   )}`;
 
 // should be reducer doll.byId
-export const getDollTeam = (levelId, id) => getLevel(levelId).dolls[id].team;
+export const getDollTeam = (levelId, id) => {
+  console.log('>>', id, getLevel(levelId).dolls[3].team);
+  return getLevel(levelId).dolls[1].team;
+};
 
 // export const prepareBoardData = levelId => {
 //   console.log('prepareBoardData');

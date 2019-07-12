@@ -30,7 +30,7 @@ const renderAll = (tileData, selectedTileId, currentLevelId) => {
         <Doll
           tileId={tileId}
           key={`doll-${tileId}`}
-          //team={getDollTeam(currentLevelId, tile.doll)}
+          team={getDollTeam(currentLevelId, tile.doll)}
         />
       );
     }

@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
-import { changeLevel, setBoard, toggleWall } from '../redux/actions';
+import { setBoard, toggleWall } from '../redux/actions';
 import {
   getCurrentLevelId,
   getSelectedTileId,
   getBoardData
 } from '../redux/selectors';
 import { getLevel } from '../brain/utils';
+import level from '../redux/reducers/level';
 
 export default function Level() {
   console.log('level');
@@ -22,7 +23,7 @@ export default function Level() {
   useEffect(() => {
     console.log('useEffect');
     dispatch(setBoard('1'));
-    dispatch(changeLevel('1'));
+    dispatch(level.actions.changeLevel('1'));
     //start();
   }, [dispatch]);
 
