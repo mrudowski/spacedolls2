@@ -9,5 +9,5 @@ export default combineReducers({
   counter,
   level: level.reducer,
   dolls: dolls.reducer,
-  board
+  board: board.reducer
 });

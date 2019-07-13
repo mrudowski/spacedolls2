@@ -4,7 +4,6 @@ import { getTileXFromId, getTileYFromId } from '../brain/utils';
 // import dolls from '../redux/dolls';
 
 const Doll = ({ data, tileId }) => {
-  console.log('data.team',data);
   // const dollsData = useSelector(dolls.selectors.getDolls);
   //  const allDollsData = useSelector(dolls.selectors.getAllDolls);
   // Using props via closure to determine what to extract

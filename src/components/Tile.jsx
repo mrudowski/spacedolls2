@@ -1,24 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import StyledTile from '../styled/Tile';
-import level from '../redux/level';
-
-const propTypes = {};
-
-const defaultProps = {};
+import board from '../redux/board';
 
 const Tile = ({ id, selected }) => {
   const dispatch = useDispatch();
 
   return (
-    <StyledTile onClick={() => dispatch(level.actions.selectTile(id))} selected={selected}>
+    <StyledTile onClick={() => dispatch(board.actions.selectTile(id))} selected={selected}>
       <div className="coordinates">{id}</div>
     </StyledTile>
   );
 };
-
-Tile.propTypes = propTypes;
-Tile.defaultProps = defaultProps;
 
 export default Tile;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import foreach from 'lodash/each';
 import Tile from './Tile';
@@ -8,10 +7,6 @@ import Doll from './Doll';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 import dolls from '../redux/dolls';
-
-const propTypes = {};
-
-const defaultProps = {};
 
 const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
   // tileMap - tileMap.entries()
@@ -30,7 +25,7 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
       const dollId = tile.doll;
       dolls.push(
         <Doll
-          data={dollsData.byId[dollId]}
+          data={dollsData[dollId]}
           tileId={tileId}
           key={`doll-${dollId}`}
         />
@@ -55,8 +50,5 @@ const Board = props => {
     </Styled.Board>
   );
 };
-
-Board.propTypes = propTypes;
-Board.defaultProps = defaultProps;
 
 export default Board;

@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
-import { setBoard, toggleWall } from '../redux/board/actions';
-import { getBoardData } from '../redux/board/selectors';
 import { getLevel } from '../brain/utils';
 import level from '../redux/level';
 import dolls from '../redux/dolls';
+import board from '../redux/board';
 import DollInfo from './DollInfo';
 
 export default function Level() {
-  const {currentLevelId, selectedTileId} = useSelector(level.selectors.getLevel);
-  const boardData = useSelector(getBoardData);
+  const { currentLevelId } = useSelector(level.selectors.getLevel);
+  const { selectedTileId, tiles: tilesData } = useSelector(
+    board.selectors.getBoard
+  );
   const dispatch = useDispatch();
 
   console.log('level');
@@ -19,7 +20,7 @@ export default function Level() {
   // for now only
   useEffect(() => {
     console.log('useEffect');
-    dispatch(setBoard('1'));
+    dispatch(board.actions.setBoard('1'));
     dispatch(dolls.actions.create('1')); //?
     dispatch(level.actions.changeLevel('1'));
     //start();
@@ -30,7 +31,7 @@ export default function Level() {
   }
 
   const dispatchToggleWall = () =>
-    dispatch(toggleWall(selectedTileId));
+    dispatch(board.actions.toggleWall(selectedTileId));
   const levelData = getLevel(currentLevelId);
 
   return (
@@ -41,11 +42,11 @@ export default function Level() {
       <hr />
       <div style={{ position: 'relative', textAlign: 'left' }}>
         <Board
-          data={boardData}
+          data={tilesData}
           selectedTileId={selectedTileId}
           currentLevelId={currentLevelId}
         />
-        <TileInfo tileId={selectedTileId} tiles={boardData} />
+        <TileInfo tileId={selectedTileId} tiles={tilesData} />
         <DollInfo />
         <button onClick={dispatchToggleWall}>toggle wall</button>
       </div>
