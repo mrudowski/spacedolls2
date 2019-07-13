@@ -3,26 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
 import { setBoard, toggleWall } from '../redux/actions';
-import {
-  getCurrentLevelId,
-  getSelectedTileId,
-  getBoardData
-} from '../redux/selectors';
+import { getBoardData } from '../redux/selectors';
 import { getLevel } from '../brain/utils';
 import level from '../redux/reducers/level';
+import dolls from '../redux/reducers/dolls';
 
 export default function Level() {
-  console.log('level');
-
-  const selectedTileId = useSelector(getSelectedTileId);
-  const currentLevelId = useSelector(getCurrentLevelId);
+  const {currentLevelId, selectedTileId} = useSelector(level.selectors.getLevel);
   const boardData = useSelector(getBoardData);
   const dispatch = useDispatch();
+
+  console.log('level');
 
   // for now only
   useEffect(() => {
     console.log('useEffect');
     dispatch(setBoard('1'));
+    dispatch(dolls.actions.create('1')); //?
     dispatch(level.actions.changeLevel('1'));
     //start();
   }, [dispatch]);
@@ -31,7 +28,8 @@ export default function Level() {
     return null;
   }
 
-  const dispatchToggleWall = () => dispatch(toggleWall(selectedTileId));
+  const dispatchToggleWall = () =>
+    dispatch(toggleWall(selectedTileId));
   const levelData = getLevel(currentLevelId);
 
   return (

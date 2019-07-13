@@ -28,6 +28,7 @@ const renderAll = (tileData, selectedTileId, currentLevelId) => {
     } else if (tile.doll) {
       dolls.push(
         <Doll
+          id={tile.doll}
           tileId={tileId}
           key={`doll-${tileId}`}
           team={getDollTeam(currentLevelId, tile.doll)}
