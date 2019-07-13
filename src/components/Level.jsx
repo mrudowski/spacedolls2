@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
-import { setBoard, toggleWall } from '../redux/actions';
-import { getBoardData } from '../redux/selectors';
+import { setBoard, toggleWall } from '../redux/board/actions';
+import { getBoardData } from '../redux/board/selectors';
 import { getLevel } from '../brain/utils';
-import level from '../redux/reducers/level';
-import dolls from '../redux/reducers/dolls';
+import level from '../redux/level';
+import dolls from '../redux/dolls';
+import DollInfo from './DollInfo';
 
 export default function Level() {
   const {currentLevelId, selectedTileId} = useSelector(level.selectors.getLevel);
@@ -45,6 +46,7 @@ export default function Level() {
           currentLevelId={currentLevelId}
         />
         <TileInfo tileId={selectedTileId} tiles={boardData} />
+        <DollInfo />
         <button onClick={dispatchToggleWall}>toggle wall</button>
       </div>
     </div>

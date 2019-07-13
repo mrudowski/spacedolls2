@@ -1,6 +1,6 @@
 import { configureStore } from 'redux-starter-kit';
 // import { createStore } from 'redux'
-import reducer from './reducers/index';
+import reducer from './rootReducer';
 
 // const store = createStore(reducer);
 

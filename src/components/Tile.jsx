@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import StyledTile from '../styled/Tile';
-import level from '../redux/reducers/level';
+import level from '../redux/level';
 
 const propTypes = {};
 

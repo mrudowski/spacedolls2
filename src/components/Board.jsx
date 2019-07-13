@@ -1,37 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import foreach from 'lodash/each';
-import { getDollTeam } from '../brain/utils';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
+import dolls from '../redux/dolls';
 
 const propTypes = {};
 
 const defaultProps = {};
 
-const renderAll = (tileData, selectedTileId, currentLevelId) => {
+const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
   // tileMap - tileMap.entries()
   //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
 
   const tiles = [];
   const walls = [];
   const dolls = [];
-  foreach(tileData, (tile, tileId) => {
+  foreach(tilesData, (tile, tileId) => {
     const selected = tileId === selectedTileId;
     tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
 
     if (tile.wall) {
       walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
     } else if (tile.doll) {
+      const dollId = tile.doll;
       dolls.push(
         <Doll
-          id={tile.doll}
+          data={dollsData.byId[dollId]}
           tileId={tileId}
-          key={`doll-${tileId}`}
-          team={getDollTeam(currentLevelId, tile.doll)}
+          key={`doll-${dollId}`}
         />
       );
     }
@@ -46,10 +47,11 @@ const renderAll = (tileData, selectedTileId, currentLevelId) => {
 };
 
 const Board = props => {
+  const dollsData = useSelector(dolls.selectors.getDolls);
   const { data, selectedTileId, currentLevelId } = props;
   return (
     <Styled.Board>
-      <div>{renderAll(data, selectedTileId, currentLevelId)}</div>
+      <div>{renderAll(data, dollsData, selectedTileId, currentLevelId)}</div>
     </Styled.Board>
   );
 };

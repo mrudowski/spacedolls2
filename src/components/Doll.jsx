@@ -1,21 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import StyledDoll from '../styled/Doll';
 import { getTileXFromId, getTileYFromId } from '../brain/utils';
-import dolls from '../redux/reducers/dolls';
+// import dolls from '../redux/dolls';
 
-const Doll = ({ id, tileId, team }) => {
-  const dollsData = useSelector(dolls.selectors.getDolls);
-  const allDollsData = useSelector(dolls.selectors.getAllDolls);
-  //const dollData = useSelector(dolls.selectors.getDollById);
-
-console.log('allDollsData',allDollsData);
+const Doll = ({ data, tileId }) => {
+  console.log('data.team',data);
+  // const dollsData = useSelector(dolls.selectors.getDolls);
+  //  const allDollsData = useSelector(dolls.selectors.getAllDolls);
+  // Using props via closure to determine what to extract
+  // const dollData = useSelector(store => store.dolls.byId[id]);
+  // const dollData2 = useSelector(dolls.selectors.getDollById(id));
+  // const getDollTeam = useSelector(dolls.selectors.getDollTeam(id));
 
   const x = getTileXFromId(tileId);
   const y = getTileYFromId(tileId);
   return (
-    <StyledDoll $x={x} $y={y} $team={team}>
-      {dollsData.byId[id].hp}
+    <StyledDoll $x={x} $y={y} $team={data.team}>
+      {data.hp}
     </StyledDoll>
   );
 };

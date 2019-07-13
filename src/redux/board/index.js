@@ -1,4 +1,4 @@
-import { SET_BOARD, TOGGLE_WALL } from '../actionTypes';
+import { SET_BOARD, TOGGLE_WALL } from './actionTypes';
 import { prepareBoardData } from '../../brain/utils';
 import produce from 'immer';
 
