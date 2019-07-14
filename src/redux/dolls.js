@@ -1,7 +1,6 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
-import levelsDef from '../data/levels';
-import dollsDef from '../data/dolls';
-import level from './level';
+import { getLevel } from '../utils/level';
+import { getDollMetaData } from '../utils/doll';
 import board from './board';
 
 const dolls = createSlice({
@@ -10,14 +9,14 @@ const dolls = createSlice({
   reducers: {
     create: (state, action) => {
       const levelId = action.payload;
-      const level = levelsDef[levelId];
+      const level = getLevel(levelId);
 
       level.dolls.forEach(doll => {
         state[doll.id] = {
           id: doll.id,
           team: doll.team,
-          meta: dollsDef[doll.id], // ref or selector?
-          hp: dollsDef[doll.id].stats.hp
+          meta: getDollMetaData(doll.id), // ref or as util only?
+          hp: getDollMetaData(doll.id).stats.hp
         };
       });
     }

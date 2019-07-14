@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Board from './Board';
 import TileInfo from './TileInfo';
-import { getLevel } from '../brain/utils';
+import { getLevel } from '../utils/level';
 import level from '../redux/level';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
@@ -13,6 +13,7 @@ export default function Level() {
   const { selectedTileId, tiles: tilesData } = useSelector(
     board.selectors.getBoard
   );
+  const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
 
   console.log('level');
@@ -32,6 +33,12 @@ export default function Level() {
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
+  const showMoveGizmo = () => {};
+
+  const isDollSelected = () => {
+    return selectedTile && selectedTile.doll;
+  };
+
   const levelData = getLevel(currentLevelId);
 
   return (
@@ -46,9 +53,14 @@ export default function Level() {
           selectedTileId={selectedTileId}
           currentLevelId={currentLevelId}
         />
-        <TileInfo tileId={selectedTileId} tiles={tilesData} />
+        <TileInfo tile={selectedTile} />
         <DollInfo />
-        <button onClick={dispatchToggleWall}>toggle wall</button>
+        <button onClick={dispatchToggleWall} disabled={isDollSelected()}>
+          toggle wall
+        </button>
+        <button onClick={showMoveGizmo} disabled={!isDollSelected()}>
+          move
+        </button>
       </div>
     </div>
   );

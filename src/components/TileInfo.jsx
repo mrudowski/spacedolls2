@@ -1,10 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Styled from '../styled/TileInfo';
-
-const propTypes = {};
-
-const defaultProps = {};
 
 const getOccupiedBy = tile => {
   const elements = [];
@@ -13,14 +8,14 @@ const getOccupiedBy = tile => {
   return elements.join(', ') || 'nothing';
 };
 
-const TileInfo = ({ tileId, tiles }) => {
-  if (tileId) {
+const TileInfo = ({ tile }) => {
+  if (tile) {
     return (
       <Styled>
         <h4>Selected</h4>
-        tileId: {tileId}
+        tileId: {tile.id}
         <br />
-        occupiedBy/content: {getOccupiedBy(tiles[tileId])}
+        occupiedBy/content: {getOccupiedBy(tile)}
       </Styled>
     );
   } else {
@@ -32,8 +27,5 @@ const TileInfo = ({ tileId, tiles }) => {
     );
   }
 };
-
-TileInfo.propTypes = propTypes;
-TileInfo.defaultProps = defaultProps;
 
 export default TileInfo;

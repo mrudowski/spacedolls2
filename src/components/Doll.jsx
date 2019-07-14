@@ -1,7 +1,6 @@
 import React from 'react';
 import StyledDoll from '../styled/Doll';
-import { getTileXFromId, getTileYFromId } from '../brain/utils';
-// import dolls from '../redux/dolls';
+import { getTileXFromId, getTileYFromId } from '../utils/tile';
 
 const Doll = ({ data, tileId }) => {
   // const dollsData = useSelector(dolls.selectors.getDolls);
