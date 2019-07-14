@@ -5,7 +5,8 @@ const board = createSlice({
   slice: 'board',
   initialState: {
     tiles: {},
-    selectedTileId: null
+    selectedTileId: null,
+    move: false
   },
   reducers: {
     setBoard: (state, action) => {
@@ -24,6 +25,9 @@ const board = createSlice({
       } else if (tile && !tile.doll) {
         tile.wall = true;
       }
+    },
+    showMoveGizmo: state => {
+      state.move = true;
     }
   }
 });
@@ -42,5 +46,7 @@ board.selectors.getSelectedTile = createSelector(
     }
   }
 );
+
+board.selectors.isMoveGizmoActive = createSelector(['board.move']);
 
 export default board;

@@ -33,7 +33,7 @@ export default function Level() {
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
-  const showMoveGizmo = () => {};
+  const showMoveGizmo = () => dispatch(board.actions.showMoveGizmo());
 
   const isDollSelected = () => {
     return selectedTile && selectedTile.doll;

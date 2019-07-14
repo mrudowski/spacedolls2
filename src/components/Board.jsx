@@ -7,6 +7,7 @@ import Doll from './Doll';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 import dolls from '../redux/dolls';
+import MoveGizmo from './MoveGizmo';
 
 const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
   // tileMap - tileMap.entries()
@@ -24,11 +25,7 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
     } else if (tile.doll) {
       const dollId = tile.doll;
       dolls.push(
-        <Doll
-          data={dollsData[dollId]}
-          tileId={tileId}
-          key={`doll-${dollId}`}
-        />
+        <Doll data={dollsData[dollId]} tileId={tileId} key={`doll-${dollId}`} />
       );
     }
   });
@@ -46,7 +43,8 @@ const Board = props => {
   const { data, selectedTileId, currentLevelId } = props;
   return (
     <Styled.Board>
-      <div>{renderAll(data, dollsData, selectedTileId, currentLevelId)}</div>
+      {renderAll(data, dollsData, selectedTileId, currentLevelId)}
+      <MoveGizmo />
     </Styled.Board>
   );
 };
