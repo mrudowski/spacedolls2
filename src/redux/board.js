@@ -1,5 +1,6 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import { prepareBoardData } from '../brain/utils';
+import store from './store';
 
 const board = createSlice({
   slice: 'board',
@@ -17,9 +18,8 @@ const board = createSlice({
     selectTile: (state, action) => {
       state.selectedTileId = action.payload;
     },
-    toggleWall: (state, action) => {
-      const tileId = action.payload;
-      const tile = state.tiles[tileId];
+    toggleWall: (state) => {
+      const tile = state.selectedTileId && state.tiles[state.selectedTileId];
       if (tile && tile.wall) {
         tile.wall = false;
       } else if (tile && !tile.doll) {
@@ -35,7 +35,7 @@ board.selectors.getTiles = createSelector(['board.tiles']);
 
 board.selectors.getSelectedTile = createSelector(
   [getBoard],
-  ({tiles, selectedTileId}) => {
+  ({ tiles, selectedTileId }) => {
     if (selectedTileId) {
       return tiles[selectedTileId];
     } else {

@@ -30,8 +30,8 @@ export default function Level() {
     return null;
   }
 
-  const dispatchToggleWall = () =>
-    dispatch(board.actions.toggleWall(selectedTileId));
+  const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
+
   const levelData = getLevel(currentLevelId);
 
   return (
