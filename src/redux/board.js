@@ -26,8 +26,8 @@ const board = createSlice({
         tile.wall = true;
       }
     },
-    showMoveGizmo: state => {
-      state.move = true;
+    toggleMoveGizmo: state => {
+      state.move = !state.move;
     }
   }
 });
@@ -35,6 +35,7 @@ const board = createSlice({
 const { getBoard } = board.selectors;
 
 board.selectors.getTiles = createSelector(['board.tiles']);
+board.selectors.selectedTileId = createSelector(['board.selectedTileId']);
 
 board.selectors.getSelectedTile = createSelector(
   [getBoard],

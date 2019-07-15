@@ -10,7 +10,7 @@ export const StyledMoveGizmo = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${rgba('#000', 0.25)};
+  // background-color: ${rgba('#000', 0.25)};
   pointer-events: none;
 `;
 
@@ -19,7 +19,7 @@ export const StyledGizmoTile = styled.div`
   position: absolute;
   width: ${props => props.theme.sizes.tileSize};
   height: ${props => props.theme.sizes.tileSize};
-  background-color: ${rgba('yellow', 0.25)};
+  background-color: ${rgba('#ffe200', 0.3)};
   pointer-events: none;
   ${props => {
     // oh...

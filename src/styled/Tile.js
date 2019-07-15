@@ -23,6 +23,7 @@ const Tile = styled.div`
     border: 1px solid ${rgba(colors.active, 0.5)};
     transition: all 0.1s ease-in-out;
     display: none;
+    z-index: 1;
   }
 
   &:hover:before {

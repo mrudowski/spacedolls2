@@ -9,6 +9,7 @@ import board from '../redux/board';
 import DollInfo from './DollInfo';
 
 export default function Level() {
+  const moveGizmo = useSelector(board.selectors.isMoveGizmoActive);
   const { currentLevelId } = useSelector(level.selectors.getLevel);
   const { selectedTileId, tiles: tilesData } = useSelector(
     board.selectors.getBoard
@@ -33,13 +34,15 @@ export default function Level() {
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
-  const showMoveGizmo = () => dispatch(board.actions.showMoveGizmo());
+  const toggleMoveGizmo = () => dispatch(board.actions.toggleMoveGizmo());
 
   const isDollSelected = () => {
     return selectedTile && selectedTile.doll;
   };
 
   const levelData = getLevel(currentLevelId);
+
+  // TODO - styled button with active class
 
   return (
     <div>
@@ -58,7 +61,10 @@ export default function Level() {
         <button onClick={dispatchToggleWall} disabled={isDollSelected()}>
           toggle wall
         </button>
-        <button onClick={showMoveGizmo} disabled={!isDollSelected()}>
+        <button
+          onClick={toggleMoveGizmo}
+          disabled={!isDollSelected() && !moveGizmo}
+        >
           move
         </button>
       </div>

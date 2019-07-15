@@ -13,6 +13,8 @@ export const getTileIdFromIndex = (index, size) =>
     size.height
   )}`;
 
+// why not [x][y] array?
+
 export const prepareBoardData = levelId => {
   console.log('prepareBoardData');
 
