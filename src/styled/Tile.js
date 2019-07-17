@@ -2,10 +2,11 @@ import styled, { css } from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
 import { rgba, math } from 'polished';
+import { tileSize } from '../styled/common';
 
 const Tile = styled.div`
-  width: ${sizes.tileSize};
-  height: ${sizes.tileSize};
+  ${tileSize}
+
   line-height: ${sizes.tileSize};
   text-align: center;
   display: inline-block;

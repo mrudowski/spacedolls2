@@ -17,7 +17,7 @@ export default function Level() {
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
 
-  console.log('level');
+  console.log('Level');
 
   // for now only
   useEffect(() => {

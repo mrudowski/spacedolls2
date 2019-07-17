@@ -6,6 +6,9 @@ import dolls from '../redux/dolls';
 
 const DollInfo = () => {
   const data = useSelector(dolls.selectors.getSelectedDollData);
+
+  console.log('DollInfo');
+
   if (data) {
     // alternative better way?
     const metaData = getDollMetaData(data.id);

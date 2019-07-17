@@ -1,25 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { rgba, math } from 'polished';
 import sizes from '../theme/sizes';
 import colors from '../theme/colors';
-
-const sharedTest = css`
-  pointer-events: none;
-  position: absolute;
-
-  ${props => {
-    // oh...
-    return css`
-      left: ${math(`${props.$x} * ${props.theme.sizes.tileSize}`)};
-      top: ${math(`${props.$y} * ${props.theme.sizes.tileSize}`)};
-    `;
-  }}
-`;
+import { tileBase } from '../styled/common';
 
 const dollSize = math(`${sizes.tileSize} - 8`);
 
 const Doll = styled.div`
-  ${sharedTest}
+  ${tileBase}
 
   width: ${dollSize};
   height: ${dollSize};

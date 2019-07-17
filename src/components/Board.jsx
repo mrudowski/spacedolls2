@@ -41,6 +41,9 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
 const Board = props => {
   const dollsData = useSelector(dolls.selectors.getDolls);
   const { data, selectedTileId, currentLevelId } = props;
+
+  console.log('Board');
+
   return (
     <Styled.Board>
       {renderAll(data, dollsData, selectedTileId, currentLevelId)}
