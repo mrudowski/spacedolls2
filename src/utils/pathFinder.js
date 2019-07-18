@@ -5,6 +5,9 @@ import store from '../redux/store';
 
 const easystar = new EasyStar.js();
 
+//easystar.setIterationsPerCalculation(1000);
+easystar.enableSync();
+
 const createGrid = tilesData => {
   const grid = [];
   // use selectors? // dep loop?
@@ -24,39 +27,34 @@ const createGrid = tilesData => {
 
 export const prepareGrid = tilesData => {
   const grid = createGrid(tilesData);
-  console.log('grid', grid);
+  console.log('preparedGrid', grid);
   easystar.setGrid(grid);
   easystar.setAcceptableTiles(['0']);
 
-  console.log('findPath...');
-  easystar.findPath(2, 0, 2, 4, path => {
-    if (path === null) {
-      console.log('no found!');
-    } else {
-      console.log(
-        'Path was found. The first Point is ' + path[0].x + ' ' + path[0].y,
-        'path length',
-        path.length,
-        path
-      );
-    }
-  });
-  easystar.calculate();
+  // console.log('findPath...');
+  // easystar.findPath(2, 0, 2, 4, path => {
+  //   if (path === null) {
+  //     console.log('no found!');
+  //   } else {
+  //     console.log(
+  //       'Path was found. The first Point is ' + path[0].x + ' ' + path[0].y,
+  //       'path length',
+  //       path.length,
+  //       path
+  //     );
+  //   }
+  // });
+  //easystar.calculate();
 };
 
-//calculate in par?
+export const calculatePath = (startX, startY, endX, endY, callbackFunction) => {
+  easystar.findPath(
+    parseInt(startX, 10),
+    parseInt(startY, 10),
+    parseInt(endX, 10),
+    parseInt(endY, 10),
+    callbackFunction
+  );
 
-export const calculatePath = (startX, startY, endX, endY) => {
-  console.log('calculatePath', startX, startY, endX, endY);
-  easystar.findPath(startX, startY, endX, endY, path => {
-    if (path === null) {
-      console.log('no found!');
-    } else {
-      console.log(
-        'Path was found. The first Point is ' + path[0].x + ' ' + path[0].y
-      );
-    }
-  });
-  //calculate in parts?
-  //easystar.calculate();
+  easystar.calculate();
 };

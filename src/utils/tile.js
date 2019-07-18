@@ -7,6 +7,8 @@ export const getTileYFromId = id => id.split(',')[1];
 export const getTileXFromIndex = (index, width) => index % width;
 export const getTileYFromIndex = (index, height) => Math.floor(index / height);
 
+//export const getTileIdFromXY = (x, y) => Math.floor(index / height);
+
 export const getTileIdFromIndex = (index, size) =>
   `${getTileXFromIndex(index, size.width)},${getTileYFromIndex(
     index,
