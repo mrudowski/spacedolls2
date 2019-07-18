@@ -17,6 +17,12 @@ export const StyledMoveGizmo = styled.div`
 export const StyledGizmoTile = styled.div`
   ${tileBase}
   ${tileSize}
+  pointer-events: auto; // overwrite tileBase
+  background-color: ${colors.gizmo};
+  opacity: 0.3;
+  cursor: pointer;
 
-  background-color: ${rgba('#ffe200', 0.3)};
+  :hover {
+    opacity: 0.4;
+  }
 `;

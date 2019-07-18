@@ -36,6 +36,7 @@ export default function Level() {
 
   const toggleMoveGizmo = () => dispatch(board.actions.toggleMoveGizmo());
 
+  // move to utils?
   const isDollSelected = () => {
     return selectedTile && selectedTile.doll;
   };
@@ -65,7 +66,7 @@ export default function Level() {
           onClick={toggleMoveGizmo}
           disabled={!isDollSelected() && !moveGizmo}
         >
-          move
+          move {moveGizmo && 'ON'}
         </button>
       </div>
     </div>

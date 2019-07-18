@@ -28,6 +28,16 @@ const board = createSlice({
     },
     toggleMoveGizmo: state => {
       state.move = !state.move;
+    },
+    moveSelectedDollTo: (state, action) => {
+      const sourceTile = state.tiles[state.selectedTileId];
+      const destinationTile = state.tiles[action.payload];
+      // better with selector?
+      destinationTile.doll = sourceTile.doll;
+      sourceTile.doll = null;
+
+      //dispatch?
+      state.selectedTileId = action.payload;
     }
   }
 });
@@ -35,7 +45,7 @@ const board = createSlice({
 const { getBoard } = board.selectors;
 
 board.selectors.getTiles = createSelector(['board.tiles']);
-board.selectors.selectedTileId = createSelector(['board.selectedTileId']);
+// board.selectors.getSelectedTileId = createSelector(['board.selectedTileId']);
 
 board.selectors.getSelectedTile = createSelector(
   [getBoard],

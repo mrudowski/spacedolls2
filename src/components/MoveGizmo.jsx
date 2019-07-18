@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import forEach from 'lodash/each';
 import board from '../redux/board';
-import { getTileXFromId, getTileYFromId } from '../utils/tile';
+import { getTileXFromId, getTileYFromId, getTileIdFromXY } from '../utils/tile';
 import { StyledMoveGizmo, StyledGizmoTile } from '../styled/StyledMoveGizmo';
 import { prepareGrid, calculatePath } from '../utils/pathFinder';
 
@@ -57,11 +57,15 @@ let validTilesTest = [];
 //asynchronize
 const addTileToValidTiles = path => {
   if (path === null || path.length === 0) {
-    console.log('no found!', path.length === 0 ? 'path length = 0' : '');
+    console.log(
+      'no found!',
+      path && path.length === 0 ? 'path length = 0' : ''
+    );
   } else {
     console.log('Path was found', 'path length', path.length, path);
     //Path was found path length 0 []
     // all path? and check if tile added
+    // easy if we change xy into id
     if (path.length < 4) {
       const tileXY = path[path.length - 1];
       validTilesTest.push(tileXY);
@@ -69,14 +73,22 @@ const addTileToValidTiles = path => {
   }
 };
 
-const renderTiles = setOfTileIds => {
+const renderTiles = (setOfTileIds, dispatch) => {
   // TODO: tileId not tileData
   const tilesToRender = [];
+
+  // better tileId here...
   setOfTileIds.forEach(({ x, y }, index) => {
+    const tileId = getTileIdFromXY(x, y);
     // const x = getTileXFromId(tileId);
     // const y = getTileYFromId(tileId);
     tilesToRender.push(
-      <StyledGizmoTile $x={x} $y={y} key={`tile-${x},${y}`} />
+      <StyledGizmoTile
+        $x={x}
+        $y={y}
+        key={`tile-${tileId}`}
+        onClick={() => dispatch(board.actions.moveSelectedDollTo(tileId))}
+      />
     );
   });
   return tilesToRender;
@@ -90,14 +102,22 @@ const MoveGizmo = () => {
   // move button on active when moveGizmoOn
   // selected ring hides
   const moveGizmo = useSelector(board.selectors.isMoveGizmoActive);
-  const selectedTileId = useSelector(board.selectors.selectedTileId);
+  const selectedTile = useSelector(board.selectors.getSelectedTile);
   const tiles = useSelector(board.selectors.getTiles);
-  if (!moveGizmo) {
+  const dispatch = useDispatch();
+  // change to utils tile.hasDoll(selectedTile)
+  // or move from level this one:
+  // const isDollSelected = () => {
+  //   return selectedTile && selectedTile.doll;
+  // };
+  if (!moveGizmo || !selectedTile.doll) {
     return null;
   }
-  const possibleMoveArea = getPossibleMoveArea(selectedTileId, tiles);
+  const possibleMoveArea = getPossibleMoveArea(selectedTile.id, tiles);
 
-  return <StyledMoveGizmo>{renderTiles(possibleMoveArea)}</StyledMoveGizmo>;
+  return (
+    <StyledMoveGizmo>{renderTiles(possibleMoveArea, dispatch)}</StyledMoveGizmo>
+  );
 };
 
 export default MoveGizmo;
