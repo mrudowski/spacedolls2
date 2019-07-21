@@ -9,6 +9,8 @@ const getOccupiedBy = tile => {
 };
 
 const TileInfo = ({ tile }) => {
+  console.log('TileInfo');
+
   if (tile) {
     return (
       <Styled>

@@ -9,11 +9,8 @@ import board from '../redux/board';
 import DollInfo from './DollInfo';
 
 export default function Level() {
-  const moveGizmo = useSelector(board.selectors.isMoveGizmoActive);
+  const isMoveGizmoActive = useSelector(board.selectors.isMoveGizmoActive);
   const { currentLevelId } = useSelector(level.selectors.getLevel);
-  const { selectedTileId, tiles: tilesData } = useSelector(
-    board.selectors.getBoard
-  );
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
 
@@ -22,15 +19,12 @@ export default function Level() {
   // for now only
   useEffect(() => {
     console.log('useEffect');
-    dispatch(board.actions.setBoard('1'));
-    dispatch(dolls.actions.create('1')); //?
-    dispatch(level.actions.changeLevel('1'));
-    //start();
-  }, [dispatch]);
-
-  if (!currentLevelId) {
-    return null;
-  }
+    if (currentLevelId) {
+      dispatch(board.actions.setBoard(currentLevelId));
+      dispatch(dolls.actions.create(currentLevelId));
+    }
+    // dispatch(level.actions.changeLevel('1'));
+  }, [dispatch, currentLevelId]);
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
@@ -52,11 +46,7 @@ export default function Level() {
       </h4>
       <hr />
       <div style={{ position: 'relative', textAlign: 'left' }}>
-        <Board
-          data={tilesData}
-          selectedTileId={selectedTileId}
-          currentLevelId={currentLevelId}
-        />
+        <Board />
         <TileInfo tile={selectedTile} />
         <DollInfo />
         <button onClick={dispatchToggleWall} disabled={isDollSelected()}>
@@ -64,9 +54,9 @@ export default function Level() {
         </button>
         <button
           onClick={toggleMoveGizmo}
-          disabled={!isDollSelected() && !moveGizmo}
+          disabled={!isDollSelected() && !isMoveGizmoActive}
         >
-          move {moveGizmo && 'ON'}
+          move {isMoveGizmoActive && 'ON'}
         </button>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { createSlice } from 'redux-starter-kit';
 const level = createSlice({
   slice: 'level',
   initialState: {
-    currentLevelId: null
+    currentLevelId: '1'
   },
   reducers: {
     changeLevel: (state, action) => {

@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
-import { prepareBoardData } from '../utils/tile';
+import * as boardUtil from '../utils/board';
 
 const board = createSlice({
   slice: 'board',
@@ -12,7 +12,7 @@ const board = createSlice({
     setBoard: (state, action) => {
       // You can "mutate" the state in a reducer, thanks to Immer
       const levelId = action.payload;
-      const tiles = prepareBoardData(levelId);
+      const tiles = boardUtil.prepareData(levelId);
       state.tiles = tiles;
     },
     selectTile: (state, action) => {
@@ -55,6 +55,8 @@ board.selectors.getSelectedTile = createSelector(
     }
   }
 );
+
+// move to action
 
 board.selectors.isMoveGizmoActive = createSelector(['board.move']);
 

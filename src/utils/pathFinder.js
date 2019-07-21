@@ -1,12 +1,11 @@
 import EasyStar from 'easystarjs';
-import foreach from 'lodash/each';
-import { getTileXFromId, getTileYFromId } from './tile';
+import forEach from 'lodash/each';
+import * as tileUtil from './tile';
 import store from '../redux/store';
 
 const easystar = new EasyStar.js();
-
-//easystar.setIterationsPerCalculation(1000);
 easystar.enableSync();
+// easystar.setIterationsPerCalculation(1000);
 
 const createGrid = tilesData => {
   const grid = [];
@@ -17,8 +16,10 @@ const createGrid = tilesData => {
     grid.push([]);
   }
 
-  foreach(tilesData, (tile, tileId) => {
-    grid[getTileYFromId(tileId)][getTileXFromId(tileId)] =
+  forEach(tilesData, (tile, tileId) => {
+    const {x, y} = tileUtil.getXYFromId(tileId);
+    // reversing order
+    grid[y][x] =
       tile.doll || tile.wall ? '1' : '0';
   });
 
@@ -30,21 +31,6 @@ export const prepareGrid = tilesData => {
   console.log('preparedGrid', grid);
   easystar.setGrid(grid);
   easystar.setAcceptableTiles(['0']);
-
-  // console.log('findPath...');
-  // easystar.findPath(2, 0, 2, 4, path => {
-  //   if (path === null) {
-  //     console.log('no found!');
-  //   } else {
-  //     console.log(
-  //       'Path was found. The first Point is ' + path[0].x + ' ' + path[0].y,
-  //       'path length',
-  //       path.length,
-  //       path
-  //     );
-  //   }
-  // });
-  //easystar.calculate();
 };
 
 export const calculatePath = (startX, startY, endX, endY, callbackFunction) => {
@@ -55,6 +41,5 @@ export const calculatePath = (startX, startY, endX, endY, callbackFunction) => {
     parseInt(endY, 10),
     callbackFunction
   );
-
   easystar.calculate();
 };
