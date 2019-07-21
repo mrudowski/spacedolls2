@@ -30,13 +30,11 @@ const board = createSlice({
       state.move = !state.move;
     },
     moveSelectedDollTo: (state, action) => {
+      // better by selectors?
       const sourceTile = state.tiles[state.selectedTileId];
       const destinationTile = state.tiles[action.payload];
-      // better with selector?
       destinationTile.doll = sourceTile.doll;
       sourceTile.doll = null;
-
-      //dispatch?
       state.selectedTileId = action.payload;
     }
   }

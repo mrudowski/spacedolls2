@@ -2,18 +2,10 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import forEach from 'lodash/each';
 import board from '../redux/board';
-import { getTileXFromId, getTileYFromId, getTileIdFromXY } from '../utils/tile';
+import * as tileUtil from '../utils/tile';
+import * as boardUtil from '../utils/board';
+import * as pathFinderUtil from '../utils/pathFinder';
 import { StyledMoveGizmo, StyledGizmoTile } from '../styled/StyledMoveGizmo';
-import { prepareGrid, calculatePath } from '../utils/pathFinder';
-
-// manhattanDistance -linear movement - no diagonals - just cardinal directions (NSEW)
-const getDistance = (startTileId, endTileId) => {
-  const distance =
-    Math.abs(getTileXFromId(startTileId) - getTileXFromId(endTileId)) +
-    Math.abs(getTileYFromId(startTileId) - getTileYFromId(endTileId));
-  //console.log('getDistance', distance);
-  return distance;
-};
 
 //walkableArea /validTiles
 const getPossibleMoveArea = (startTileId, tiles) => {
@@ -24,24 +16,32 @@ const getPossibleMoveArea = (startTileId, tiles) => {
   // of course it would be better when counting from doll (flood fill?)
 
   //let grid =
-  prepareGrid(tiles);
+  pathFinderUtil.prepareGrid(tiles);
 
   forEach(tiles, (tile, tileId) => {
     //distance bigger or not
     // TODO isWalkable to the utils
-    if (!tile.wall && !tile.doll && getDistance(startTileId, tileId) <= 2) {
+    if (
+      !tile.wall &&
+      !tile.doll &&
+      boardUtil.getDistance(startTileId, tileId) <= 2
+    ) {
       //let end = trueThis.getGraphNode(tile, graph);
       //let path = astar.search(graph, start, end);
       // if (path.length > 0 && path.length <= activeDoll.stats.move) {
       //console.log('result for', tile.id, 'is', result);
-      const startX = getTileXFromId(startTileId);
-      const startY = getTileYFromId(startTileId);
-      const endX = getTileXFromId(tileId);
-      const endY = getTileYFromId(tileId);
+      const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
+      const { x: endX, y: endY } = tileUtil.getXYFromId(tileId);
 
       // and check if tile already added
 
-      calculatePath(startX, startY, endX, endY, addTileToValidTiles);
+      pathFinderUtil.calculatePath(
+        startX,
+        startY,
+        endX,
+        endY,
+        addTileToValidTiles
+      );
 
       // }
       //validTiles.push(tileId);
@@ -55,21 +55,17 @@ const getPossibleMoveArea = (startTileId, tiles) => {
 let validTilesTest = [];
 
 //asynchronize
+// how to do it in other way...?
 const addTileToValidTiles = path => {
-  if (path === null || path.length === 0) {
-    console.log(
-      'no found!',
-      path && path.length === 0 ? 'path length = 0' : ''
-    );
-  } else {
+  // static 4 for now
+  if (path && path.length > 0 && path.length < 4) {
     console.log('Path was found', 'path length', path.length, path);
-    //Path was found path length 0 []
-    // all path? and check if tile added
-    // easy if we change xy into id
-    if (path.length < 4) {
-      const tileXY = path[path.length - 1];
-      validTilesTest.push(tileXY);
-    }
+    // add all tiles from  path? and check if tile added
+    // easy if we change xy into id back again
+    const tileXY = path[path.length - 1];
+    validTilesTest.push(tileXY);
+  } else {
+    console.log('path no found!');
   }
 };
 
@@ -79,7 +75,7 @@ const renderTiles = (setOfTileIds, dispatch) => {
 
   // better tileId here...
   setOfTileIds.forEach(({ x, y }, index) => {
-    const tileId = getTileIdFromXY(x, y);
+    const tileId = tileUtil.getTileIdFromXY(x, y);
     // const x = getTileXFromId(tileId);
     // const y = getTileYFromId(tileId);
     tilesToRender.push(

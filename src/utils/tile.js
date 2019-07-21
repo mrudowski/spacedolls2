@@ -1,8 +1,14 @@
 import produce from 'immer';
-import {getLevel} from './level';
+import { getLevel } from './level';
+
+// remove tile form names
 
 export const getTileXFromId = id => id.split(',')[0];
 export const getTileYFromId = id => id.split(',')[1];
+export const getXYFromId = id => {
+  const idArray = id.split(',');
+  return { x: idArray[0], y: idArray[1] };
+};
 
 export const getTileXFromIndex = (index, width) => index % width;
 export const getTileYFromIndex = (index, height) => Math.floor(index / height);
@@ -14,8 +20,6 @@ export const getTileIdFromIndex = (index, size) =>
     index,
     size.height
   )}`;
-
-// why not [x][y] array?
 
 export const prepareBoardData = levelId => {
   console.log('prepareBoardData');
@@ -44,7 +48,6 @@ export const prepareBoardData = levelId => {
 
   return updatedTiles;
 };
-
 
 // Map vs Object, mutation, spread, assign... with in depth discussion in comments section
 // https://medium.com/dailyjs/rewriting-javascript-converting-an-array-of-objects-to-an-object-ec579cafbfc7
