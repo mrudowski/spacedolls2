@@ -34,6 +34,7 @@ export const prepareData = levelId => {
       draft[wall.tile].wall = true;
     });
     level.dolls.forEach(doll => {
+      // dollId instead doll?
       draft[doll.tile].doll = doll.id;
     });
   });

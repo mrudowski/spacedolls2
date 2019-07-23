@@ -33,6 +33,7 @@ const board = createSlice({
       // better by selectors?
       const sourceTile = state.tiles[state.selectedTileId];
       const destinationTile = state.tiles[action.payload];
+      // change doll to dollId
       destinationTile.doll = sourceTile.doll;
       sourceTile.doll = null;
       state.selectedTileId = action.payload;

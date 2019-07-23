@@ -23,7 +23,7 @@ const dolls = createSlice({
   }
 });
 
-const { getDolls } = dolls.selectors;
+// const { getDolls } = dolls.selectors;
 
 // not used
 // dolls.selectors.getDollById = id =>
@@ -32,11 +32,22 @@ const { getDolls } = dolls.selectors;
 //     dolls => dolls[id]
 //   );
 
-dolls.selectors.getSelectedDollData = createSelector(
-  [getDolls, board.selectors.getSelectedTile],
-  (dolls, selectedTile) => {
+dolls.selectors.getSelectedDollId = createSelector(
+  [board.selectors.getSelectedTile],
+  selectedTile => {
     if (selectedTile && selectedTile.doll) {
-      return dolls[selectedTile.doll];
+      return selectedTile.doll;
+    } else {
+      return null;
+    }
+  }
+);
+
+dolls.selectors.getSelectedDollData = createSelector(
+  [dolls.selectors.getDolls, dolls.selectors.getSelectedDollId],
+  (dolls, dollId) => {
+    if (dollId) {
+      return dolls[dollId];
     } else {
       return null;
     }
