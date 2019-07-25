@@ -4,6 +4,7 @@ import * as boardUtil from './board';
 import * as dollUtil from './doll';
 import * as pathFinderUtil from './pathFinder';
 
+console.log('moveAction module');
 // change name
 // change to const?
 let validTilesTest = [];
@@ -16,13 +17,10 @@ const addTileToValidTiles = path => {
   // we should get it from the selected doll stats/ap
 
   if (path && path.length > 0 && path.length <= moveRange) {
-    console.log('Path was found', 'path length', path.length, path);
     // add all tiles from  path? and check if tile added
     const { x, y } = path[path.length - 1];
     const tileId = tileUtil.getIdFromXY(x, y);
     validTilesTest.push(tileId);
-  } else {
-    console.log('path no found!');
   }
 };
 
@@ -31,7 +29,6 @@ export const getPossibleMoveTilesId = (startTileId, tiles) => {
   validTilesTest = [];
 
   moveRange = dollUtil.getDollMove(dollUtil.getSelectedDollId()) + 1;
-  console.log('moveRange', moveRange);
 
   pathFinderUtil.prepareGrid(tiles);
 
