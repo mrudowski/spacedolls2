@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import colors from '../theme/colors';
-import sizes from '../theme/sizes';
-import { rgba, math } from 'polished';
+// import sizes from '../theme/sizes';
+import { rgba } from 'polished';
 import { tileBase, tileSize } from '../styled/common';
 
 export const StyledMoveGizmo = styled.div`

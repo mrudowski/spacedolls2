@@ -7203,9 +7203,9 @@ redux-immutable-state-invariant@^2.1.0:
     invariant "^2.1.0"
     json-stringify-safe "^5.0.1"
 
-redux-starter-kit@0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.5.1.tgz#8b11ef234624a20c9cd384892033f7772331e9e3"
+redux-starter-kit@0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.6.3.tgz#bafde49b8ff35dff0f4f43700d7ed9973754c96e"
   dependencies:
     immer "^2.1.5"
     redux "^4.0.0"

@@ -1,7 +1,7 @@
 import EasyStar from 'easystarjs';
 import forEach from 'lodash/each';
 import * as tileUtil from './tile';
-import store from '../redux/store';
+// import store from '../redux/store';
 
 const easystar = new EasyStar.js();
 easystar.enableSync();

@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
-  INCREMENT,
+  // INCREMENT,
   increment,
-  decrement
+  // decrement
 } from '../redux/reducers/counterActions';
 
 const StyledCounter = styled.div`

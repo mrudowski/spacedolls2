@@ -14,6 +14,7 @@ const board = createSlice({
       const tiles = boardUtil.prepareData(levelId);
       state.tiles = tiles;
     },
+    // TODO: change SelectTile to SelectTileId?
     selectTile: (state, action) => {
       state.selectedTileId = action.payload;
     },
@@ -24,16 +25,30 @@ const board = createSlice({
       } else if (tile && !tile.doll) {
         tile.wall = true;
       }
-    }
+    },
+		changeDollPosition: (state, action) => {
+      const {sourceTileId, destinationTileId} = action.payload;
+			const sourceTile = state.tiles[sourceTileId];
+			const destinationTile = state.tiles[destinationTileId];
+      // thanks to immer
+			// change doll to dollId
+			destinationTile.doll = sourceTile.doll;
+			sourceTile.doll = null;
+			state.selectedTileId = destinationTile.id;
+		}
   }
 });
 
 const { getBoard } = board.selectors;
 
+
 board.selectors.getTiles = createSelector(['board.tiles']);
 // board.selectors.getSelectedTileId = createSelector(['board.selectedTileId']);
 
-board.selectors.getSelectedTile = createSelector(
+// structure from?
+// https://github.com/reduxjs/redux-starter-kit/issues/91
+
+const getSelectedTile = createSelector(
   [getBoard],
   ({ tiles, selectedTileId }) => {
     if (selectedTileId) {
@@ -43,5 +58,7 @@ board.selectors.getSelectedTile = createSelector(
     }
   }
 );
+// TODO
+board.selectors.getSelectedTile = getSelectedTile;
 
 export default board;
