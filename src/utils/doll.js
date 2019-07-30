@@ -4,7 +4,7 @@ import dolls from '../redux/dolls';
 
 export const getDollMetaData = dollId => dollsData[dollId];
 
-// can we do that?
+// can we do that? //circular dependency ?
 export const getSelectedDollId = () => {
   const state = store.getState();
   return dolls.selectors.getSelectedDollId(state);

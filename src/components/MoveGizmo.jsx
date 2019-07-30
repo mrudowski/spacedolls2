@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import board from '../redux/board';
+import actions from '../redux/actions';
 import * as tileUtil from '../utils/tile';
 import * as moveActionUtil from '../utils/moveAction';
 import { StyledMoveGizmo, StyledGizmoTile } from '../styled/StyledMoveGizmo';
@@ -15,7 +16,7 @@ const renderTiles = (tilesId, dispatch) => {
         $x={x}
         $y={y}
         key={`tile-${tileId}`}
-        onClick={() => dispatch(board.actions.moveSelectedDollTo(tileId))}
+        onClick={() => dispatch(actions.actions.moveSelectedDollTo(tileId))}
       />
     );
   });

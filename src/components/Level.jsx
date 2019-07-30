@@ -6,10 +6,14 @@ import { getLevel } from '../utils/level';
 import level from '../redux/level';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
+import actions from '../redux/actions';
 import DollInfo from './DollInfo';
 
 export default function Level() {
-  const isMoveGizmoActive = useSelector(board.selectors.isMoveGizmoActive);
+  const isMoveGizmoActive = useSelector(actions.selectors.isMoveGizmoActive);
+  const isActionGizmoActive = useSelector(
+    actions.selectors.isAttackGizmoActive
+  );
   const { currentLevelId } = useSelector(level.selectors.getLevel);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
@@ -28,7 +32,8 @@ export default function Level() {
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
-  const toggleMoveGizmo = () => dispatch(board.actions.toggleMoveGizmo());
+  const toggleMoveGizmo = () => dispatch(actions.actions.toggleMoveGizmo());
+  const toggleAttackGizmo = () => dispatch(actions.actions.toggleAttackGizmo());
 
   // move to utils?
   const isDollSelected = () => {
@@ -52,11 +57,20 @@ export default function Level() {
         <button onClick={dispatchToggleWall} disabled={isDollSelected()}>
           toggle wall
         </button>
+
+        {/*actions panel*/}
         <button
           onClick={toggleMoveGizmo}
           disabled={!isDollSelected() && !isMoveGizmoActive}
         >
           move {isMoveGizmoActive && 'ON'}
+        </button>
+        <button
+          // primary action? what about medic?
+          onClick={toggleAttackGizmo}
+          disabled={!isDollSelected() && !isActionGizmoActive}
+        >
+          attack {isActionGizmoActive && 'ON'}
         </button>
       </div>
     </div>

@@ -4,6 +4,7 @@ import foreach from 'lodash/each';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import level from '../redux/level';
+import actions from '../redux/actions';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
@@ -42,8 +43,8 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
 
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
-  // move to other 'actions' reducer?
-  const isMoveGizmoActive = useSelector(board.selectors.isMoveGizmoActive);
+  // this is the same selector like parent node Level... better by prop?
+  const isMoveGizmoActive = useSelector(actions.selectors.isMoveGizmoActive);
   const { selectedTileId, tiles: tilesData } = useSelector(
     board.selectors.getBoard
   );
