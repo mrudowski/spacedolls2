@@ -23,8 +23,6 @@ const dolls = createSlice({
   }
 });
 
-// const { getDolls } = dolls.selectors;
-
 // not used
 // dolls.selectors.getDollById = id =>
 //   createSelector(
@@ -32,7 +30,16 @@ const dolls = createSlice({
 //     dolls => dolls[id]
 //   );
 
-dolls.selectors.getSelectedDollId = createSelector(
+// export const getDollTeam = (levelId, id) => {
+//   console.log('>>', id, getLevel(levelId).dolls[3].team);
+//   return getLevel(levelId).dolls[1].team;
+// };
+
+// selectors
+
+const {getDolls} = dolls.selectors;
+
+const getSelectedDollId = createSelector(
   [board.selectors.getSelectedTile],
   selectedTile => {
     if (selectedTile && selectedTile.doll) {
@@ -43,8 +50,8 @@ dolls.selectors.getSelectedDollId = createSelector(
   }
 );
 
-dolls.selectors.getSelectedDollData = createSelector(
-  [dolls.selectors.getDolls, dolls.selectors.getSelectedDollId],
+const getSelectedDollData = createSelector(
+  [getDolls, getSelectedDollId],
   (dolls, dollId) => {
     if (dollId) {
       return dolls[dollId];
@@ -54,10 +61,10 @@ dolls.selectors.getSelectedDollData = createSelector(
   }
 );
 
-// should be reducer doll.byId ???
-// export const getDollTeam = (levelId, id) => {
-//   console.log('>>', id, getLevel(levelId).dolls[3].team);
-//   return getLevel(levelId).dolls[1].team;
-// };
+dolls.selectors = {
+  getDolls, // overwrite?
+	getSelectedDollId,
+	getSelectedDollData,
+};
 
 export default dolls;

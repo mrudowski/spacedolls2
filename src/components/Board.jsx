@@ -44,7 +44,7 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
   // this is the same selector like parent node Level... better by prop?
-  const isMoveGizmoActive = useSelector(actions.selectors.isMoveGizmoActive);
+  const isMoveActionActive = useSelector(actions.selectors.isMoveActionActive);
   const { selectedTileId, tiles: tilesData } = useSelector(
     board.selectors.getBoard
   );
@@ -55,7 +55,7 @@ const Board = () => {
   return (
     <Styled.Board>
       {renderAll(tilesData, dollsData, selectedTileId, currentLevelId)}
-      {isMoveGizmoActive && <MoveGizmo />}
+      {isMoveActionActive && <MoveGizmo />}
     </Styled.Board>
   );
 };

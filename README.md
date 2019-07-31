@@ -44,3 +44,17 @@ React turn based tactics playground
 
 https://koenig-media.raywenderlich.com/uploads/2013/05/Tiled-java-Coordinates.jpg
 https://omaharentalads.com/explore/Java-drawing-pixel/#gal_post_6051_java-drawing-pixel-3.png
+
+### Some logic structure assumptions
+
+data
+- use nothing
+- used only by `utils`
+
+utils
+- use `data` and other `utils`
+- used by `components`, `redux` and other `utils`
+
+redux
+- use `utils`
+- used by `components`

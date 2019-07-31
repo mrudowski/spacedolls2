@@ -25,10 +25,10 @@ const addTileToValidTiles = path => {
 };
 
 //walkableArea /validTiles
-export const getPossibleMoveTilesId = (startTileId, tiles) => {
+export const getPossibleMoveTilesId = (startTileId, tiles, dollId) => {
   validTilesTest = [];
 
-  moveRange = dollUtil.getDollMove(dollUtil.getSelectedDollId()) + 1;
+  moveRange = dollUtil.getDollMove(dollId) + 1;
 
   pathFinderUtil.prepareGrid(tiles);
 

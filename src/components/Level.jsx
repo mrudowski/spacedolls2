@@ -10,10 +10,8 @@ import actions from '../redux/actions';
 import DollInfo from './DollInfo';
 
 export default function Level() {
-  const isMoveGizmoActive = useSelector(actions.selectors.isMoveGizmoActive);
-  const isActionGizmoActive = useSelector(
-    actions.selectors.isAttackGizmoActive
-  );
+  const isMoveActionActive = useSelector(actions.selectors.isMoveActionActive);
+  const isAttackActionActive = useSelector(actions.selectors.isAttackActionActive);
   const { currentLevelId } = useSelector(level.selectors.getLevel);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
@@ -32,8 +30,8 @@ export default function Level() {
 
   const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
 
-  const toggleMoveGizmo = () => dispatch(actions.actions.toggleMoveGizmo());
-  const toggleAttackGizmo = () => dispatch(actions.actions.toggleAttackGizmo());
+  const toggleMoveAction = () => dispatch(actions.actions.toggleMoveAction());
+  const toggleAttackAction = () => dispatch(actions.actions.toggleAttackAction());
 
   // move to utils?
   const isDollSelected = () => {
@@ -60,17 +58,17 @@ export default function Level() {
 
         {/*actions panel*/}
         <button
-          onClick={toggleMoveGizmo}
-          disabled={!isDollSelected() && !isMoveGizmoActive}
+          onClick={toggleMoveAction}
+          disabled={!isDollSelected() && !isMoveActionActive}
         >
-          move {isMoveGizmoActive && 'ON'}
+          move {isMoveActionActive && 'ON'}
         </button>
         <button
           // primary action? what about medic?
-          onClick={toggleAttackGizmo}
-          disabled={!isDollSelected() && !isActionGizmoActive}
+          onClick={toggleAttackAction}
+          disabled={!isDollSelected() && !isAttackActionActive}
         >
-          attack {isActionGizmoActive && 'ON'}
+          attack {isAttackActionActive && 'ON'}
         </button>
       </div>
     </div>
