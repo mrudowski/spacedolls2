@@ -6,12 +6,11 @@ import { getLevel } from '../utils/level';
 import level from '../redux/level';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
-import actions from '../redux/actions';
+import actions, {MOVE, ATTACK} from '../redux/actions';
 import DollInfo from './DollInfo';
 
 export default function Level() {
-  const isMoveActionActive = useSelector(actions.selectors.isMoveActionActive);
-  const isAttackActionActive = useSelector(actions.selectors.isAttackActionActive);
+  const activeAction = useSelector(actions.selectors.getActiveAction);
   const { currentLevelId } = useSelector(level.selectors.getLevel);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
@@ -59,16 +58,16 @@ export default function Level() {
         {/*actions panel*/}
         <button
           onClick={toggleMoveAction}
-          disabled={!isDollSelected() && !isMoveActionActive}
+          disabled={!isDollSelected() && activeAction !== MOVE}
         >
-          move {isMoveActionActive && 'ON'}
+          move {activeAction === MOVE && 'ON'}
         </button>
         <button
           // primary action? what about medic?
           onClick={toggleAttackAction}
-          disabled={!isDollSelected() && !isAttackActionActive}
+          disabled={!isDollSelected() && activeAction !== ATTACK}
         >
-          attack {isAttackActionActive && 'ON'}
+          attack {activeAction === ATTACK && 'ON'}
         </button>
       </div>
     </div>

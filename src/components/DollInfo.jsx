@@ -16,8 +16,10 @@ const DollInfo = () => {
       <StyledDollInfo>
         <h4>Selected / active doll</h4>
         {data.meta.codeName} ({metaData.race}){data.team}<br/>
-        MoveRange: {data.meta.stats.move}
-        
+        HP: {data.hp}<br/>
+        MoveRange: {data.meta.stats.move}<br/>
+        AttackRange: {data.meta.stats.attackRange}<br/>
+        AttackStrength: {data.meta.stats.attack}<br/>
       </StyledDollInfo>
     );
   } else {

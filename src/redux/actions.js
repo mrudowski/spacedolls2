@@ -1,32 +1,40 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import board from './board';
 
+// TODO change to action
+
+export const MOVE = 'MOVE';
+export const ATTACK = 'ATTACK';
+
 const actions = createSlice({
   slice: 'actions',
   initialState: {
-    moveActive: false,
-    attackActive: false
+    activeAction: null,
   },
   reducers: {
     toggleMoveAction: state => {
-      state.moveActive = !state.moveActive;
+    	if (state.activeAction === MOVE) {
+				state.activeAction = null;
+			} else {
+				state.activeAction = MOVE;
+			}
     },
     toggleAttackAction: state => {
-      state.attackActive = !state.attackActive;
+			if (state.activeAction === ATTACK) {
+				state.activeAction = null;
+			} else {
+				state.activeAction = ATTACK;
+			}
     },
   }
 });
 
 // selectors
 
-const isMoveActionActive = createSelector(['actions.moveActive']);
-const isAttackActionActive = createSelector(['actions.attackActive']);
-
+const getActiveAction = createSelector(['actions.activeAction']);
 
 actions.selectors = {
-	...actions.selectors,
-	isMoveActionActive,
-	isAttackActionActive,
+	getActiveAction,
 };
 
 // effects

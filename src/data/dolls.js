@@ -50,7 +50,7 @@ const dolls = {
       hp: 7,
       move: 2,
       attack: 0,
-      attackRange: 1,
+      attackRange: 0,
       medic: 5,
       medicRange: 1,
       defense: 0

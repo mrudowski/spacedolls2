@@ -14,7 +14,7 @@ const TileInfo = ({ tile }) => {
   if (tile) {
     return (
       <Styled>
-        <h4>Selected</h4>
+        <h4>Selected tile</h4>
         tileId: {tile.id}
         <br />
         occupiedBy/content: {getOccupiedBy(tile)}
@@ -23,7 +23,7 @@ const TileInfo = ({ tile }) => {
   } else {
     return (
       <Styled>
-        <h4>Selected</h4>
+        <h4>Selected tile</h4>
         no tile selected
       </Styled>
     );

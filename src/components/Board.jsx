@@ -4,11 +4,12 @@ import foreach from 'lodash/each';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import level from '../redux/level';
-import actions from '../redux/actions';
+import actions, {MOVE, ATTACK} from '../redux/actions';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
+import AttackGizmo from './AttackGizmo';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 
@@ -43,8 +44,9 @@ const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
 
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
+	const dollId = useSelector(dolls.selectors.getSelectedDollId);
   // this is the same selector like parent node Level... better by prop?
-  const isMoveActionActive = useSelector(actions.selectors.isMoveActionActive);
+  const activeAction = useSelector(actions.selectors.getActiveAction);
   const { selectedTileId, tiles: tilesData } = useSelector(
     board.selectors.getBoard
   );
@@ -55,7 +57,14 @@ const Board = () => {
   return (
     <Styled.Board>
       {renderAll(tilesData, dollsData, selectedTileId, currentLevelId)}
-      {isMoveActionActive && <MoveGizmo />}
+      {activeAction === MOVE && <MoveGizmo />}
+      {(activeAction === ATTACK && dollId) &&
+        <AttackGizmo
+          dollId={dollId}
+          tiles={tilesData}
+          selectedTileId={selectedTileId}
+        />
+      }
     </Styled.Board>
   );
 };
