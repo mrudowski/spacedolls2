@@ -39,18 +39,14 @@ const board = createSlice({
   }
 });
 
-const { getBoard } = board.selectors;
+// selectors
 
-
-board.selectors.getTiles = createSelector(['board.tiles']);
-// board.selectors.getSelectedTileId = createSelector(['board.selectedTileId']);
-
-// structure from?
-// https://github.com/reduxjs/redux-starter-kit/issues/91
+const getTiles = createSelector(['board.tiles']);
+const getSelectedTileId = createSelector(['board.selectedTileId']);
 
 const getSelectedTile = createSelector(
-  [getBoard],
-  ({ tiles, selectedTileId }) => {
+  [getTiles, getSelectedTileId],
+  (tiles, selectedTileId) => {
     if (selectedTileId) {
       return tiles[selectedTileId];
     } else {
@@ -58,7 +54,12 @@ const getSelectedTile = createSelector(
     }
   }
 );
-// TODO
-board.selectors.getSelectedTile = getSelectedTile;
+
+board.selectors = {
+  // replacing board.selectors.getBoard
+	getTiles,
+	getSelectedTileId,
+	getSelectedTile,
+};
 
 export default board;

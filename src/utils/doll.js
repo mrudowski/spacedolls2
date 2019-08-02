@@ -6,3 +6,11 @@ export const getDollMetaData = dollId => dollsData[dollId];
 export const getDollMove = dollId => {
   return getDollMetaData(dollId).stats.move;
 };
+
+export const getAttackRange = dollId => {
+	return getDollMetaData(dollId).stats.attackRange;
+};
+
+export const getDollFromTile = tile => {
+	return tile.doll; //TODO dollId?
+};

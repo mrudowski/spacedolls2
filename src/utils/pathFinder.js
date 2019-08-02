@@ -35,10 +35,10 @@ export const prepareGrid = tilesData => {
 
 export const calculatePath = (startX, startY, endX, endY, callbackFunction) => {
   easystar.findPath(
-    parseInt(startX, 10),
-    parseInt(startY, 10),
-    parseInt(endX, 10),
-    parseInt(endY, 10),
+		startX,
+		startY,
+    endX,
+    endY,
     callbackFunction
   );
   easystar.calculate();

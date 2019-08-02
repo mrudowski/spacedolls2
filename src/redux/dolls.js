@@ -64,7 +64,7 @@ const getSelectedDollData = createSelector(
 dolls.selectors = {
   getDolls, // overwrite?
 	getSelectedDollId,
-	getSelectedDollData,
+	getSelectedDollData, // getActive
 };
 
 export default dolls;

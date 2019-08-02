@@ -47,8 +47,15 @@ const moveSelectedDollTo = destinationTileId => {
 	}
 };
 
+const attack = tileId => {
+	return (dispatch, getState) => {
+		console.log("ATTACK tile", tileId);
+	}
+};
+
 actions.effects = {
 	moveSelectedDollTo,
+	attack,
 };
 
 export default actions;

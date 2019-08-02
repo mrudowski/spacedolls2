@@ -1,10 +1,10 @@
 // remove tile form names?
 
-export const getTileXFromId = id => id.split(',')[0];
-export const getTileYFromId = id => id.split(',')[1];
+export const getTileXFromId = id => parseInt(id.split(',')[0], 10);
+export const getTileYFromId = id => parseInt(id.split(',')[1], 10);
 export const getXYFromId = id => {
   const idArray = id.split(',');
-  return { x: idArray[0], y: idArray[1] };
+  return { x: parseInt(idArray[0], 10), y: parseInt(idArray[1], 10) };
 };
 
 export const getTileXFromIndex = (index, width) => index % width;

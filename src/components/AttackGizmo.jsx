@@ -2,38 +2,34 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import actions from '../redux/actions';
 import * as tileUtil from '../utils/tile';
-import * as moveActionUtil from '../utils/moveAction';
+import * as attackActionUtil from '../utils/attackAction';
 import { StyledMoveGizmo, StyledGizmoTile } from '../styled/StyledMoveGizmo';
 
-const renderTiles = (tilesId, dispatch) => {
-  const tilesToRender = [];
-
-  tilesId.forEach((tileId, index) => {
+const renderTiles = (tilesIds, dispatch) => {
+  return tilesIds.map((tileId, index) => {
     const { x, y } = tileUtil.getXYFromId(tileId);
-    tilesToRender.push(
+    return (
       <StyledGizmoTile
         $x={x}
         $y={y}
         key={`tile-${tileId}`}
-        onClick={() => dispatch(actions.effects.moveSelectedDollTo(tileId))}
+        onClick={() => dispatch(actions.effects.attack(tileId))}
       />
     );
   });
-  return tilesToRender;
 };
 
-const AttackGizmo = ({dollId, tiles, selectedTileId}) => {
+const AttackGizmo = ({tiles, selectedTile}) => {
   const dispatch = useDispatch();
 
-  const possibleMoveTilesId = moveActionUtil.getPossibleMoveTilesId(
-		selectedTileId,
+  const rangeTilesIds = attackActionUtil.getRangeTilesIds(
     tiles,
-		dollId
+		selectedTile,
   );
 
   return (
     <StyledMoveGizmo>
-      {renderTiles(possibleMoveTilesId, dispatch)}
+      {renderTiles(rangeTilesIds, dispatch)}
     </StyledMoveGizmo>
   );
 };

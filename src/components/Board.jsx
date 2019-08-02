@@ -47,22 +47,23 @@ const Board = () => {
 	const dollId = useSelector(dolls.selectors.getSelectedDollId);
   // this is the same selector like parent node Level... better by prop?
   const activeAction = useSelector(actions.selectors.getActiveAction);
-  const { selectedTileId, tiles: tilesData } = useSelector(
-    board.selectors.getBoard
-  );
-  const { currentLevelId } = useSelector(level.selectors.getLevel);
+	const { currentLevelId } = useSelector(level.selectors.getLevel);
+
+	// do we need selectedTileId?
+  const selectedTileId = useSelector(board.selectors.getSelectedTileId);
+  const selectedTile = useSelector(board.selectors.getSelectedTile);
+  const tiles = useSelector(board.selectors.getTiles);
 
   console.log('Board');
 
   return (
     <Styled.Board>
-      {renderAll(tilesData, dollsData, selectedTileId, currentLevelId)}
+      {renderAll(tiles, dollsData, selectedTileId, currentLevelId)}
       {activeAction === MOVE && <MoveGizmo />}
       {(activeAction === ATTACK && dollId) &&
         <AttackGizmo
-          dollId={dollId}
-          tiles={tilesData}
-          selectedTileId={selectedTileId}
+          tiles={tiles}
+          selectedTile={selectedTile}
         />
       }
     </Styled.Board>
