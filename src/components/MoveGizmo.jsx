@@ -28,6 +28,7 @@ const MoveGizmo = () => {
 	const dollId = useSelector(dolls.selectors.getSelectedDollId);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const tiles = useSelector(board.selectors.getTiles);
+  const boardSize = useSelector(board.selectors.getSize);
   const dispatch = useDispatch();
   // change to utils tile.hasDoll(selectedTile)?
   if (!selectedTile.doll) {
@@ -36,7 +37,8 @@ const MoveGizmo = () => {
   const possibleMoveTilesId = moveActionUtil.getPossibleMoveTilesId(
     selectedTile.id,
     tiles,
-		dollId
+		dollId,
+    boardSize,
   );
 
   return (

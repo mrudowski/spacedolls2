@@ -12,7 +12,6 @@ export const getRangeTilesIds = (tiles, startTile) => {
   // inside better then outside with params?
 	const isOnLOS = (startTileId, endTileId) => {
 		const lineOfTilesIds = boardUtil.supercover_line(startTileId, endTileId);
-		console.log('endTileId',endTileId);
 
 		// without testing last tile because we want to hit at it
 		lineOfTilesIds.pop();
@@ -21,12 +20,9 @@ export const getRangeTilesIds = (tiles, startTile) => {
 			//TODO make util for that:
 			const tile = tiles[tileId];
 
-			console.log('tile',tile);
-
 			//TODO isOccupied --- make a function
 			return !(tile.wall || tile.doll);
 		});
-		console.log('---- result', result);
 		return result;
 
 	};
@@ -38,7 +34,7 @@ export const getRangeTilesIds = (tiles, startTile) => {
 		// and add whole lines not single (end) tiles!
     if (
       tileId !== startTile.id &&
-      //boardUtil.getDistance(startTile.id, tileId) <= range &&
+      boardUtil.getDistance(startTile.id, tileId) <= range &&
 			isOnLOS(startTile.id, tileId)
     ) {
 			rangeTilesId.push(tileId);

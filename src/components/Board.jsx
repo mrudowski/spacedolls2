@@ -10,10 +10,12 @@ import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
 import AttackGizmo from './AttackGizmo';
+import * as levelUtil from '../utils/level';
+
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 
-const renderAll = (tilesData, dollsData, selectedTileId, currentLevelId) => {
+const renderAll = (tilesData, dollsData, selectedTileId) => {
   // tileMap - tileMap.entries()
   //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
 
@@ -47,18 +49,18 @@ const Board = () => {
 	const dollId = useSelector(dolls.selectors.getSelectedDollId);
   // this is the same selector like parent node Level... better by prop?
   const activeAction = useSelector(actions.selectors.getActiveAction);
-	const { currentLevelId } = useSelector(level.selectors.getLevel);
 
 	// do we need selectedTileId?
   const selectedTileId = useSelector(board.selectors.getSelectedTileId);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const tiles = useSelector(board.selectors.getTiles);
+	const { width: boardWidth, height: boardHeight } = useSelector(board.selectors.getSize);
 
-  console.log('Board');
+	console.log('Board');
 
-  return (
-    <Styled.Board>
-      {renderAll(tiles, dollsData, selectedTileId, currentLevelId)}
+	return (
+    <Styled.Board $width={boardWidth} $height={boardHeight}>
+      {renderAll(tiles, dollsData, selectedTileId)}
       {activeAction === MOVE && <MoveGizmo />}
       {(activeAction === ATTACK && dollId) &&
         <AttackGizmo

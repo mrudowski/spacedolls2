@@ -3,8 +3,8 @@ const levels = {
     id: '1',
     name: 'The Lab',
     size: {
-      width: 5,
-      height: 5
+      width: 10,
+      height: 10
     },
     tiles: {},
     walls: [{ tile: '2,1' }, { tile: '2,2' }, { tile: '2,3' }],

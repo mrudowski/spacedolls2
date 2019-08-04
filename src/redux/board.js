@@ -1,9 +1,12 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import * as boardUtil from '../utils/board';
+import * as levelUtil from '../utils/level';
 
 const board = createSlice({
   slice: 'board',
   initialState: {
+		width: 0,
+		height: 0,
     tiles: {},
     selectedTileId: null
   },
@@ -12,7 +15,10 @@ const board = createSlice({
       // You can "mutate" the state in a reducer, thanks to Immer
       const levelId = action.payload;
       const tiles = boardUtil.prepareData(levelId);
+			const level = levelUtil.getLevel(levelId);
       state.tiles = tiles;
+      state.width = level.size.width;
+      state.height = level.size.height;
     },
     // TODO: change SelectTile to SelectTileId?
     selectTile: (state, action) => {
@@ -41,6 +47,12 @@ const board = createSlice({
 
 // selectors
 
+const getSize = createSelector(
+	['board.width', 'board.height'],
+	(width, height) => {
+		return {width, height};
+	}
+);
 const getTiles = createSelector(['board.tiles']);
 const getSelectedTileId = createSelector(['board.selectedTileId']);
 
@@ -56,7 +68,8 @@ const getSelectedTile = createSelector(
 );
 
 board.selectors = {
-  // replacing board.selectors.getBoard
+  // replacing board.selectors.getBoard,
+	getSize,
 	getTiles,
 	getSelectedTileId,
 	getSelectedTile,

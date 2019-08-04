@@ -25,12 +25,12 @@ const addTileToValidTiles = path => {
 };
 
 //walkableArea /validTiles
-export const getPossibleMoveTilesId = (startTileId, tiles, dollId) => {
+export const getPossibleMoveTilesId = (startTileId, tiles, dollId, boardSize) => {
   validTilesTest = [];
 
   moveRange = dollUtil.getDollMove(dollId) + 1;
 
-  pathFinderUtil.prepareGrid(tiles);
+  pathFinderUtil.prepareGrid(tiles, boardSize);
 
   // we check all tiles on board - not best but easy
   // of course it would be better when counting from doll (and flood fill?)

@@ -7,12 +7,11 @@ const easystar = new EasyStar.js();
 easystar.enableSync();
 // easystar.setIterationsPerCalculation(1000);
 
-const createGrid = tilesData => {
-  const grid = [];
-  // use selectors? // dep loop?
-  const boardSize = 5; //store.getState().level
+const createGrid = (tilesData, boardSize) => {
+	const {width: boardWidth} = boardSize;
+	const grid = [];
 
-  for (let i = 0; i < boardSize; i++) {
+  for (let i = 0; i < boardWidth; i++) {
     grid.push([]);
   }
 
@@ -26,8 +25,8 @@ const createGrid = tilesData => {
   return grid;
 };
 
-export const prepareGrid = tilesData => {
-  const grid = createGrid(tilesData);
+export const prepareGrid = (tilesData, boardSize) => {
+	const grid = createGrid(tilesData, boardSize);
   console.log('preparedGrid', grid);
   easystar.setGrid(grid);
   easystar.setAcceptableTiles(['0']);

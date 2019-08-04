@@ -38,10 +38,9 @@ export default function CounterComponent({ className }) {
     <StyledCounter>
       <div className="counter">
         Counter: {counter.count} {counter.test}
+        <button onClick={increment3}>Increment counter</button>
+        <button onClick={() => dispatch(increment())}>Increment counter</button>
       </div>
-      <StyledHr />
-      <button onClick={increment3}>Increment counter</button>
-      <button onClick={() => dispatch(increment())}>Increment counter</button>
     </StyledCounter>
   );
 }
