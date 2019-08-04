@@ -17,8 +17,8 @@ const Doll = styled.div`
 
   background-color: ${props => {
     return props.$team === 'dolls'
-      ? rgba(colors.team.dolls, 0.25)
-      : rgba(colors.team.aliens, 0.25);
+      ? rgba(colors.team.dolls, 0.4)
+      : rgba(colors.team.aliens, 0.35);
   }};
 `;
 

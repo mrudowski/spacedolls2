@@ -13,7 +13,7 @@ export const getDistance = (startTileId, endTileId) => {
   return Math.abs(startX - endX) + Math.abs(startY - endY);
 };
 
-// https://www.redblobgames.com/grids/line-drawing.html
+// https://www.redblobgames.com/grids/line-drawing.html#supercover
 
 // other interesting one
 // https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm

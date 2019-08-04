@@ -12,6 +12,10 @@ const Tile = styled.div`
   display: inline-block;
   cursor: pointer;
   position: relative;
+  
+  &:nth-child(odd) {
+  	background-color: ${rgba(colors.white, 0.04)};;
+  }
 
   &:before {
     content: '';
@@ -32,7 +36,7 @@ const Tile = styled.div`
   }
 
   ${props =>
-    props.selected &&
+    props.$selected &&
     css`
       &:before {
         display: block;

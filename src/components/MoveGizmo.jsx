@@ -5,7 +5,7 @@ import actions from '../redux/actions';
 import dolls from '../redux/dolls';
 import * as tileUtil from '../utils/tile';
 import * as moveActionUtil from '../utils/moveAction';
-import { StyledMoveGizmo, StyledGizmoTile } from '../styled/StyledMoveGizmo';
+import { StyledGizmo, StyledMoveGizmoTile } from '../styled/Gizmos';
 
 const renderTiles = (tilesId, dispatch) => {
   const tilesToRender = [];
@@ -13,7 +13,7 @@ const renderTiles = (tilesId, dispatch) => {
   tilesId.forEach((tileId, index) => {
     const { x, y } = tileUtil.getXYFromId(tileId);
     tilesToRender.push(
-      <StyledGizmoTile
+      <StyledMoveGizmoTile
         $x={x}
         $y={y}
         key={`tile-${tileId}`}
@@ -42,9 +42,9 @@ const MoveGizmo = () => {
   );
 
   return (
-    <StyledMoveGizmo>
+    <StyledGizmo>
       {renderTiles(possibleMoveTilesId, dispatch)}
-    </StyledMoveGizmo>
+    </StyledGizmo>
   );
 };
 
