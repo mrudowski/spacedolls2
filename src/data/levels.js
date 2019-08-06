@@ -4,7 +4,7 @@ const levels = {
     name: 'The Lab',
     size: {
       width: 9,
-      height: 9
+      height: 8
     },
     tiles: {},
     walls: [{ tile: '2,1' }, { tile: '2,2' }, { tile: '2,3' }],

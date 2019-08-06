@@ -14,6 +14,7 @@ export const getDistance = (startTileId, endTileId) => {
 };
 
 // https://www.redblobgames.com/grids/line-drawing.html#supercover
+// better for what I want to archive here
 
 // other interesting one
 // https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm
@@ -105,23 +106,37 @@ export const prepareData = levelId => {
     .fill()
     .reduce(function(map, currentValue, index) {
       const id = tileUtil.getTileIdFromIndex(index, level.size);
+			console.log('reduce',index, level.size, id);
       map[id] = {
         id: id
       };
       return map;
     }, {});
 
-  const updatedTiles = produce(tiles, draft => {
-    level.walls.forEach(wall => {
-      draft[wall.tile].wall = true;
-    });
-    level.dolls.forEach(doll => {
-      // dollId instead doll?
-      draft[doll.tile].doll = doll.id;
-    });
-  });
+	console.log('updateTiles tiles', tiles);
+  // const updatedTiles = produce(tiles, draft => {
+  //   level.walls.forEach(wall => {
+  //   	console.log('updateTiles', wall, wall.tile, draft[wall.tile]);
+  //     draft[wall.tile].wall = true;
+  //   });
+  //   level.dolls.forEach(doll => {
+  //     // dollId instead doll?
+  //     draft[doll.tile].doll = doll.id;
+  //   });
+  // });
 
-  return updatedTiles;
+	//const updatedTiles;
+
+	level.walls.forEach(wall => {
+		console.log('updateTiles', wall, wall.tile, tiles[wall.tile]);
+		tiles[wall.tile].wall = true;
+	});
+	level.dolls.forEach(doll => {
+		// dollId instead doll?
+		tiles[doll.tile].doll = doll.id;
+	});
+
+  return tiles;
 };
 
 // Map vs Object, mutation, spread, assign... with in depth discussion in comments section

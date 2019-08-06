@@ -34,16 +34,27 @@ const MoveGizmo = () => {
   if (!selectedTile.doll) {
     return null;
   }
-  const possibleMoveTilesId = moveActionUtil.getPossibleMoveTilesId(
+  console.time('getWalkableArea');
+  const test = moveActionUtil.getWalkableArea(
+		selectedTile.id,
+		tiles,
+		dollId,
+		boardSize,
+  );
+	console.timeEnd('getWalkableArea');
+
+	console.time('getPossibleMoveTilesId');
+	const possibleMoveTilesId = moveActionUtil.getPossibleMoveTilesId(
     selectedTile.id,
     tiles,
 		dollId,
     boardSize,
   );
+	console.timeEnd('getPossibleMoveTilesId');
 
   return (
     <StyledGizmo>
-      {renderTiles(possibleMoveTilesId, dispatch)}
+      {renderTiles(test, dispatch)}
     </StyledGizmo>
   );
 };

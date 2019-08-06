@@ -5,7 +5,7 @@ const dolls = {
     codeName: 'Toi',
     stats: {
       hp: 10,
-      move: 2,
+      move: 12,
       // light blaster
       attack: 5,
 			attackRange: 10,

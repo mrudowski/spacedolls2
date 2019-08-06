@@ -26,10 +26,12 @@ const renderTiles = (tilesIds, dispatch) => {
 const AttackGizmo = ({tiles, selectedTile}) => {
   const dispatch = useDispatch();
 
+	console.time('getRangeTilesIds');
   const rangeTilesIds = attackActionUtil.getRangeTilesIds(
     tiles,
 		selectedTile,
   );
+	console.timeEnd('getRangeTilesIds');
 
   return (
     <StyledGizmo>

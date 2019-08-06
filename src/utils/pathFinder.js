@@ -27,7 +27,6 @@ const createGrid = (tilesData, boardSize) => {
 
 export const prepareGrid = (tilesData, boardSize) => {
 	const grid = createGrid(tilesData, boardSize);
-  console.log('preparedGrid', grid);
   easystar.setGrid(grid);
   easystar.setAcceptableTiles(['0']);
 };

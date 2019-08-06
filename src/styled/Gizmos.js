@@ -33,7 +33,7 @@ export const StyledAttackGizmoTile = styled.div`
   pointer-events: auto; // overwrite tileBase
   // background-color: ${rgba(colors.gizmos.attack, 0.25)};
   background-color: ${colors.gizmos.attack};
-  opacity: 0.25;
+  opacity: 0.2;
 
 	// border-right: ${props => props.$borderRight ? `1px solid ${colors.gizmos.attack}` : '0 none'};
 	// border-bottom: ${props => props.$borderBottom ? `1px solid ${colors.gizmos.attack}` : '0 none'};
