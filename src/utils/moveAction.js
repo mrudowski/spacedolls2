@@ -33,7 +33,18 @@ export const getPossibleMoveTilesId = (startTileId, tiles, dollId, boardSize) =>
   pathFinderUtil.prepareGrid(tiles, boardSize);
 
   // we check all tiles on board - not best but easy
-  // of course it would be better when counting from doll (and flood fill?)
+  // of course it would be better when counting from doll
+  // Breadth First Search (flood fill)
+	// or even better Dijkstra’s Algorithm(?)
+
+	// if you need varying movement costs, Breadth First Search becomes Dijkstra’s Algorithm.
+  // if you add a way to guide the search towards the goal, Breath First Search becomes Best First Search.
+  // If you start with Breadth First Search and add early exit, weighted edges, and a heuristic, you get A*.
+
+  // source: https://www.redblobgames.com/pathfinding/tower-defense/
+	// https://www.redblobgames.com/pathfinding/a-star/introduction.html
+  // and https://github.com/bah87/maze-runner
+
   forEach(tiles, (tile, tileId) => {
     //distance bigger or not
     // TODO isWalkable to the utils
@@ -46,10 +57,10 @@ export const getPossibleMoveTilesId = (startTileId, tiles, dollId, boardSize) =>
       const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
       const { x: endX, y: endY } = tileUtil.getXYFromId(tileId);
 
-      // optimise!
+      // TODO optimise!
       // and check if tile already added
 
-      pathFinderUtil.calculatePath(
+			pathFinderUtil.calculatePath(
         startX,
         startY,
         endX,

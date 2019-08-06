@@ -53,6 +53,8 @@ export const getRangeTilesIds = (tiles, startTile) => {
   forEach(tiles, (tile, tileId) => {
 		// TODO optimise!
 		// and add whole lines not single (end) tiles!
+		// or better Dijkstra’s Algorithm?
+		// https://www.redblobgames.com/pathfinding/a-star/introduction.html
     if (
       tileId !== startTile.id &&
 			boardUtil.getDistance(startTile.id, tileId) <= range &&
