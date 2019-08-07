@@ -14,11 +14,6 @@ const StyledCounter = styled.div`
   }
 `;
 
-const StyledHr = styled.hr`
-  border-color: rgba(255, 255, 255, 0.25);
-  margin: 10px 0;
-`;
-
 export default function CounterComponent({ className }) {
   const counter = useSelector(state => state.counter);
   // many values???

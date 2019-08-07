@@ -6,41 +6,39 @@ import * as pathFinderUtil from './pathFinder';
 import jsgraphs from 'js-graph-algorithms';
 
 console.log('moveAction module');
-// change name
-// change to const?
-let validTilesTest = [];
-let moveRange = 0;
 
-// by easystar `enableSync` we change asynchronous function to synchronous
-// but we still have to deal with callback in some way
-const addTileToValidTiles = path => {
-  // static 4 for now
-  // we should get it from the selected doll stats/ap
 
-  if (path && path.length > 0 && path.length <= moveRange) {
-    // add all tiles from  path? and check if tile added
-    const { x, y } = path[path.length - 1];
-    const tileId = tileUtil.getIdFromXY(x, y);
-    validTilesTest.push(tileId);
-  }
-};
+// Breadth First Search (flood fill)
+// or even better Dijkstra’s Algorithm (including nodes cost/weight)
 
+// if you need varying movement costs, Breadth First Search becomes Dijkstra’s Algorithm.
+// if you add a way to guide the search towards the goal, Breath First Search becomes Best First Search.
+// If you start with Breadth First Search and add early exit, weighted edges, and a heuristic, you get A*.
+
+// sources:
+// https://www.redblobgames.com/pathfinding/tower-defense/
+// https://www.redblobgames.com/pathfinding/a-star/introduction.html
+// https://github.com/bah87/maze-runner
+
+
+// ------------------------------
 
 // Future optimization:
 // we could memorize graph if nothing change (when reselecting dolls)
+// and much more...
 
+export const getRangeTilesIds = (tiles, startTile, boardSize) => {
+	const tilesAsGraph = new jsgraphs.WeightedDiGraph(boardSize.width * boardSize.height);
 
-export const getWalkableArea = (startTileId, tiles, dollId, boardSize) => {
-	const g = new jsgraphs.WeightedDiGraph(boardSize.width * boardSize.height); // 6 is the number vertices in the graph
-	const moveRange2 = dollUtil.getDollMove(dollId) + 1;
-	const result = [];
-
+	const dollId = dollUtil.getDollFromTile(startTile);
+	const range = dollUtil.getDollMove(dollId) + 1;
 
 	const passableAsWeight = (x, y) => {
 		const id = tileUtil.getIdFromXY(x,y);
-		// utils?
+		// TODO utils?
 		const tile = tiles[id];
-		if (!(tile.doll && id !== startTileId || tile.wall)) {
+		// TODO utils?
+		if (!((tile.doll && id !== startTile.id) || tile.wall)) {
 			return 1
 		} else {
 			return 99;
@@ -48,94 +46,109 @@ export const getWalkableArea = (startTileId, tiles, dollId, boardSize) => {
 	};
 
 	const addEdge = (index, x, y) => {
-		g.addEdge(new jsgraphs.Edge(index, tileUtil.getIndexFromXY(x, y, boardSize), passableAsWeight(x, y)));
+		tilesAsGraph.addEdge(new jsgraphs.Edge(index, tileUtil.getIndexFromXY(x, y, boardSize), passableAsWeight(x, y)));
 	};
 
-  //toArray
-  //var index = 0;?
 
-	// add only valid tiles to graph?
-
+	// TODO one common function with attackAction?
+	const tilesIdsToCheck = [];
 	forEach(tiles, (tile, tileId) => {
-	  // TODO x and y as part of tile? tile.x ?
+		if (
+			// TODO isWalkable to the utils?
+			!tile.wall &&
+			!(tile.doll && tileId !== startTile.id)
+		) {
+			const distance = boardUtil.getDistance(startTile.id, tileId);
+			if (distance <= range) {
+				//distanceSortedArray[distance].push(tileId);
+				tilesIdsToCheck.push(tileId);
+			}
+		}
+	});
+
+	tilesIdsToCheck.forEach(tileId => {
+		// TODO x and y as part of tile? tile.x ?
 		const { x, y } = tileUtil.getXYFromId(tileId);
 		const index = tileUtil.getIndexFromXY(x, y, boardSize);
-		// if (tile.doll && tileId !== startTileId || tile.wall) {
-		 //  //do nothing
-    // } else {
-			if (x > 0) {
-				addEdge(index, x - 1, y);
-			}
-			if (y > 0) {
-				addEdge(index, x, y - 1);
-			}
-			if (x < boardSize.width - 1) {
-				addEdge(index, x + 1, y);
-			}
-			if (y < boardSize.height - 1) {
-				addEdge(index, x, y + 1);
-			}
 
-    // }
+		if (x > 0) {
+			addEdge(index, x - 1, y);
+		}
+		if (y > 0) {
+			addEdge(index, x, y - 1);
+		}
+		if (x < boardSize.width - 1) {
+			addEdge(index, x + 1, y);
+		}
+		if (y < boardSize.height - 1) {
+			addEdge(index, x, y + 1);
+		}
 
-		g.node(index).label = tileId;
+		tilesAsGraph.node(index).label = tileId;
 
 	});
 
-	const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
-	const dijkstra = new jsgraphs.Dijkstra(g, tileUtil.getIndexFromXY(startX, startY, boardSize));
+	// TODO x, y as part of tile?
+	// TODO add getIndexFromId
+	const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
+	const dijkstra = new jsgraphs.Dijkstra(tilesAsGraph, tileUtil.getIndexFromXY(startX, startY, boardSize));
 
-
-	for(var v = 0; v < g.V; v++){
+	// TODO - array forEach or map
+	const rangeTilesIds = [];
+	for(let v = 0; v < tilesAsGraph.V; v++){
 		if(dijkstra.hasPathTo(v)){
+			const distance = dijkstra.distanceTo(v);
+			if (distance > 0 && distance < range) {
+				rangeTilesIds.push(tileUtil.getTileIdFromIndex(v, boardSize));
+			}
 			//var path = dijkstra.pathTo(v);
-      const distance = dijkstra.distanceTo(v);
-			if (distance > 0 && distance < moveRange2) {
-				result.push(tileUtil.getTileIdFromIndex(v, boardSize));
-      }
 			// console.log('=====path from 0 to ' + v + ' start==========');
 			// for(var i = 0; i < path.length; ++i) {
 			// 	var e = path[i];
 			// 	console.log(e.from() + ' => ' + e.to() + ': ' + e.weight);
 			// }
 			// console.log('=====path from 0 to ' + v + ' end==========');
-			// console.log('=====distance: '  + dijkstra.distanceTo(v) + '=========');
 		}
 	}
-	return result;
+	return rangeTilesIds;
 };
 
-//walkableArea /validTiles
-export const getPossibleMoveTilesId = (startTileId, tiles, dollId, boardSize) => {
-  validTilesTest = [];
 
-  moveRange = dollUtil.getDollMove(dollId) + 1;
+// ---------- getRangeTilesIds 2
 
-  pathFinderUtil.prepareGrid(tiles, boardSize);
+// here we calculate path to every valid tile...
+// not so clever but for our little needs it works pretty well
+//
+// but for fun (and some optimization) we should try calculate paths to most distance tiles
+// and - when valid - we should merge all path as result tiles
+// (like in attackAction)
 
-  // we check all tiles on board - not best but easy
-  // of course it would be better when counting from doll
-  // Breadth First Search (flood fill)
-	// or even better Dijkstra’s Algorithm (including nodes cost/weight)
+export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
+	const dollId = dollUtil.getDollFromTile(startTile);
+	const range = dollUtil.getDollMove(dollId) + 1;
+	const rangeTilesIds = [];
 
-	// if you need varying movement costs, Breadth First Search becomes Dijkstra’s Algorithm.
-  // if you add a way to guide the search towards the goal, Breath First Search becomes Best First Search.
-  // If you start with Breadth First Search and add early exit, weighted edges, and a heuristic, you get A*.
+	// by easystar `enableSync` we change asynchronous function to synchronous
+	// but we still have to deal with callback
+	const addTileToValidTiles = path => {
+		if (path && path.length > 0 && path.length <= range) {
+			// TODO optimize! add all tiles from  path? and check if tile added
+			const { x, y } = path[path.length - 1];
+			const tileId = tileUtil.getIdFromXY(x, y);
+			rangeTilesIds.push(tileId);
+		}
+	};
 
-  // source: https://www.redblobgames.com/pathfinding/tower-defense/
-	// https://www.redblobgames.com/pathfinding/a-star/introduction.html
-  // and https://github.com/bah87/maze-runner
+	pathFinderUtil.prepareGrid(tiles, boardSize); // whole board?
 
-  forEach(tiles, (tile, tileId) => {
-    //distance bigger or not
-    // TODO isWalkable to the utils
-
+	forEach(tiles, (tile, tileId) => {
     if (
+			// TODO isWalkable to the utils?
       !tile.wall &&
       !tile.doll &&
-      boardUtil.getDistance(startTileId, tileId) <= moveRange
+      boardUtil.getDistance(startTile.id, tileId) <= range
     ) {
-      const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
+      const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
       const { x: endX, y: endY } = tileUtil.getXYFromId(tileId);
 
       // TODO optimise!
@@ -150,5 +163,5 @@ export const getPossibleMoveTilesId = (startTileId, tiles, dollId, boardSize) =>
       );
     }
   });
-  return validTilesTest;
+  return rangeTilesIds;
 };

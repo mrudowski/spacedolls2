@@ -106,37 +106,24 @@ export const prepareData = levelId => {
     .fill()
     .reduce(function(map, currentValue, index) {
       const id = tileUtil.getTileIdFromIndex(index, level.size);
-			console.log('reduce',index, level.size, id);
       map[id] = {
         id: id
       };
       return map;
     }, {});
 
-	console.log('updateTiles tiles', tiles);
-  // const updatedTiles = produce(tiles, draft => {
-  //   level.walls.forEach(wall => {
-  //   	console.log('updateTiles', wall, wall.tile, draft[wall.tile]);
-  //     draft[wall.tile].wall = true;
-  //   });
-  //   level.dolls.forEach(doll => {
-  //     // dollId instead doll?
-  //     draft[doll.tile].doll = doll.id;
-  //   });
-  // });
+	// we don't needed immer here...
+  const updatedTiles = produce(tiles, draft => {
+    level.walls.forEach(wall => {
+      draft[wall.tile].wall = true;
+    });
+    level.dolls.forEach(doll => {
+      // TODO dollId instead doll?
+      draft[doll.tile].doll = doll.id;
+    });
+  });
 
-	//const updatedTiles;
-
-	level.walls.forEach(wall => {
-		console.log('updateTiles', wall, wall.tile, tiles[wall.tile]);
-		tiles[wall.tile].wall = true;
-	});
-	level.dolls.forEach(doll => {
-		// dollId instead doll?
-		tiles[doll.tile].doll = doll.id;
-	});
-
-  return tiles;
+  return updatedTiles;
 };
 
 // Map vs Object, mutation, spread, assign... with in depth discussion in comments section

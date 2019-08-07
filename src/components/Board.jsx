@@ -3,14 +3,12 @@ import { useSelector } from 'react-redux';
 import foreach from 'lodash/each';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
-import level from '../redux/level';
 import actions, {MOVE, ATTACK} from '../redux/actions';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
 import AttackGizmo from './AttackGizmo';
-import * as levelUtil from '../utils/level';
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';

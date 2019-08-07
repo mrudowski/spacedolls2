@@ -26,10 +26,6 @@ export const getRangeTilesIds = (tiles, startTile) => {
 	const getTilesIdsOnLOF = (startTileId, endTileId) => {
 		const lineOfTilesIds = boardUtil.supercover_line(startTileId, endTileId);
 
-		// MERGE IT
-
-		// const targetTileId = lineOfTilesIds.pop();
-
 		const isCleanLine = lineOfTilesIds.every((tileId, index) => {
 			// TODO make util for that:
 			const tile = tiles[tileId];
@@ -40,33 +36,10 @@ export const getRangeTilesIds = (tiles, startTile) => {
 			}
 
 			//TODO isOccupied --- make a function?
-			// what about aboveHead
 			return !(tile.wall || (!aboveHeads && tile.doll));
 		});
 
 		return isCleanLine ? lineOfTilesIds : [];
-	};
-
-	const isOnLOS = (startTileId, endTileId) => {
-		const lineOfTilesIds = boardUtil.supercover_line(startTileId, endTileId);
-
-		// MERGE IT
-
-		// const targetTileId = lineOfTilesIds.pop();
-
-		return lineOfTilesIds.every((tileId, index) => {
-			// TODO make util for that:
-			const tile = tiles[tileId];
-
-			// without testing last tile because we want to hit at it
-			if (index === lineOfTilesIds.length - 1) {
-				return true;
-			}
-
-			//TODO isOccupied --- make a function?
-			// what about aboveHead
-			return !(tile.wall || (!aboveHeads && tile.doll));
-		});
 	};
 
 	let index = 0;
@@ -77,11 +50,11 @@ export const getRangeTilesIds = (tiles, startTile) => {
 		distanceSortedArray[i] = [];
 	}
 
-	// meybe better arrayWithIndex - by distance? wtf..
+	// maybe better arrayWithIndex - by distance? wtf..
 
 	forEach(tiles, (tile, tileId) => {
 		index++;
-		// TODO optimise!
+		// TODO already optimised but not ducumented
 		// we should to calculate it from max distance to low distance!!!
 		// without it is no so optimise at all
 

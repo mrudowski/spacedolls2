@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
 import { math, rgba } from 'polished';
@@ -14,6 +14,10 @@ export const StyledGizmo = styled.div`
   pointer-events: none;
 `;
 
+// TODO OPTIMIZATION NEEDED?
+// close to 100 tiles with the same styles
+// only top and bottom is different
+
 export const StyledMoveGizmoTile = styled.div`
   ${tileBase}
   ${tileSize}
@@ -26,6 +30,10 @@ export const StyledMoveGizmoTile = styled.div`
     opacity: 0.4;
   }
 `;
+
+// TODO OPTIMIZATION NEEDED?
+// close to 100 tiles with the same styles
+// only top and bottom is different
 
 export const StyledAttackGizmoTile = styled.div`
   ${tileBase}

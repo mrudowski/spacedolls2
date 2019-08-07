@@ -34,27 +34,25 @@ const MoveGizmo = () => {
   if (!selectedTile.doll) {
     return null;
   }
-  console.time('getWalkableArea');
-  const test = moveActionUtil.getWalkableArea(
-		selectedTile.id,
+  console.time('moveActionUtil.getRangeTilesIds');
+  const rangeTilesIds = moveActionUtil.getRangeTilesIds(
 		tiles,
-		dollId,
+		selectedTile,
 		boardSize,
   );
-	console.timeEnd('getWalkableArea');
+	console.timeEnd('moveActionUtil.getRangeTilesIds');
 
-	console.time('getPossibleMoveTilesId');
-	const possibleMoveTilesId = moveActionUtil.getPossibleMoveTilesId(
-    selectedTile.id,
-    tiles,
-		dollId,
-    boardSize,
-  );
-	console.timeEnd('getPossibleMoveTilesId');
+	// console.time('moveActionUtil.getRangeTilesIds2');
+	// const rangeTilesIds2 = moveActionUtil.getRangeTilesIds2(
+   //  tiles,
+	// 	selectedTile,
+   //  boardSize,
+	// );
+	// console.timeEnd('moveActionUtil.getRangeTilesIds2');
 
   return (
     <StyledGizmo>
-      {renderTiles(test, dispatch)}
+      {renderTiles(rangeTilesIds, dispatch)}
     </StyledGizmo>
   );
 };
