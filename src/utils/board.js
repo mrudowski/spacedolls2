@@ -2,6 +2,10 @@ import produce from 'immer';
 import * as tileUtil from './tile';
 import * as levelUtil from './level';
 
+
+export const getTileById = (tiles, tileId) => tiles[tileId];
+
+
 // manhattanDistance
 // - linear movement
 // - no diagonals

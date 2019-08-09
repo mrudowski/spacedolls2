@@ -23,9 +23,14 @@ console.log('moveAction module');
 
 // ------------------------------
 
+
+// using Dijkstra
+// https://github.com/chen0040/js-graph-algorithms
+
 // Future optimization:
 // we could memorize graph if nothing change (when reselecting dolls)
 // and much more...
+
 
 export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	const tilesAsGraph = new jsgraphs.WeightedDiGraph(boardSize.width * boardSize.height);

@@ -1,42 +1,62 @@
 import forEach from 'lodash/each';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
+import * as tileUtil from './tile';
 
 console.log('attackAction module');
+
+// For fun (and some optimization) we calculate line to most distance tiles
+// and - when valid - we merge all path as result tiles
 
 export const getRangeTilesIds = (tiles, startTile) => {
 	const rangeTilesId = [];
 	const dollId = dollUtil.getDollFromTile(startTile);
-	// weapon stats
+
+	//for now - soon it will be weapon stats
   const range = dollUtil.getAttackRange(dollId);
   const affectWalls = dollUtil.getDollMetaData(dollId).stats.affectWalls;
-	const aboveHeads = dollUtil.getDollMetaData(dollId).stats.aboveHeads;
+	const overDoll = dollUtil.getDollMetaData(dollId).stats.aboveHeads;
 
-	// inner function better then outside with 2nd attr tiles?
   const isWallIncluded = tileId => {
-		const tile = tiles[tileId];
-		//TODO make a function for tile.wall?
+  	//const tile = boardUtil.getTileById(tiles, tileId);
+  	const tile = tileUtil.getModel(tiles, tileId);
+
 		if (affectWalls) {
 			return true;
 		} else {
-			return !tile.wall
+			return !tile.hasWall()
+			//return !tileUtil.hasWall(tile)
 		}
-	}
+	};
 
 	const getTilesIdsOnLOF = (startTileId, endTileId) => {
+		// TODO change supercover_line to getLineOfTilesIds
 		const lineOfTilesIds = boardUtil.supercover_line(startTileId, endTileId);
 
 		const isCleanLine = lineOfTilesIds.every((tileId, index) => {
-			// TODO make util for that:
-			const tile = tiles[tileId];
 
-			// without testing last tile because we want to hit at it
+			// TODO outside?
+			// without testing last tile because we want to hit it no matter what
 			if (index === lineOfTilesIds.length - 1) {
 				return true;
 			}
 
+			// TODO ????
+			const tile = boardUtil.getTileById(tiles, tileId);
+			// const tile = tiles[tileId];
+
+
+			if (tileUtil.hasWall(tile)) {
+				return false;
+			}
+
+			if (!overDoll && tileUtil.hasDoll(tile)) {
+				return false;
+			}
+
 			//TODO isOccupied --- make a function?
-			return !(tile.wall || (!aboveHeads && tile.doll));
+			return !(tileUtil.hasWall(tile) || (!overDoll && tileUtil.hasDoll(tile)));
+			//return !(tile.wall || (!aboveHeads && tile.doll));
 		});
 
 		return isCleanLine ? lineOfTilesIds : [];

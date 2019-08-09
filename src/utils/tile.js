@@ -1,4 +1,4 @@
-// remove tile form names?
+// remove tile from names?
 
 export const getTileXFromId = id => parseInt(id.split(',')[0], 10);
 export const getTileYFromId = id => parseInt(id.split(',')[1], 10);
@@ -19,4 +19,16 @@ export const getIndexFromXY = (x, y, size) => {
   return x + (y * size.width);
 };
 
+// some anti(?)pattern or not?
 
+export const getModel = (tiles, tileId) => {
+	const tile = tiles[tileId];
+	return {
+		hasWall: () => !!tile.wall,
+		hasDoll: () => !!tile.doll
+	}
+};
+
+
+export const hasWall = (tile) => !!tile.wall;
+export const hasDoll = (tile) => !!tile.doll;
