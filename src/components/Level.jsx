@@ -34,7 +34,7 @@ export default function Level() {
 
   // move to utils?
   const isDollSelected = () => {
-    return selectedTile && selectedTile.doll;
+    return selectedTile && selectedTile.dollId;
   };
 
   const levelData = getLevel(currentLevelId);

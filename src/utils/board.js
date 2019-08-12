@@ -3,9 +3,6 @@ import * as tileUtil from './tile';
 import * as levelUtil from './level';
 
 
-export const getTileById = (tiles, tileId) => tiles[tileId];
-
-
 // manhattanDistance
 // - linear movement
 // - no diagonals
@@ -17,14 +14,16 @@ export const getDistance = (startTileId, endTileId) => {
   return Math.abs(startX - endX) + Math.abs(startY - endY);
 };
 
+// Supercover lines
+// "lines that catch all the grid squares that a line passes through"
 // https://www.redblobgames.com/grids/line-drawing.html#supercover
 // better for what I want to archive here
 
-// other interesting one
+// other interesting ones
 // https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm
-// for anti-aliasing might be useful for determining how much of an object is on one grid cell or another
+// anti-aliasing might be useful for determining how much of an object is on one grid cell or another
 
-export const supercover_line = (startTileId, endTileId) => {
+export const getTilesIdsOnLOF = (startTileId, endTileId) => {
 	const lineTiles = [];
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
 	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
@@ -60,10 +59,9 @@ export const supercover_line = (startTileId, endTileId) => {
 // Bresenham's line algorithm
 // https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
-// better
-// https://www.redblobgames.com/grids/line-drawing.html
+// no so good for us
 
-export const getLineOfTilesIds = (startTileId, endTileId) => {
+export const getTilesIdsOnLOF_NOTUSED = (startTileId, endTileId) => {
   const lineTiles = [];
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
 	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
@@ -109,7 +107,7 @@ export const prepareData = levelId => {
   const tiles = Array(boardSize)
     .fill()
     .reduce(function(map, currentValue, index) {
-      const id = tileUtil.getTileIdFromIndex(index, level.size);
+      const id = tileUtil.getIdFromIndex(index, level.size);
       map[id] = {
         id: id
       };
@@ -122,8 +120,7 @@ export const prepareData = levelId => {
       draft[wall.tile].wall = true;
     });
     level.dolls.forEach(doll => {
-      // TODO dollId instead doll?
-      draft[doll.tile].doll = doll.id;
+      draft[doll.tile].dollId = doll.id;
     });
   });
 

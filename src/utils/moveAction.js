@@ -34,16 +34,16 @@ console.log('moveAction module');
 
 export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	const tilesAsGraph = new jsgraphs.WeightedDiGraph(boardSize.width * boardSize.height);
-
 	const dollId = dollUtil.getDollFromTile(startTile);
 	const range = dollUtil.getDollMove(dollId) + 1;
 
-	const passableAsWeight = (x, y) => {
-		const id = tileUtil.getIdFromXY(x,y);
-		// TODO utils?
-		const tile = tiles[id];
-		// TODO utils?
-		if (!((tile.doll && id !== startTile.id) || tile.wall)) {
+	const isWalkable = tileDM =>
+		!((tileDM.hasDoll() && tileDM.getId() !== startTile.id) || tileDM.hasWall());
+
+	const walkableAsWeight = (x, y) => {
+		const tileId = tileUtil.getIdFromXY(x,y);
+		const tileDM = tileUtil.getDataModel(tiles[tileId]);
+		if (isWalkable(tileDM)) {
 			return 1
 		} else {
 			return 99;
@@ -51,28 +51,22 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	};
 
 	const addEdge = (index, x, y) => {
-		tilesAsGraph.addEdge(new jsgraphs.Edge(index, tileUtil.getIndexFromXY(x, y, boardSize), passableAsWeight(x, y)));
+		tilesAsGraph.addEdge(new jsgraphs.Edge(index, tileUtil.getIndexFromXY(x, y, boardSize), walkableAsWeight(x, y)));
 	};
 
-
-	// TODO one common function with attackAction?
 	const tilesIdsToCheck = [];
 	forEach(tiles, (tile, tileId) => {
-		if (
-			// TODO isWalkable to the utils?
-			!tile.wall &&
-			!(tile.doll && tileId !== startTile.id)
-		) {
+		const tileDM = tileUtil.getDataModel(tile);
+		if (isWalkable(tileDM)) {
 			const distance = boardUtil.getDistance(startTile.id, tileId);
-			if (distance <= range) {
-				//distanceSortedArray[distance].push(tileId);
+			if (distance < range) {
+				// distanceSortedArray[distance].push(tileId);
 				tilesIdsToCheck.push(tileId);
 			}
 		}
 	});
 
 	tilesIdsToCheck.forEach(tileId => {
-		// TODO x and y as part of tile? tile.x ?
 		const { x, y } = tileUtil.getXYFromId(tileId);
 		const index = tileUtil.getIndexFromXY(x, y, boardSize);
 
@@ -89,22 +83,19 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 			addEdge(index, x, y + 1);
 		}
 
-		tilesAsGraph.node(index).label = tileId;
+		// tilesAsGraph.node(index).label = tileId;
 
 	});
 
-	// TODO x, y as part of tile?
-	// TODO add getIndexFromId
 	const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
 	const dijkstra = new jsgraphs.Dijkstra(tilesAsGraph, tileUtil.getIndexFromXY(startX, startY, boardSize));
 
-	// TODO - array forEach or map
 	const rangeTilesIds = [];
 	for(let v = 0; v < tilesAsGraph.V; v++){
 		if(dijkstra.hasPathTo(v)){
 			const distance = dijkstra.distanceTo(v);
 			if (distance > 0 && distance < range) {
-				rangeTilesIds.push(tileUtil.getTileIdFromIndex(v, boardSize));
+				rangeTilesIds.push(tileUtil.getIdFromIndex(v, boardSize));
 			}
 			//var path = dijkstra.pathTo(v);
 			// console.log('=====path from 0 to ' + v + ' start==========');
@@ -128,6 +119,7 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 // and - when valid - we should merge all path as result tiles
 // (like in attackAction)
 
+/*
 export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
 	const dollId = dollUtil.getDollFromTile(startTile);
 	const range = dollUtil.getDollMove(dollId) + 1;
@@ -136,8 +128,9 @@ export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
 	// by easystar `enableSync` we change asynchronous function to synchronous
 	// but we still have to deal with callback
 	const addTileToValidTiles = path => {
+		// <= ?
 		if (path && path.length > 0 && path.length <= range) {
-			// TODO optimize! add all tiles from  path? and check if tile added
+`			// optimize add all tiles from path? and check if tile added
 			const { x, y } = path[path.length - 1];
 			const tileId = tileUtil.getIdFromXY(x, y);
 			rangeTilesIds.push(tileId);
@@ -148,15 +141,15 @@ export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
 
 	forEach(tiles, (tile, tileId) => {
     if (
-			// TODO isWalkable to the utils?
+			// isWalkable to the utils?
       !tile.wall &&
-      !tile.doll &&
-      boardUtil.getDistance(startTile.id, tileId) <= range
+      !tile.dollId &&
+      boardUtil.getDistance(startTile.id, tileId) <= range // ? <=
     ) {
       const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
       const { x: endX, y: endY } = tileUtil.getXYFromId(tileId);
 
-      // TODO optimise!
+      // optimise!
       // and check if tile already added
 
 			pathFinderUtil.calculatePath(
@@ -170,3 +163,4 @@ export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
   });
   return rangeTilesIds;
 };
+*/

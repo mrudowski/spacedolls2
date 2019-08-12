@@ -42,8 +42,8 @@ const {getDolls} = dolls.selectors;
 const getSelectedDollId = createSelector(
   [board.selectors.getSelectedTile],
   selectedTile => {
-    if (selectedTile && selectedTile.doll) {
-      return selectedTile.doll;
+    if (selectedTile && selectedTile.dollId) {
+      return selectedTile.dollId;
     } else {
       return null;
     }

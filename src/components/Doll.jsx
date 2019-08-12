@@ -1,6 +1,6 @@
 import React from 'react';
 import StyledDoll from '../styled/Doll';
-import { getTileXFromId, getTileYFromId } from '../utils/tile';
+import { getXYFromId } from '../utils/tile';
 
 const Doll = ({ data, tileId }) => {
   // const dollsData = useSelector(dolls.selectors.getDolls);
@@ -10,8 +10,7 @@ const Doll = ({ data, tileId }) => {
   // const dollData2 = useSelector(dolls.selectors.getDollById(id));
   // const getDollTeam = useSelector(dolls.selectors.getDollTeam(id));
 
-  const x = getTileXFromId(tileId);
-  const y = getTileYFromId(tileId);
+  const {x, y} = getXYFromId(tileId);
   return (
     <StyledDoll $x={x} $y={y} $team={data.team}>
       {data.hp}

@@ -25,10 +25,11 @@ const board = createSlice({
       state.selectedTileId = action.payload;
     },
     toggleWall: state => {
+    	// TODO utils
       const tile = state.selectedTileId && state.tiles[state.selectedTileId];
       if (tile && tile.wall) {
         tile.wall = false;
-      } else if (tile && !tile.doll) {
+      } else if (tile && !tile.dollId) {
         tile.wall = true;
       }
     },
@@ -37,9 +38,8 @@ const board = createSlice({
 			const sourceTile = state.tiles[sourceTileId];
 			const destinationTile = state.tiles[destinationTileId];
       // thanks to immer
-			// change doll to dollId
-			destinationTile.doll = sourceTile.doll;
-			sourceTile.doll = null;
+			destinationTile.dollId = sourceTile.dollId;
+			sourceTile.dollId = null;
 			state.selectedTileId = destinationTile.id;
 		}
   }

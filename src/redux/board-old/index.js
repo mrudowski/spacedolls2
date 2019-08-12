@@ -19,10 +19,11 @@ const board = (state = initialState, action) =>
         draft.tiles = tiles;
         return;
       case TOGGLE_WALL:
+        // TODO utils
         const tileId = action.payload.tileId;
         if (draft.tiles[tileId].wall) {
           draft.tiles[tileId].wall = false;
-        } else if (!draft.tiles[tileId].doll) {
+        } else if (!draft.tiles[tileId].dollId) {
           draft.tiles[tileId].wall = true;
         }
         return;

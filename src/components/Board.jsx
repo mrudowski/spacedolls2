@@ -24,10 +24,11 @@ const renderAll = (tilesData, dollsData, selectedTileId) => {
     const selected = tileId === selectedTileId;
     tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
 
+    // TODO hasDoll
     if (tile.wall) {
       walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
-    } else if (tile.doll) {
-      const dollId = tile.doll;
+    } else if (tile.dollId) {
+      const dollId = tile.dollId;
       dolls.push(
         <Doll data={dollsData[dollId]} tileId={tileId} key={`doll-${dollId}`} />
       );

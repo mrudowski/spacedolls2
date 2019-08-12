@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import board from '../redux/board';
 import actions from '../redux/actions';
-import dolls from '../redux/dolls';
 import * as tileUtil from '../utils/tile';
 import * as moveActionUtil from '../utils/moveAction';
 import { StyledGizmo, StyledMoveGizmoTile } from '../styled/Gizmos';
@@ -25,13 +24,12 @@ const renderTiles = (tilesId, dispatch) => {
 };
 
 const MoveGizmo = () => {
-	const dollId = useSelector(dolls.selectors.getSelectedDollId);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const tiles = useSelector(board.selectors.getTiles);
   const boardSize = useSelector(board.selectors.getSize);
   const dispatch = useDispatch();
-  // change to utils tile.hasDoll(selectedTile)?
-  if (!selectedTile.doll) {
+  // TODO change to utils tile.hasDoll(selectedTile)?
+  if (!selectedTile.dollId) {
     return null;
   }
   console.time('moveActionUtil.getRangeTilesIds');

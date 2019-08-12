@@ -3,8 +3,9 @@ import Styled from '../styled/TileInfo';
 
 const getOccupiedBy = tile => {
   const elements = [];
+  // TODO utils
   if (tile.wall) elements.push('wall');
-  if (tile.doll) elements.push('doll');
+  if (tile.dollId) elements.push('doll');
   return elements.join(', ') || 'nothing';
 };
 

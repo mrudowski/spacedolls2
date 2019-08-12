@@ -12,5 +12,5 @@ export const getAttackRange = dollId => {
 };
 
 export const getDollFromTile = tile => {
-	return tile.doll; //TODO dollId?
+	return tile.dollId;
 };
