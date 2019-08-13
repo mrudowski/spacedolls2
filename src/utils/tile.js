@@ -39,6 +39,7 @@ export const getIndexFromXY = (x, y, size) =>
 export const getDataModel = tile => {
 	return {
 		getId: 		() => tile.id,
+		//getXY:	() => getXYFromId(tile.id),
 		hasWall: 	() => !!tile.wall,
 		hasDoll: 	() => !!tile.dollId
 	}

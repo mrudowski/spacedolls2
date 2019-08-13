@@ -17,10 +17,10 @@ const createGrid = (tilesData, boardSize) => {
 
   forEach(tilesData, (tile, tileId) => {
     const {x, y} = tileUtil.getXYFromId(tileId);
+    const tileDM = tileUtil.getDataModel(tileId);
     // reversing order
-		// TODO hasDoll()
     grid[y][x] =
-      tile.dollId || tile.wall ? '1' : '0';
+			tileDM.hasDoll() || tileDM.hasWall() ? '1' : '0';
   });
 
   return grid;

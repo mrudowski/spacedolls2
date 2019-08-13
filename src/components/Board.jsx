@@ -12,6 +12,7 @@ import AttackGizmo from './AttackGizmo';
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
+import AttackGizmoContainer from "./AttackGizmoContainer";
 
 const renderAll = (tilesData, dollsData, selectedTileId) => {
   // tileMap - tileMap.entries()
@@ -62,7 +63,7 @@ const Board = () => {
       {renderAll(tiles, dollsData, selectedTileId)}
       {activeAction === MOVE && <MoveGizmo />}
       {(activeAction === ATTACK && dollId) &&
-        <AttackGizmo
+        <AttackGizmoContainer
           tiles={tiles}
           selectedTile={selectedTile}
         />
