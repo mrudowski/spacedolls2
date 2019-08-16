@@ -7,7 +7,7 @@ const TileInfo = styled.div`
   padding: 8px;
   position: absolute;
   top: 0;
-  left: 408px;
+  left: 368px;
 `;
 
 export default TileInfo;

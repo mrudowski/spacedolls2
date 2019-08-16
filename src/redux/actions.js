@@ -37,9 +37,11 @@ const actions = createSlice({
 // selectors
 
 const getActiveAction = createSelector(['actions.activeAction']);
+const getFODTileId = createSelector(['actions.FODTileId']);
 
 actions.selectors = {
 	getActiveAction,
+	getFODTileId
 };
 
 // effects

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as dollUtil from '../utils/doll';
 import * as attackActionUtil from '../utils/attackAction';
 import AttackGizmo from './AttackGizmo';

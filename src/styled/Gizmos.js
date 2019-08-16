@@ -40,17 +40,31 @@ export const StyledAttackGizmoTile = styled.div`
   ${tileSize}
   pointer-events: auto; // overwrite tileBase
   // background-color: ${rgba(colors.gizmos.attack, 0.25)};
-  background-color: ${colors.gizmos.attack};
-  opacity: 0.2;
+  //background-color: ${colors.gizmos.attack};
+  opacity: 0.85;
 
-	border-right: ${props => props.$borderRight ? `1px solid ${colors.gizmos.attack}` : '0 none'};
-	border-bottom: ${props => props.$borderBottom ? `1px solid ${colors.gizmos.attack}` : '0 none'};
-	border-left: ${props => props.$borderLeft ? `1px solid ${colors.gizmos.attack}` : '0 none'};
-	border-top: ${props => props.$borderTop ? `1px solid ${colors.gizmos.attack}` : '0 none'};
+	border-right: ${props => props.$borderRight ? `1px dashed ${colors.gizmos.attack}` : '0 none'};
+	border-bottom: ${props => props.$borderBottom ? `1px dashed ${colors.gizmos.attack}` : '0 none'};
+	border-left: ${props => props.$borderLeft ? `1px dashed ${colors.gizmos.attack}` : '0 none'};
+	border-top: ${props => props.$borderTop ? `1px dashed ${colors.gizmos.attack}` : '0 none'};
 
 	cursor: pointer;
+	
+	// :hover {
+	//   opacity: 0.5;
+	// 	// background-color: ${rgba(colors.gizmos.attack, 0.6)};
+	// }
+`;
 
-	// :hover:before {
+export const StyledFODGizmoTile = styled.div`
+  ${tileBase}
+  ${tileSize}
+
+  background-color: ${colors.gizmos.attack};
+  opacity: 0.5;
+  opacity: ${props => props.$damage};
+  
+	// :before {
 	// 	content: '';
 	// 	position: absolute;
 	// 	display: block;
@@ -62,16 +76,7 @@ export const StyledAttackGizmoTile = styled.div`
 	// 	border-radius: 50%;
 	// 	z-index: 1;
 	// }
-	
-	// :hover {
-	//   opacity: 0.5;
-	// 	// background-color: ${rgba(colors.gizmos.attack, 0.6)};
-	// }
+  
 `;
 
-export const StyledFODGizmoTile = styled.div`
-  ${tileBase}
-  ${tileSize}
-  background-color: ${colors.gizmos.attack};
-  opacity: 0.5;
-`;
+

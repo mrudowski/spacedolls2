@@ -8,7 +8,6 @@ import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
-import AttackGizmo from './AttackGizmo';
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';

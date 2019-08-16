@@ -2,11 +2,10 @@ import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
-import * as pathFinderUtil from './pathFinder';
+// import * as pathFinderUtil from './pathFinder';
 import jsgraphs from 'js-graph-algorithms';
 
 console.log('moveAction module');
-
 
 // Breadth First Search (flood fill)
 // or even better Dijkstra’s Algorithm (including nodes cost/weight)
