@@ -21,6 +21,7 @@ const AttackGizmoContainer = ({tiles, selectedTile}) => {
 	return (
 		<AttackGizmo
 			rangeTilesIds={rangeTilesIds}
+			startTileId={selectedTile.id}
 			FOD={FOD}
 		/>
   );

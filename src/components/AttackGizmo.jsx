@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../redux/actions';
 import board from '../redux/board';
@@ -9,35 +9,23 @@ import { StyledGizmo, StyledAttackGizmoTile, StyledFODGizmoTile } from '../style
 // Definitions:
 // FOD - field of destruction
 
-const FODGizmo = ({FOD}) => {
-	const tiles = useSelector(board.selectors.getTiles);
+// TODO break for two components that getFODTileId selector
+const FODGizmo = ({FOD, startTileId}) => {
 	const boardSize = useSelector(board.selectors.getSize);
 	const FODTileId = useSelector(actions.selectors.getFODTileId);
-	console.log('FODGizmo', FODTileId, FOD);
 
 	if (!FODTileId) return null;
 
-	const getTileIfValid = (x,y) => {
-		const tileId = tileUtil.getIdFromXY(x,y);
-		const tileDM = tileUtil.getDataModel(tiles[tileId]);
-	};
-
-	// TODO add more tiles
 	const tilesIds = [];
-	const {x:FODX, y:FODY} = tileUtil.getXYFromId(FODTileId);
-	// TODO utils?
-	for (let x = Math.max(FODX - FOD + 1, 0); x <= Math.min(FODX + FOD - 1, boardSize.width - 1); x++) {
-		for (let y = Math.max(FODY - FOD + 1, 0); y <= Math.min(FODY + FOD - 1, boardSize.height - 1); y++) {
-			// TODO utils check if valid
-			const distance = boardUtil.getDistance(FODTileId, tileUtil.getIdFromXY(x,y));
-			// we could calculate damage/distance based on diagonal (Euclidean) distance but Manhattan fits well for our design
-			// calculating damage for presentation only
-			const damage = 0.5 - distance*0.15;
-			tilesIds.push({x, y, damage});
-		}
-	}
+	boardUtil.forEachTileInRange(FODTileId, FOD - 1, boardSize, (x, y) => {
+		const distance = boardUtil.getDistance(FODTileId, tileUtil.getIdFromXY(x,y));
+		// we probably should calculate damage/distance based on diagonal (Euclidean) distance but Manhattan is ok for now
+		// here we calculating damage for presentation only
+		const damage = 0.5 - distance*0.15;
+		tilesIds.push({x, y, damage});
+	});
 
-	return tilesIds.map((tileData, index) => {
+	const FODTiles = tilesIds.map((tileData, index) => {
 		const {x, y, damage} = tileData;
 		return (
 			<StyledFODGizmoTile
@@ -48,9 +36,27 @@ const FODGizmo = ({FOD}) => {
 			/>
 		);
 	});
+
+	const {x:startX, y:startY} = tileUtil.getXYFromId(startTileId);
+	const {x:endX, y:endY} = tileUtil.getXYFromId(FODTileId);
+
+	return (
+		<React.Fragment>
+			<svg height="600" width="600">
+				<line
+					x1={startX * 40 + 40/2}
+					y1={startY * 40 + 40/2}
+					x2={endX * 40 + 40/2}
+					y2={endY * 40 + 40/2}
+					style={{stroke: "rgb(255,0,0)", strokeWidth: 1}}
+				/>
+			</svg>
+			{FODTiles}
+		</React.Fragment>
+	)
 };
 
-const AttackGizmo = ({rangeTilesIds, FOD}) => {
+const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 	// const [FODTileId, setFODTileId] = useState(null);
   const dispatch = useDispatch();
 
@@ -67,12 +73,12 @@ const AttackGizmo = ({rangeTilesIds, FOD}) => {
 		// will be change to weapon slot
 
 		// setFODTileId(tileId);
-		dispatch(actions.effects.attack(tileId))
+		dispatch(actions.actions.setFODTileId(tileId));
 	};
 
 	const hideFODGizmo = () => {
 		// setFODTileId(null);
-		dispatch(actions.effects.attack(null));
+		dispatch(actions.actions.setFODTileId(null));
 	};
 
 	const renderRangeTiles = tilesIds => {
@@ -98,7 +104,7 @@ const AttackGizmo = ({rangeTilesIds, FOD}) => {
 	return (
     <StyledGizmo>
       {renderRangeTiles(rangeTilesIds)}
-			<FODGizmo FOD={FOD}/>
+			<FODGizmo FOD={FOD} startTileId={startTileId}/>
     </StyledGizmo>
   );
 };

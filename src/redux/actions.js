@@ -27,8 +27,8 @@ const actions = createSlice({
 				state.activeAction = ATTACK;
 			}
     },
-		toggleFOD: (state, action) => {
-			const {targetTileId} = action.payload;
+		setFODTileId: (state, action) => {
+			const targetTileId = action.payload;
 			state.FODTileId = targetTileId;
 		}
 	}
@@ -54,10 +54,10 @@ const moveSelectedDollTo = destinationTileId => {
 	}
 };
 
+// for now only
 const attack = tileId => {
 	return (dispatch, getState) => {
-		console.log("ATTACK tile", tileId);
-		dispatch(actions.actions.toggleFOD({targetTileId: tileId}));
+		console.log("TODO: ATTACK tile", tileId);
 	}
 };
 

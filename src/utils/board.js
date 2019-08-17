@@ -3,6 +3,16 @@ import * as tileUtil from './tile';
 import * as levelUtil from './level';
 
 
+export const forEachTileInRange = (startTileId, range, boardSize, callback) => {
+	const {x:startTileX, y:startTileY} = tileUtil.getXYFromId(startTileId);
+	const {width, height} = boardSize;
+	for (let x = Math.max(startTileX - range, 0); x <= Math.min(startTileX + range, width - 1); x++) {
+		for (let y = Math.max(startTileY - range, 0); y <= Math.min(startTileY + range, height - 1); y++) {
+			callback(x,y);
+		}
+	}
+};
+
 // manhattanDistance
 // - linear movement
 // - no diagonals
@@ -91,12 +101,6 @@ export const getTilesIdsOnLOF_NOTUSED = (startTileId, endTileId) => {
 
   return lineTiles;
 };
-
-// moved to attackAction
-// export const isOnLOS = (startTileId, endTileId) => {
-// 	const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
-// 	const { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
-// };
 
 export const prepareData = levelId => {
   console.log('prepareBoardData');
