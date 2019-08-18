@@ -22,7 +22,7 @@ const renderAll = (tilesData, dollsData, selectedTileId) => {
   const dolls = [];
   foreach(tilesData, (tile, tileId) => {
     const selected = tileId === selectedTileId;
-    tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} />);
+    tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} hasDoll={tile.dollId} />);
 
     // TODO hasDoll
     if (tile.wall) {
@@ -30,7 +30,7 @@ const renderAll = (tilesData, dollsData, selectedTileId) => {
     } else if (tile.dollId) {
       const dollId = tile.dollId;
       dolls.push(
-        <Doll data={dollsData[dollId]} tileId={tileId} key={`doll-${dollId}`} />
+        <Doll data={dollsData[dollId]} tileId={tileId} selected={selected} key={`doll-${dollId}`} />
       );
     }
   });

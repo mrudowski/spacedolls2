@@ -4,7 +4,7 @@ import StyledTile from '../styled/Tile';
 import board from '../redux/board';
 // import * as tileUtil from '../utils/tile';
 
-const Tile = ({ id, selected }) => {
+const Tile = ({ id, selected, hasDoll }) => {
   const dispatch = useDispatch();
 
   // console.log('Tile');
@@ -13,9 +13,12 @@ const Tile = ({ id, selected }) => {
     <StyledTile
       // $even={tileUtil.getTileIndex}
       $selected={selected}
+      $hasDoll={hasDoll}
+      // $dollSelected={}
       onClick={() => dispatch(board.actions.selectTile(id))}
     >
       <div className="coordinates">{id}</div>
+      <div className="hover"><span></span></div>
     </StyledTile>
   );
 };
