@@ -34,7 +34,7 @@ export const getIndexFromXY = (x, y, size) =>
 // some anti(?)pattern or not?
 // it duplicates a selectors in some way
 // and could be use be them
-// but maybe it should be selector in first place
+// but maybe it should be selector in first place?
 
 export const getDataModel = tile => {
 	return {
@@ -44,3 +44,24 @@ export const getDataModel = tile => {
 		hasDoll: 	() => !!tile.dollId
 	}
 };
+
+// better alternative?
+// https://verekia.com/react/logic-less-jsx/
+
+export class TileDataModel {
+	constructor(tile) {
+		this.tile = tile
+	}
+
+	get id() {
+		return this.tile.id;
+	}
+
+	hasWall() {
+		return !!this.tile.wall;
+	}
+
+	hasDoll() {
+		return !!this.tile.dollId;
+	}
+}

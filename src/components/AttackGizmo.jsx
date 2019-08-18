@@ -1,60 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import actions from '../redux/actions';
-import board from '../redux/board';
 import * as tileUtil from '../utils/tile';
-import * as boardUtil from '../utils/board';
+import FODGizmo from './FODGizmo';
+import LOFGizmo from './LOFGizmo';
 import { StyledGizmo, StyledAttackGizmoTile, StyledFODGizmoTile } from '../styled/Gizmos';
-
-// Definitions:
-// FOD - field of destruction
-
-// TODO break for two components that getFODTileId selector
-const FODGizmo = ({FOD, startTileId}) => {
-	const boardSize = useSelector(board.selectors.getSize);
-	const FODTileId = useSelector(actions.selectors.getFODTileId);
-
-	if (!FODTileId) return null;
-
-	const tilesIds = [];
-	boardUtil.forEachTileInRange(FODTileId, FOD - 1, boardSize, (x, y) => {
-		const distance = boardUtil.getDistance(FODTileId, tileUtil.getIdFromXY(x,y));
-		// we probably should calculate damage/distance based on diagonal (Euclidean) distance but Manhattan is ok for now
-		// here we calculating damage for presentation only
-		const damage = 0.5 - distance*0.15;
-		tilesIds.push({x, y, damage});
-	});
-
-	const FODTiles = tilesIds.map((tileData, index) => {
-		const {x, y, damage} = tileData;
-		return (
-			<StyledFODGizmoTile
-				$x={x}
-				$y={y}
-				$damage={damage}
-				key={`fod-tile-${x}-${y}`}
-			/>
-		);
-	});
-
-	const {x:startX, y:startY} = tileUtil.getXYFromId(startTileId);
-	const {x:endX, y:endY} = tileUtil.getXYFromId(FODTileId);
-
-	return (
-		<React.Fragment>
-			<svg height="600" width="600">
-				<line
-					x1={startX * 40 + 40/2}
-					y1={startY * 40 + 40/2}
-					x2={endX * 40 + 40/2}
-					y2={endY * 40 + 40/2}
-					style={{stroke: "rgb(255,0,0)", strokeWidth: 1}}
-				/>
-			</svg>
-			{FODTiles}
-		</React.Fragment>
-	)
-};
 
 const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 	// const [FODTileId, setFODTileId] = useState(null);
@@ -104,7 +54,8 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 	return (
     <StyledGizmo>
       {renderRangeTiles(rangeTilesIds)}
-			<FODGizmo FOD={FOD} startTileId={startTileId}/>
+			<FODGizmo FOD={FOD} />
+			<LOFGizmo startTileId={startTileId} />
     </StyledGizmo>
   );
 };

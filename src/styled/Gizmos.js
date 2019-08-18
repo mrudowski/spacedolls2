@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
+import zindex from '../theme/zindex';
 import { math, rgba } from 'polished';
 import { tileBase, tileSize } from '../styled/common';
 
@@ -79,4 +80,15 @@ export const StyledFODGizmoTile = styled.div`
   
 `;
 
+export const StyledLOFGizmo = styled.svg`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: ${props => math(`${props.$boardSize.width} * ${sizes.tileSize}`)};
+	height: ${props => math(`${props.$boardSize.height} * ${sizes.tileSize}`)};
+	stroke: ${rgba(colors.gizmos.LOF, 1)};
+	stroke-width: 1;
+	stroke-dasharray: 5 5;
+	z-index: ${zindex.LOF};
+`;
 

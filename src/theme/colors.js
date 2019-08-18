@@ -7,7 +7,8 @@ const colors = {
 
   gizmos: {
     move: '#ffe200',
-    attack: '#e00500'
+    attack: '#e00500',
+    LOF: '#28ffee',
   },
 
   team: {
