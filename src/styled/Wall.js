@@ -3,8 +3,8 @@ import styled /*, { css }*/ from 'styled-components';
 import { tileBase, tileSize } from '../styled/common';
 
 const Wall = styled.div`
-  ${tileBase}
-  ${tileSize}
+  ${tileBase};
+  ${tileSize};
   background-color: rgba(0, 0, 0, 0.5);
 `;
 

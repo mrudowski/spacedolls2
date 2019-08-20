@@ -5,7 +5,7 @@ import { rgba, math } from 'polished';
 import { tileSize } from '../styled/common';
 
 const Tile = styled.div`
-  ${tileSize}
+  ${tileSize};
 
   line-height: ${sizes.tileSize};
   text-align: center;

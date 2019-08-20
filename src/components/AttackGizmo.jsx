@@ -55,7 +55,7 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
     <StyledGizmo>
       {renderRangeTiles(rangeTilesIds)}
 			<FODGizmo FOD={FOD} />
-			<LOFGizmo startTileId={startTileId} />
+			<LOFGizmo startTileId={startTileId}   />
     </StyledGizmo>
   );
 };

@@ -7,7 +7,7 @@ import { tileBase } from '../styled/common';
 const dollSize = math(`${sizes.tileSize} - 8`);
 
 const Doll = styled.div`
-  ${tileBase}
+  ${tileBase};
 
   width: ${dollSize};
   height: ${dollSize};

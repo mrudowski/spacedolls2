@@ -62,7 +62,6 @@ export const StyledFODGizmoTile = styled.div`
   ${tileSize}
 
   background-color: ${colors.gizmos.attack};
-  opacity: 0.5;
   opacity: ${props => props.$damage};
   
 	// :before {

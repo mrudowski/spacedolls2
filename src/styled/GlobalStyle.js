@@ -23,7 +23,7 @@ const rebootOptions = {
 const rebootCss = reboot(rebootOptions);
 
 const GlobalStyle = createGlobalStyle`
-  ${rebootCss}
+  ${rebootCss};
 
   body {
   }

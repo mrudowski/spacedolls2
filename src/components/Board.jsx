@@ -8,10 +8,10 @@ import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
+import AttackGizmoContainer from "./AttackGizmoContainer";
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
-import AttackGizmoContainer from "./AttackGizmoContainer";
 
 const renderAll = (tilesData, dollsData, selectedTileId) => {
   // tileMap - tileMap.entries()
