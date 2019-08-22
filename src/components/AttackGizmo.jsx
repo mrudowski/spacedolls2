@@ -23,12 +23,12 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 		// will be change to weapon slot
 
 		// setFODTileId(tileId);
-		dispatch(actions.actions.setFODTileId(tileId));
+		dispatch(actions.actions.setHoveredTileId(tileId));
 	};
 
 	const hideFODGizmo = () => {
 		// setFODTileId(null);
-		dispatch(actions.actions.setFODTileId(null));
+		dispatch(actions.actions.setHoveredTileId(null));
 	};
 
 	const renderRangeTiles = tilesIds => {

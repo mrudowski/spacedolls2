@@ -10,7 +10,7 @@ const actions = createSlice({
   slice: 'actions',
   initialState: {
     activeAction: null,
-		FODTileId: null
+		hoveredTileId: null
   },
   reducers: {
     toggleMoveAction: state => {
@@ -27,9 +27,8 @@ const actions = createSlice({
 				state.activeAction = ATTACK;
 			}
     },
-		setFODTileId: (state, action) => {
-			const targetTileId = action.payload;
-			state.FODTileId = targetTileId;
+		setHoveredTileId: (state, action) => {
+			state.hoveredTileId = action.payload;
 		}
 	}
 });
@@ -37,11 +36,11 @@ const actions = createSlice({
 // selectors
 
 const getActiveAction = createSelector(['actions.activeAction']);
-const getFODTileId = createSelector(['actions.FODTileId']);
+const getHoveredTileId = createSelector(['actions.hoveredTileId']);
 
 actions.selectors = {
 	getActiveAction,
-	getFODTileId
+	getHoveredTileId
 };
 
 // effects

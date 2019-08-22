@@ -11,7 +11,7 @@ import { StyledFODGizmoTile } from '../styled/Gizmos';
 
 const FODGizmo = ({FOD}) => {
 	const boardSize = useSelector(board.selectors.getSize);
-	const FODTileId = useSelector(actions.selectors.getFODTileId);
+	const FODTileId = useSelector(actions.selectors.getHoveredTileId);
 
 	if (!FODTileId) return null;
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
 import zindex from '../theme/zindex';
@@ -79,15 +79,28 @@ export const StyledFODGizmoTile = styled.div`
   
 `;
 
-export const StyledLOFGizmo = styled.svg`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: ${props => math(`${props.$boardSize.width} * ${sizes.tileSize}`)};
-	height: ${props => math(`${props.$boardSize.height} * ${sizes.tileSize}`)};
-	stroke: ${rgba(colors.gizmos.LOF, 1)};
-	stroke-width: 1;
-	stroke-dasharray: 5 5;
-	z-index: ${zindex.LOF};
+const styledSvgGizmo = css`
+  ${props => {
+  return css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: ${props => math(`${props.$boardSize.width} * ${sizes.tileSize}`)};
+    height: ${props => math(`${props.$boardSize.height} * ${sizes.tileSize}`)};
+    stroke-width: 1;
+    stroke-dasharray: 5 5;
+    z-index: ${zindex.LOF};
+  `;
+}}
 `;
 
+export const StyledLOFGizmo = styled.svg`
+  ${styledSvgGizmo};
+	stroke: ${rgba(colors.gizmos.LOF, 1)};
+`;
+
+
+export const StyledPathGizmo = styled.svg`
+  ${styledSvgGizmo};
+	stroke: ${rgba(colors.gizmos.path, 1)};
+`;

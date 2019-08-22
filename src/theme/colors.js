@@ -10,6 +10,7 @@ const colors = {
     move: '#ffe200',
     attack: '#e00500',
     LOF: '#28ffee',
+    path: '#ffa71a',
   },
 
   team: {
