@@ -6,25 +6,28 @@ import * as tileUtil from '../utils/tile';
 import { StyledPathGizmo } from '../styled/Gizmos';
 import * as painterUtil from '../utils/painter';
 
-const PathGizmo = ({startTileId}) => {
+const PathGizmo = ({startTileId, paths}) => {
 	const endTileId = useSelector(actions.selectors.getHoveredTileId);
 	const boardSize = useSelector(board.selectors.getSize);
 
-	if (!endTileId) return null;
+	if (!endTileId || !paths[endTileId]) return null;
 
-	// calculate path once again... a place for optimization?
-	const {x:startX, y:startY} = tileUtil.getXYFromId(startTileId);
-	const {x:endX, y:endY} = tileUtil.getXYFromId(endTileId);
+	const path = [
+		startTileId,
+		...paths[endTileId]
+	];
 
-	const x1 = painterUtil.getTileCenter(startX),
-		y1 = painterUtil.getTileCenter(startY),
-		x2 = painterUtil.getTileCenter(endX),
-		y2 = painterUtil.getTileCenter(endY);
+	const pointsAsArray = path.map(tileId => {
+		const {x, y} = tileUtil.getXYFromId(tileId);
+		const pointX = painterUtil.getTileCenter(x),
+					pointY = painterUtil.getTileCenter(y);
+		return `${pointX},${pointY}`;
+	});
 
 	return (
 		<StyledPathGizmo $boardSize={boardSize}>
 			<polyline
-				points={`${x1},${y1} ${x2},${y2}`}
+				points={pointsAsArray.join(' ')}
 			/>
 		</StyledPathGizmo>
 	)

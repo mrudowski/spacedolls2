@@ -103,4 +103,5 @@ export const StyledLOFGizmo = styled.svg`
 export const StyledPathGizmo = styled.svg`
   ${styledSvgGizmo};
 	stroke: ${rgba(colors.gizmos.path, 1)};
+	fill: none;
 `;

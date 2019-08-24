@@ -89,23 +89,20 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
 	const dijkstra = new jsgraphs.Dijkstra(tilesAsGraph, tileUtil.getIndexFromXY(startX, startY, boardSize));
 
-	const rangeTilesIds = [];
+	const rangeTilesIds = [],
+				paths = {};
 	for(let v = 0; v < tilesAsGraph.V; v++){
 		if(dijkstra.hasPathTo(v)){
 			const distance = dijkstra.distanceTo(v);
 			if (distance > 0 && distance < range) {
 				rangeTilesIds.push(tileUtil.getIdFromIndex(v, boardSize));
+				const path = dijkstra.pathTo(v).map(edge => tileUtil.getIdFromIndex(edge.to(), boardSize));
+				const endTileId = path[path.length-1];
+				paths[endTileId] = path;
 			}
-			//var path = dijkstra.pathTo(v);
-			// console.log('=====path from 0 to ' + v + ' start==========');
-			// for(var i = 0; i < path.length; ++i) {
-			// 	var e = path[i];
-			// 	console.log(e.from() + ' => ' + e.to() + ': ' + e.weight);
-			// }
-			// console.log('=====path from 0 to ' + v + ' end==========');
 		}
 	}
-	return rangeTilesIds;
+	return [rangeTilesIds, paths];
 };
 
 

@@ -4,7 +4,7 @@ import board from '../redux/board';
 import actions from '../redux/actions';
 import * as tileUtil from '../utils/tile';
 import * as moveActionUtil from '../utils/moveAction';
-import {StyledAttackGizmoTile, StyledGizmo, StyledMoveGizmoTile} from '../styled/Gizmos';
+import {StyledGizmo, StyledMoveGizmoTile} from '../styled/Gizmos';
 import PathGizmo from "./PathGizmo";
 
 const MoveGizmo = () => {
@@ -18,7 +18,7 @@ const MoveGizmo = () => {
   }
 
   console.time('moveActionUtil.getRangeTilesIds');
-  const rangeTilesIds = moveActionUtil.getRangeTilesIds(
+  const [ rangeTilesIds, paths ] = moveActionUtil.getRangeTilesIds(
 		tiles,
 		selectedTile,
 		boardSize,
@@ -63,7 +63,7 @@ const MoveGizmo = () => {
   return (
     <StyledGizmo>
       {renderTiles(rangeTilesIds)}
-      <PathGizmo startTileId={selectedTile.id} />
+      <PathGizmo startTileId={selectedTile.id} paths={paths} />
     </StyledGizmo>
   );
 };
