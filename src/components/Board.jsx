@@ -12,6 +12,7 @@ import * as boardUtil from "../utils/board";
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
+import DevGizmo from "./DevGizmo";
 
 const renderAll = (tilesData, dollsData, selectedTileId) => {
   // tileMap - tileMap.entries()
@@ -66,8 +67,8 @@ const Board = () => {
           tiles={tiles}
           selectedTile={selectedTile}
         />
-      // <DevMode />
       }
+      <DevGizmo/>
     </Styled.Board>
   );
 };

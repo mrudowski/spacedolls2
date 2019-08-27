@@ -15,6 +15,23 @@ export const StyledGizmo = styled.div`
   pointer-events: none;
 `;
 
+export const StyledDevGizmo = styled(StyledGizmo)`
+  border: 1px dashed ${colors.gizmos.dev}
+`;
+
+export const StyledGizmoTile = styled.div`
+  ${tileBase}
+  ${tileSize}
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px solid ${colors.gizmos.dev};
+  opacity: 0;
+
+  :hover {
+    opacity: 0.5;
+  }
+`;
+
 // TODO OPTIMIZATION NEEDED?
 // close to 100 tiles with the same styles
 // only top and bottom is different

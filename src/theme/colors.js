@@ -10,8 +10,10 @@ const colors = {
     move: '#ffe200',
     attack: '#e00500',
     LOF: '#28ffee',
-    path: '#ffa71a',
+    path: '#fff',
+    dev: '#ffb100',
   },
+
 
   team: {
     dolls: '#ff3d00',

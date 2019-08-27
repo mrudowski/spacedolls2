@@ -1,7 +1,10 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
+import board from './board';
+import * as tileUtil from '../utils/tile';
+
 export const PAINT = 'PAINT';
 
-const actions = createSlice({
+const devTools = createSlice({
   slice: 'devTools',
   initialState: {
     activeAction: null
@@ -15,13 +18,6 @@ const actions = createSlice({
 				state.activeAction = actionName;
 			}
 		},
-			// TODO utils
-			// const tile = state.selectedTileId && state.tiles[state.selectedTileId];
-			// if (tile && tile.wall) {
-			// 	tile.wall = false;
-			// } else if (tile && !tile.dollId) {
-			// 	tile.wall = true;
-			// }
 	}
 });
 
@@ -29,10 +25,11 @@ const actions = createSlice({
 
 const getActiveAction = createSelector(['devTools.activeAction']);
 
-actions.selectors = {
+devTools.selectors = {
 	getActiveAction,
 };
 
 // effects
 
-export default actions;
+
+export default devTools;

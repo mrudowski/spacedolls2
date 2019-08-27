@@ -1,6 +1,7 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import * as boardUtil from '../utils/board';
 import * as levelUtil from '../utils/level';
+import * as tileUtil from "../utils/tile";
 
 const board = createSlice({
   slice: 'board',
@@ -32,7 +33,20 @@ const board = createSlice({
 			destinationTile.dollId = sourceTile.dollId;
 			sourceTile.dollId = null;
 			state.selectedTileId = destinationTile.id;
-		}
+		},
+		toggleWall: (state, action) => {
+    	const tileId = action.payload;
+			const tile = state.tiles[tileId];
+			const tileDM = tileUtil.getDataModel(tile);
+			if (tileDM.hasDoll()) {
+				return;
+			}
+			if (tileDM.hasWall()) {
+				tile.wall = false;
+			} else {
+				tile.wall = true;
+			}
+		},
   }
 });
 
