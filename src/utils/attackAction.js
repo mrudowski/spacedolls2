@@ -1,4 +1,3 @@
-import forEach from 'lodash/each';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
 import * as tileUtil from './tile';
@@ -43,7 +42,7 @@ export const getRangeTilesIds = (tiles, startTile) => {
 
 	// TODO optimisation - use forEachTileInRange
 	const tilesToCheck = [];
-	forEach(tiles, (tile, tileId) => {
+	boardUtil.forEachTile(tiles, (tile, tileId) => {
 		if (
 			tileId !== startTile.id &&
 			isWallIncluded(tileId) &&

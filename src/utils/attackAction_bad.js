@@ -1,4 +1,3 @@
-import forEach from 'lodash/each';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
 import * as tileUtil from './tile';
@@ -45,7 +44,7 @@ export const getRangeTilesIds = (tiles, startTile) => {
 	// calculate line from max distance to low distance
 	// without it is not not optimise at all
 	const distanceSortedArray = Array(range+1).fill([]);
-	forEach(tiles, (tile, tileId) => {
+	boardUtil.forEachTile(tiles, (tile, tileId) => {
 		if (
 			tileId !== startTile.id &&
 			isWallIncluded(tileId)

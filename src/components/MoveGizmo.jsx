@@ -9,11 +9,12 @@ import PathGizmo from "./PathGizmo";
 
 const MoveGizmo = () => {
   const selectedTile = useSelector(board.selectors.getSelectedTile);
+  const selectedTileDM = tileUtil.getDataModel(selectedTile);
   const tiles = useSelector(board.selectors.getTiles);
   const boardSize = useSelector(board.selectors.getSize);
   const dispatch = useDispatch();
-  // TODO change to utils tile.hasDoll(selectedTile)?
-  if (!selectedTile.dollId) {
+
+  if (!selectedTileDM.hasDoll()) {
     return null;
   }
 

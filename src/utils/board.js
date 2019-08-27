@@ -1,6 +1,17 @@
 import produce from 'immer';
+import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as levelUtil from './level';
+
+// things we could/should(?) get from store... (but how?)
+// - tiles
+// - boardSize
+
+export const forEachTile = (tiles, callback) => {
+	forEach(tiles, (tile, tileId) => {
+		callback(tile, tileId)
+	});
+};
 
 
 export const forEachTileInRange = (startTileId, range, boardSize, callback) => {

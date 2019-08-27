@@ -1,4 +1,3 @@
-import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
@@ -54,7 +53,7 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	};
 
 	const tilesIdsToCheck = [];
-	forEach(tiles, (tile, tileId) => {
+	boardUtil.forEachTile(tiles, (tile, tileId) => {
 		const tileDM = tileUtil.getDataModel(tile);
 		if (isWalkable(tileDM)) {
 			const distance = boardUtil.getDistance(startTile.id, tileId);
@@ -135,7 +134,7 @@ export const getRangeTilesIds2 = (tiles, startTile, boardSize) => {
 
 	pathFinderUtil.prepareGrid(tiles, boardSize); // whole board?
 
-	forEach(tiles, (tile, tileId) => {
+	boardUtil.forEachTile(tiles, (tile, tileId) => {
     if (
 			// isWalkable to the utils?
       !tile.wall &&

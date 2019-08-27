@@ -4,7 +4,7 @@ import actions from '../redux/actions';
 import * as tileUtil from '../utils/tile';
 import FODGizmo from './FODGizmo';
 import LOFGizmo from './LOFGizmo';
-import { StyledGizmo, StyledAttackGizmoTile, StyledFODGizmoTile } from '../styled/Gizmos';
+import { StyledGizmo, StyledAttackGizmoTile } from '../styled/Gizmos';
 
 const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 	// const [FODTileId, setFODTileId] = useState(null);

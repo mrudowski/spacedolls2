@@ -7,10 +7,13 @@ import level from '../redux/level';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import actions, {MOVE, ATTACK} from '../redux/actions';
+import devTools, {PAINT} from '../redux/devTools';
 import DollInfo from './DollInfo';
 
 export default function Level() {
+  // TODO move buttons somewhere else
   const activeAction = useSelector(actions.selectors.getActiveAction);
+  const activeDevAction = useSelector(devTools.selectors.getActiveAction);
   const { currentLevelId } = useSelector(level.selectors.getLevel);
   const selectedTile = useSelector(board.selectors.getSelectedTile);
   const dispatch = useDispatch();
@@ -27,10 +30,10 @@ export default function Level() {
     // dispatch(level.actions.changeLevel('1'));
   }, [dispatch, currentLevelId]);
 
-  const dispatchToggleWall = () => dispatch(board.actions.toggleWall());
-
-  const toggleMoveAction = () => dispatch(actions.actions.toggleMoveAction());
-  const toggleAttackAction = () => dispatch(actions.actions.toggleAttackAction());
+  // TODO one function
+  const togglePaintAction = () => dispatch(devTools.actions.toggleAction(PAINT));
+  const toggleMoveAction = () => dispatch(actions.actions.toggleAction(MOVE));
+  const toggleAttackAction = () => dispatch(actions.actions.toggleAction(ATTACK));
 
   // move to utils?
   const isDollSelected = () => {
@@ -51,8 +54,8 @@ export default function Level() {
         <Board />
         <TileInfo tile={selectedTile} />
         <DollInfo />
-        <button onClick={dispatchToggleWall} disabled={isDollSelected()}>
-          toggle wall
+        <button onClick={togglePaintAction}>
+          Wall Painter {activeDevAction === PAINT && 'ON'}
         </button>
 
         {/*actions panel*/}

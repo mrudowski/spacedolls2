@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import foreach from 'lodash/each';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import actions, {MOVE, ATTACK} from '../redux/actions';
@@ -9,6 +8,7 @@ import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
 import AttackGizmoContainer from "./AttackGizmoContainer";
+import * as boardUtil from "../utils/board";
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
@@ -20,7 +20,7 @@ const renderAll = (tilesData, dollsData, selectedTileId) => {
   const tiles = [];
   const walls = [];
   const dolls = [];
-  foreach(tilesData, (tile, tileId) => {
+  boardUtil.forEachTile(tilesData, (tile, tileId) => {
     const selected = tileId === selectedTileId;
     tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} hasDoll={tile.dollId} />);
 
@@ -66,6 +66,7 @@ const Board = () => {
           tiles={tiles}
           selectedTile={selectedTile}
         />
+      // <DevMode />
       }
     </Styled.Board>
   );

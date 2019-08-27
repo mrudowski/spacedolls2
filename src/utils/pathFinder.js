@@ -1,5 +1,5 @@
 import EasyStar from 'easystarjs';
-import forEach from 'lodash/each';
+import * as boardUtil from "../utils/board";
 import * as tileUtil from './tile';
 // import store from '../redux/store';
 
@@ -15,7 +15,7 @@ const createGrid = (tilesData, boardSize) => {
     grid.push([]);
   }
 
-  forEach(tilesData, (tile, tileId) => {
+  boardUtil.forEachTile(tilesData, (tile, tileId) => {
     const {x, y} = tileUtil.getXYFromId(tileId);
     const tileDM = tileUtil.getDataModel(tileId);
     // reversing order

@@ -24,15 +24,6 @@ const board = createSlice({
     selectTile: (state, action) => {
       state.selectedTileId = action.payload;
     },
-    toggleWall: state => {
-    	// TODO utils
-      const tile = state.selectedTileId && state.tiles[state.selectedTileId];
-      if (tile && tile.wall) {
-        tile.wall = false;
-      } else if (tile && !tile.dollId) {
-        tile.wall = true;
-      }
-    },
 		changeDollPosition: (state, action) => {
       const {sourceTileId, destinationTileId} = action.payload;
 			const sourceTile = state.tiles[sourceTileId];

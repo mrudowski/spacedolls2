@@ -10,23 +10,17 @@ const actions = createSlice({
   slice: 'actions',
   initialState: {
     activeAction: null,
-		hoveredTileId: null
+		hoveredTileId: null,
   },
   reducers: {
-    toggleMoveAction: state => {
-    	if (state.activeAction === MOVE) {
+  	toggleAction: (state, action) => {
+  		const actionName = action.payload;
+			if (state.activeAction === actionName) {
 				state.activeAction = null;
 			} else {
-				state.activeAction = MOVE;
+				state.activeAction = actionName;
 			}
-    },
-    toggleAttackAction: state => {
-			if (state.activeAction === ATTACK) {
-				state.activeAction = null;
-			} else {
-				state.activeAction = ATTACK;
-			}
-    },
+		},
 		setHoveredTileId: (state, action) => {
 			state.hoveredTileId = action.payload;
 		}

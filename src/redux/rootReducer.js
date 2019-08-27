@@ -4,13 +4,15 @@ import level from './level';
 import board from './board';
 import dolls from './dolls';
 import actions from './actions';
+import devTools from "./devTools";
 
 export default combineReducers({
   counter,
   level: level.reducer,
   dolls: dolls.reducer,
   board: board.reducer,
-  actions: actions.reducer
+  actions: actions.reducer,
+  devTools: devTools.reducer,
 });
 
 /*
