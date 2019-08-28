@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 import colors from '../theme/colors';
 import sizes from '../theme/sizes';
-import zindex from '../theme/zindex';
+import zIndex from '../theme/zIndex';
 import { math, rgba } from 'polished';
 import { tileBase, tileSize } from '../styled/common';
 
@@ -16,7 +16,12 @@ export const StyledGizmo = styled.div`
 `;
 
 export const StyledDevGizmo = styled(StyledGizmo)`
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
   border: 1px dashed ${colors.gizmos.dev}
+  z-index: ${zIndex.dev}
 `;
 
 export const StyledGizmoTile = styled.div`
@@ -28,7 +33,7 @@ export const StyledGizmoTile = styled.div`
   opacity: 0;
 
   :hover {
-    opacity: 0.5;
+    opacity: 0.85;
   }
 `;
 
@@ -106,7 +111,7 @@ const styledSvgGizmo = css`
     height: ${props => math(`${props.$boardSize.height} * ${sizes.tileSize}`)};
     stroke-width: 1;
     stroke-dasharray: 5 5;
-    z-index: ${zindex.LOF};
+    z-index: ${zIndex.LOF};
   `;
 }}
 `;

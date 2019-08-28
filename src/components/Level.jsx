@@ -22,15 +22,24 @@ export default function Level() {
 
   // for now only
   useEffect(() => {
-    console.log('useEffect');
-    if (currentLevelId) {
-      dispatch(board.actions.setBoard(currentLevelId));
-      dispatch(dolls.actions.create(currentLevelId));
+    console.log('useEffect', currentLevelId);
+    if (!currentLevelId) {
+       // TODO not all at once
+       const newLevelId = '1';
+       dispatch(level.actions.changeLevel(newLevelId));
+       dispatch(board.actions.setBoard(newLevelId));
+       dispatch(dolls.actions.create(newLevelId));
     }
-    // dispatch(level.actions.changeLevel('1'));
   }, [dispatch, currentLevelId]);
 
-  // TODO one function
+  if (!currentLevelId) {
+    return null;
+  }
+
+  // TODO for now only
+  // it reset level but doesn't clear selection etc
+  const resetLevel = () => dispatch(level.actions.changeLevel(null));
+  // TODO one function?
   const togglePaintAction = () => dispatch(devTools.actions.toggleAction(PAINT));
   const toggleMoveAction = () => dispatch(actions.actions.toggleAction(MOVE));
   const toggleAttackAction = () => dispatch(actions.actions.toggleAction(ATTACK));
@@ -54,24 +63,28 @@ export default function Level() {
         <Board />
         <TileInfo tile={selectedTile} />
         <DollInfo />
-        <button onClick={togglePaintAction}>
-          Wall Painter {activeDevAction === PAINT && 'ON'}
-        </button>
-
-        {/*actions panel*/}
-        <button
-          onClick={toggleMoveAction}
-          disabled={!isDollSelected() && activeAction !== MOVE}
-        >
-          move {activeAction === MOVE && 'ON'}
-        </button>
-        <button
-          // primary action? what about medic?
-          onClick={toggleAttackAction}
-          disabled={!isDollSelected() && activeAction !== ATTACK}
-        >
-          attack {activeAction === ATTACK && 'ON'}
-        </button>
+        <div>
+          {/*actions panel*/}
+          <button
+            onClick={toggleMoveAction}
+            disabled={!isDollSelected() && activeAction !== MOVE}
+          >
+            move {activeAction === MOVE && 'ON'}
+          </button>
+          <button
+            // primary action? what about medic?
+            onClick={toggleAttackAction}
+            disabled={!isDollSelected() && activeAction !== ATTACK}
+          >
+            attack {activeAction === ATTACK && 'ON'}
+          </button>
+        </div>
+        <div>
+          <button onClick={togglePaintAction}>
+            wall painter {activeDevAction === PAINT && 'ON'}
+          </button>
+          <button onClick={resetLevel}>reset level</button>
+        </div>
       </div>
     </div>
   );
