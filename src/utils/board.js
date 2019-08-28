@@ -2,6 +2,7 @@ import produce from 'immer';
 import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as levelUtil from './level';
+import * as tilesDef from "./tileDef";
 
 // things we could/should(?) get from store... (but how?)
 // - tiles
@@ -113,11 +114,14 @@ export const getTilesIdsOnLOF_NOTUSED = (startTileId, endTileId) => {
   return lineTiles;
 };
 
+export const createWall = () => tilesDef.getInitialStats(tilesDef.WALL);
+
 export const prepareData = levelId => {
   console.log('prepareBoardData');
 
   const level = levelUtil.getLevel(levelId);
-  const boardSize = level.size.width * level.size.height;
+  const { width, height } = level.size;
+  const boardSize = width * height;
 
   const tiles = Array(boardSize)
     .fill()
@@ -132,14 +136,14 @@ export const prepareData = levelId => {
 	// we don't needed immer here...
   const updatedTiles = produce(tiles, draft => {
     level.walls.forEach(wall => {
-      draft[wall.tile].wall = true;
+      draft[wall.tile].wall = createWall();
     });
     level.dolls.forEach(doll => {
       draft[doll.tile].dollId = doll.id;
     });
   });
 
-  return updatedTiles;
+  return [ updatedTiles, width, height];
 };
 
 // Map vs Object, mutation, spread, assign... with in depth discussion in comments section

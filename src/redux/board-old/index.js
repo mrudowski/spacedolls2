@@ -16,7 +16,7 @@ const board = (state = initialState, action) =>
       case SET_BOARD:
         const tiles = prepareBoardData(action.payload.levelId);
         console.log('tiles', tiles);
-        draft.tiles = tiles;
+        draft.tileset = tiles;
         return;
       case TOGGLE_WALL:
         // TODO utils

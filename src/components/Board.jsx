@@ -14,36 +14,6 @@ import * as boardUtil from "../utils/board";
 import * as Styled from '../styled/Board';
 import DevGizmo from "./DevGizmo";
 
-const renderAll = (tilesData, dollsData, selectedTileId) => {
-  // tileMap - tileMap.entries()
-  //return [...tileMap].map(([key, value]) => <Tile id={key} key={`${key}`} />);
-
-  const tiles = [];
-  const walls = [];
-  const dolls = [];
-  boardUtil.forEachTile(tilesData, (tile, tileId) => {
-    const selected = tileId === selectedTileId;
-    tiles.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} hasDoll={tile.dollId} />);
-
-    // TODO hasDoll
-    if (tile.wall) {
-      walls.push(<Wall tileId={tileId} key={`wall-${tileId}`} />);
-    } else if (tile.dollId) {
-      const dollId = tile.dollId;
-      dolls.push(
-        <Doll data={dollsData[dollId]} tileId={tileId} selected={selected} key={`doll-${dollId}`} />
-      );
-    }
-  });
-  return (
-    <React.Fragment>
-      <div>{tiles}</div>
-      <div>{walls}</div>
-      <div>{dolls}</div>
-    </React.Fragment>
-  );
-};
-
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
 	const dollId = useSelector(dolls.selectors.getSelectedDollId);
@@ -57,6 +27,39 @@ const Board = () => {
 	const { width: boardWidth, height: boardHeight } = useSelector(board.selectors.getSize);
 
 	console.log('Board');
+
+  const renderAll = () => {
+    const tilesToRender = [];
+    const wallsToRender = [];
+    const dollsToRender = [];
+    boardUtil.forEachTile(tiles, (tile, tileId) => {
+      const selected = tileId === selectedTileId;
+      tilesToRender.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} hasDoll={tile.dollId} />);
+
+      // TODO hasDoll
+      if (tile.wall) {
+        wallsToRender.push(
+          <Wall
+            tileId={tileId}
+            data={tile.wall}
+            key={`wall-${tileId}`}
+          />
+        );
+      } else if (tile.dollId) {
+        const dollId = tile.dollId;
+        dollsToRender.push(
+          <Doll data={dollsData[dollId]} tileId={tileId} selected={selected} key={`doll-${dollId}`} />
+        );
+      }
+    });
+    return (
+      <React.Fragment>
+        <div>{tilesToRender}</div>
+        <div>{wallsToRender}</div>
+        <div>{dollsToRender}</div>
+      </React.Fragment>
+    );
+  };
 
 	return (
     <Styled.Board $width={boardWidth} $height={boardHeight}>

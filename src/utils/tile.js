@@ -1,4 +1,3 @@
-
 // export const getTileXFromId = id => parseInt(id.split(',')[0], 10);
 // export const getTileYFromId = id => parseInt(id.split(',')[1], 10);
 

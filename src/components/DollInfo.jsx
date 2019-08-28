@@ -9,23 +9,22 @@ const DollInfo = () => {
 
   console.log('DollInfo');
 
-  if (data) {
-    // alternative better way?
-    const metaData = getDollMetaData(data.id);
-    return (
-      <StyledDollInfo>
-        <h4>Selected / active doll</h4>
-        {data.meta.codeName} ({metaData.race}){data.team}<br/>
-        HP: {data.hp}<br/>
-        MoveRange: {data.meta.stats.move}<br/>
-        AttackRange: {data.meta.stats.attackRange}<br/>
-        AttackStrength: {data.meta.stats.attack}<br/>
-        FieldOfDestruction: {data.meta.stats.fieldOfDestruction}<br/>
-      </StyledDollInfo>
-    );
-  } else {
+  if (!data) {
     return <StyledDollInfo>no doll selected / active</StyledDollInfo>;
   }
+
+  const metaData = getDollMetaData(data.id);
+  return (
+    <StyledDollInfo>
+      <h4>Selected / active doll</h4>
+      {data.meta.codeName} ({metaData.race}){data.team}<br/>
+      HP: {data.hp}<br/>
+      MoveRange: {data.meta.stats.move}<br/>
+      AttackRange: {data.meta.stats.attackRange}<br/>
+      AttackStrength: {data.meta.stats.attack}<br/>
+      FieldOfDestruction: {data.meta.stats.fieldOfDestruction}<br/>
+    </StyledDollInfo>
+  );
 };
 
 export default DollInfo;

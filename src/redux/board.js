@@ -15,11 +15,10 @@ const board = createSlice({
     setBoard: (state, action) => {
       // You can "mutate" the state in a reducer, thanks to Immer
       const levelId = action.payload;
-      const tiles = boardUtil.prepareData(levelId);
-			const level = levelUtil.getLevel(levelId);
+      const [ tiles, width, height ] = boardUtil.prepareData(levelId);
       state.tiles = tiles;
-      state.width = level.size.width;
-      state.height = level.size.height;
+      state.width = width;
+      state.height = height;
     },
     // TODO: change SelectTile to SelectTileId?
     selectTile: (state, action) => {
@@ -41,10 +40,11 @@ const board = createSlice({
 			if (tileDM.hasDoll()) {
 				return;
 			}
+			// TODO the same function as in prepareData
 			if (tileDM.hasWall()) {
-				tile.wall = false;
+				tile.wall = null;
 			} else {
-				tile.wall = true;
+				tile.wall = boardUtil.createWall();
 			}
 		},
   }

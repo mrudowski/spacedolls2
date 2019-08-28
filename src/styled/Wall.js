@@ -6,6 +6,14 @@ const Wall = styled.div`
   ${tileBase};
   ${tileSize};
   background-color: rgba(0, 0, 0, 0.5);
+  
+  > span {
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    opacity: 0.85;
+  }
 `;
 
 export default Wall;

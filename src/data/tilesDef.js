@@ -1,6 +1,4 @@
-// types of tiles
-
-const tiles = {
+const tilesDef = {
   wall: {
     id: 'wall',
     title: 'Wall',
@@ -19,4 +17,4 @@ const tiles = {
   },
 };
 
-export default tiles;
+export default tilesDef;
