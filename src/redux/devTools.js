@@ -1,6 +1,4 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
-import board from './board';
-import * as tileUtil from '../utils/tile';
 
 export const PAINT = 'PAINT';
 

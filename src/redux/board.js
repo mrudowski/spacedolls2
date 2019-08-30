@@ -1,6 +1,5 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import * as boardUtil from '../utils/board';
-import * as levelUtil from '../utils/level';
 import * as tileUtil from "../utils/tile";
 
 const board = createSlice({
