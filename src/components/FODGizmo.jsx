@@ -17,14 +17,15 @@ const FODGizmo = ({FOD}) => {
 
 	const tilesIds = [];
 	boardUtil.forEachTileInRange(FODTileId, FOD - 1, boardSize, (x, y) => {
-		const distance = boardUtil.getDistance(FODTileId, tileUtil.getIdFromXY(x,y));
-		// we probably should calculate damage/distance based on diagonal (Euclidean) distance but Manhattan is ok for now
+		const distance = boardUtil.getDistance(FODTileId, tileUtil.getIdFromXY(x, y));
+		// we probably should calculate damage/distance based on
+		// diagonal (Euclidean) distance but Manhattan is ok for now
 		// here we calculating damage for presentation only
-		const damage = 0.5 - distance*0.15;
+		const damage = 0.5 - distance * 0.15;
 		tilesIds.push({x, y, damage});
 	});
 
-	return tilesIds.map((tileData, index) => {
+	return tilesIds.map(tileData => {
 		const {x, y, damage} = tileData;
 		return (
 			<StyledFODGizmoTile

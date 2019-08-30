@@ -26,14 +26,14 @@ const TileInfo = ({ tile }) => {
         occupiedBy/content: {getOccupiedBy(tile)}
       </Styled>
     );
-  } else {
-    return (
-      <Styled>
-        <h4>Selected tile</h4>
-        no tile selected
-      </Styled>
-    );
   }
+
+  return (
+    <Styled>
+      <h4>Selected tile</h4>
+      no tile selected
+    </Styled>
+  );
 };
 
 export default TileInfo;

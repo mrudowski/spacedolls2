@@ -1,0 +1,53 @@
+// when this conf has error it will silently be ignore, issue on cra github
+{
+	"extends": [
+		"react-app",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"airbnb" // is little to much // and need to be installed without peerdep, cra3 has it all
+	],
+	"rules": {
+		// our own
+		"quotes": ["warn", "single"],
+		"no-mixed-spaces-and-tabs": "warn",
+		// "quote-props": ["warn", "as-needed", { "keywords": true, "unnecessary": false }],
+		// "indent": [1, "tab"],
+		"react/prop-types": "off",
+		// airbnb
+		"no-shadow": "warn",
+		"semi": "warn",
+		"arrow-body-style": "warn",
+		"no-console": "off",
+		"comma-dangle": "off",
+		"no-tabs": "off",
+		"indent": "off",
+		"object-curly-spacing": "off",
+		"array-bracket-spacing": "off",
+		"spaced-comment": "off",
+		"arrow-parens": "off",
+		"key-spacing": "off",
+		"no-param-reassign": "off", // but with immer it's ok
+		"operator-linebreak": "off",
+		"no-multiple-empty-lines": "off",
+		"eol-last": "off",
+		"one-var": "off",
+		"camelcase": "off",
+		"prefer-const": "off",
+		"one-var-declaration-per-line": "off",
+		"no-plusplus": "off",
+		"comma-spacing": "off",
+		"space-infix-ops": "off",
+		"implicit-arrow-linebreak": "off",
+		"prefer-destructuring": "off",
+		"import/prefer-default-export": "off",
+		"keyword-spacing": "off",
+		"jsx-a11y/mouse-events-have-key-events": "off",
+		"react/jsx-indent": "off",
+		"react/jsx-indent-props": "off",
+		"react/jsx-fragments": "off",
+		"react/jsx-tag-spacing": "off",
+		"react/jsx-wrap-multilines": "off",
+		"react/jsx-one-expression-per-line": "off",
+		"react/jsx-filename-extension": "off"
+	}
+}

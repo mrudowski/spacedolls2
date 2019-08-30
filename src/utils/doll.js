@@ -3,14 +3,8 @@ import dollsData from '../data/dolls';
 export const getDollMetaData = dollId => dollsData[dollId];
 
 // for now this name, should be stats etc?
-export const getDollMove = dollId => {
-  return getDollMetaData(dollId).stats.move;
-};
+export const getDollMove = dollId => getDollMetaData(dollId).stats.move;
 
-export const getAttackRange = dollId => {
-	return getDollMetaData(dollId).stats.attackRange;
-};
+export const getAttackRange = dollId => getDollMetaData(dollId).stats.attackRange;
 
-export const getDollFromTile = tile => {
-	return tile.dollId;
-};
+export const getDollFromTile = tile => tile.dollId;

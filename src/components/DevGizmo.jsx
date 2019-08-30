@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import board from '../redux/board';
 import devTools from '../redux/devTools';
-import * as boardUtil from "../utils/board";
+import * as boardUtil from '../utils/board';
 import * as tileUtil from '../utils/tile';
 import {StyledDevGizmo, StyledGizmoTile} from '../styled/Gizmos';
 

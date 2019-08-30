@@ -18,7 +18,7 @@ const Tile = ({ id, selected, hasDoll }) => {
       onClick={() => dispatch(board.actions.selectTile(id))}
     >
       <div className="coordinates">{id}</div>
-      <div className="hover"><span></span></div>
+      <div className="hover"><span /></div>
     </StyledTile>
   );
 };

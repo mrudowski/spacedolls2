@@ -22,9 +22,8 @@ export const getRangeTilesIds = (tiles, startTile) => {
   	const tileDM = tileUtil.getDataModel(tiles[tileId]);
 		if (affectWalls) {
 			return true;
-		} else {
-			return !tileDM.hasWall()
 		}
+		return !tileDM.hasWall()
 	};
 
 	const isCleanLOF = (startTileId, endTileId) => {
@@ -52,6 +51,5 @@ export const getRangeTilesIds = (tiles, startTile) => {
 		}
 	});
 
-	return tilesToCheck.filter(tileId =>
-		isCleanLOF(startTile.id, tileId));
+	return tilesToCheck.filter(tileId => isCleanLOF(startTile.id, tileId));
 };

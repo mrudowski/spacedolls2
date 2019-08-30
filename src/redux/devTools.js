@@ -3,13 +3,13 @@ import { createSlice, createSelector } from 'redux-starter-kit';
 export const PAINT = 'PAINT';
 
 const devTools = createSlice({
-  slice: 'devTools',
-  initialState: {
-    activeAction: null
-  },
-  reducers: {
-  	toggleAction: (state, action) => {
-  		const actionName = action.payload;
+	slice: 'devTools',
+	initialState: {
+		activeAction: null
+	},
+	reducers: {
+		toggleAction: (state, action) => {
+			const actionName = action.payload;
 			if (state.activeAction === actionName) {
 				state.activeAction = null;
 			} else {

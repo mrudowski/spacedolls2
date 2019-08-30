@@ -1,5 +1,5 @@
 import React from 'react';
-import StyledDoll from '../styled/Doll';
+import StyledDoll from "../styled/Doll";
 import { getXYFromId } from '../utils/tile';
 
 interface DollData {

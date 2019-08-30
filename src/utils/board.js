@@ -50,7 +50,7 @@ export const getTilesIdsOnLOF = (startTileId, endTileId) => {
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
 	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
 
-	let dx = endX-startX, dy = endY-startY;
+	const dx = endX-startX, dy = endY-startY;
 	let nx = Math.abs(dx), ny = Math.abs(dy);
 	let sign_x = dx > 0 ? 1 : -1, sign_y = dy > 0 ? 1 : -1;
 
@@ -88,15 +88,15 @@ export const getTilesIdsOnLOF_NOTUSED = (startTileId, endTileId) => {
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
 	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
 
-  let dx = Math.abs(endX - startX),
+  const dx = Math.abs(endX - startX),
       dy = Math.abs(endY - startY),
 	    sx = startX < endX ? 1 : -1,
-	    sy = startY < endY ? 1 : -1,
-      err = (dx>dy ? dx : -dy)/2;
+	    sy = startY < endY ? 1 : -1;
+
+	let err = (dx>dy ? dx : -dy)/2;
     	//err = dx + dy;
 
-  while (true) {
-    if (startX === endX && startY === endY) break;
+  while (!(startX === endX && startY === endY)) {
     let e2 = err;
 		// let e2 = 2 * err;
     if (e2 > -dx) { // e2 >= dy
