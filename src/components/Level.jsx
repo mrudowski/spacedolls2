@@ -66,12 +66,14 @@ export default function Level() {
         <div>
           {/*actions panel*/}
           <button
+            type="button"
             onClick={toggleMoveAction}
             disabled={!isDollSelected() && activeAction !== MOVE}
           >
             move {activeAction === MOVE && 'ON'}
           </button>
           <button
+            type="button"
             // primary action? what about medic?
             onClick={toggleAttackAction}
             disabled={!isDollSelected() && activeAction !== ATTACK}
@@ -80,10 +82,10 @@ export default function Level() {
           </button>
         </div>
         <div>
-          <button onClick={togglePaintAction}>
+          <button type="button" onClick={togglePaintAction}>
             wall painter {activeDevAction === PAINT && 'ON'}
           </button>
-          <button onClick={resetLevel}>reset level</button>
+          <button type="button" onClick={resetLevel}>reset level</button>
         </div>
       </div>
     </div>

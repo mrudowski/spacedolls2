@@ -14,7 +14,7 @@ const StyledCounter = styled.div`
   }
 `;
 
-export default function CounterComponent({ className }) {
+export default function CounterComponent() {
   const counter = useSelector(state => state.counter);
   // many values???
   // const { counter } = useSelector(
@@ -33,8 +33,8 @@ export default function CounterComponent({ className }) {
     <StyledCounter>
       <div className="counter">
         Counter: {counter.count} {counter.test}
-        <button onClick={increment3}>Increment counter</button>
-        <button onClick={() => dispatch(increment())}>Increment counter</button>
+        <button type="button" onClick={increment3}>Increment counter</button>
+        <button type="button" onClick={() => dispatch(increment())}>Increment counter</button>
       </div>
     </StyledCounter>
   );

@@ -44,9 +44,8 @@ const getSelectedDollId = createSelector(
   selectedTile => {
     if (selectedTile && selectedTile.dollId) {
       return selectedTile.dollId;
-    } else {
-      return null;
     }
+    return null;
   }
 );
 
@@ -55,9 +54,8 @@ const getSelectedDollData = createSelector(
   (dolls, dollId) => {
     if (dollId) {
       return dolls[dollId];
-    } else {
-      return null;
     }
+    return null;
   }
 );
 

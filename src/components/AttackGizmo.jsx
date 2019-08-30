@@ -31,8 +31,8 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 		dispatch(actions.actions.setHoveredTileId(null));
 	};
 
-	const renderRangeTiles = tilesIds => {
-		return tilesIds.map((tileId, index) => {
+	const renderRangeTiles = tilesIds =>
+		tilesIds.map(tileId => {
 			const { x, y } = tileUtil.getXYFromId(tileId);
 			return (
 				<StyledAttackGizmoTile
@@ -49,7 +49,6 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 				/>
 			);
 		});
-	};
 
 	return (
     <StyledGizmo>
