@@ -8,7 +8,7 @@ import { StyledGizmo, StyledAttackGizmoTile } from '../styled/Gizmos';
 
 const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 	// const [FODTileId, setFODTileId] = useState(null);
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	// useState should be good enough but it would re-render component
 	// + good: "heavy" getRangeTilesIds is parent (container) component
@@ -43,7 +43,7 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 					$borderLeft={tilesIds.indexOf(tileUtil.getIdFromXY(x - 1, y)) === -1}
 					$borderTop={tilesIds.indexOf(tileUtil.getIdFromXY(x, y - 1)) === -1}
 					key={`range-tile-${tileId}`}
-					onClick={() => dispatch(actions.effects.attack(tileId))}
+					onClick={() => dispatch(actions.effects.attack(tileId, FOD))}
 					onMouseOver={() => showFODGizmo(tileId)}
 					onMouseOut={hideFODGizmo}
 				/>
@@ -51,11 +51,11 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 		});
 
 	return (
-    <StyledGizmo>
-      {renderRangeTiles(rangeTilesIds)}
-			<FODGizmo FOD={FOD} />
-			<LOFGizmo startTileId={startTileId} />
-    </StyledGizmo>
+	<StyledGizmo>
+		{renderRangeTiles(rangeTilesIds)}
+		<FODGizmo FOD={FOD} />
+		<LOFGizmo startTileId={startTileId} />
+	</StyledGizmo>
   );
 };
 

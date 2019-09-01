@@ -1,5 +1,8 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import board from './board';
+import dolls from './dolls';
+import * as tileUtil from '../utils/tile';
+import * as boardUtil from '../utils/board';
 
 // TODO change to action
 
@@ -51,9 +54,39 @@ const moveSelectedDollTo = destinationTileId =>
 
 
 // for now only
-const attack = tileId =>
+const attack = (targetTileId, FOD) =>
 	(dispatch, getState) => {
-		console.log('TODO: ATTACK tile', tileId);
+		const tiles = board.selectors.getTiles(getState());
+		// if tileId empty then nothing?
+		// if tilesId wall or doll then attack?
+
+		// TODO move calcDemage to other function?
+
+		const boardSize = board.selectors.getSize(getState());
+		const FODTilesIds = [];
+		// TODO get forEachTileInRangeGetId // getXY
+		boardUtil.forEachTileInRange(targetTileId, FOD - 1, boardSize, (x, y) => {
+			const tileId = tileUtil.getIdFromXY(x, y);
+			const distance = boardUtil.getDistance(targetTileId, tileId);
+			const damage = 1 / (distance + 1);
+			FODTilesIds.push({tileId, damage});
+		});
+		console.log('FOD', FODTilesIds);
+		FODTilesIds.forEach(value => {
+			const tileDM = tileUtil.getDataModel(tiles[value.tileId]);
+			if (tileDM.hasDoll()) {
+				const dollId = tileDM.getDollId();
+				const dollsById = dolls.selectors.getDolls(getState());
+				console.log('DOLL ATTACKED', dollsById[dollId], value.damage);
+			}
+			if (tileDM.hasWall()) {
+				const wall = tileDM.getWall();
+				console.log('WALL ATTACKED', wall, value.damage);
+			}
+
+		});
+
+
 	};
 
 actions.effects = {

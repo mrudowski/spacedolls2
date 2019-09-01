@@ -39,7 +39,9 @@ export const getDataModel = tile => ({
 	getId: 		() => tile.id,
 	//getXY:	() => getXYFromId(tile.id),
 	hasWall: 	() => !!tile.wall,
-	hasDoll: 	() => !!tile.dollId
+	hasDoll: 	() => !!tile.dollId,
+	getDollId: 	() => tile.dollId,
+	getWall: 	() => tile.wall
 });
 
 // better alternative?
