@@ -7,14 +7,14 @@ export const MOVE = 'MOVE';
 export const ATTACK = 'ATTACK';
 
 const actions = createSlice({
-  slice: 'actions',
-  initialState: {
-    activeAction: null,
+	slice: 'actions',
+	initialState: {
+		activeAction: null,
 		hoveredTileId: null,
-  },
-  reducers: {
-  	toggleAction: (state, action) => {
-  		const actionName = action.payload;
+	},
+	reducers: {
+		toggleAction: (state, action) => {
+			const actionName = action.payload;
 			if (state.activeAction === actionName) {
 				state.activeAction = null;
 			} else {
@@ -40,19 +40,21 @@ actions.selectors = {
 // effects
 // inspired by https://github.com/reduxjs/redux-starter-kit/issues/91
 
-const moveSelectedDollTo = destinationTileId => {
-	return (dispatch, getState) => {
+const moveSelectedDollTo = destinationTileId =>
+	(dispatch, getState) => {
 		const sourceTile = board.selectors.getSelectedTile(getState());
-		dispatch(board.actions.changeDollPosition({sourceTileId: sourceTile.id, destinationTileId}));
-	}
-};
+		dispatch(board.actions.changeDollPosition({
+			sourceTileId: sourceTile.id,
+			destinationTileId
+		}));
+	};
+
 
 // for now only
-const attack = tileId => {
-	return (dispatch, getState) => {
-		console.log("TODO: ATTACK tile", tileId);
-	}
-};
+const attack = tileId =>
+	(dispatch, getState) => {
+		console.log('TODO: ATTACK tile', tileId);
+	};
 
 actions.effects = {
 	moveSelectedDollTo,

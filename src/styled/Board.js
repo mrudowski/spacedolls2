@@ -5,11 +5,8 @@ export const Board = styled.div`
   border: 1px solid ${props => props.theme.colors.border};
   text-align: left;
   position: relative;
-	${props => {
-			// oh...
-			return css`
-				width: ${math(`${props.$width} * ${props.theme.sizes.tileSize} + 2`)};
-				height: ${math(`${props.$height} * ${props.theme.sizes.tileSize} + 2`)};
-			`;
-	}}
+	${props => css`
+		width: ${math(`${props.$width} * ${props.theme.sizes.tileSize} + 2`)};
+		height: ${math(`${props.$height} * ${props.theme.sizes.tileSize} + 2`)};
+	`}
 `;

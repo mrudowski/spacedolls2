@@ -35,21 +35,19 @@ export const getIndexFromXY = (x, y, size) =>
 // and could be use be them
 // but maybe it should be selector in first place?
 
-export const getDataModel = tile => {
-	return {
-		getId: 		() => tile.id,
-		//getXY:	() => getXYFromId(tile.id),
-		hasWall: 	() => !!tile.wall,
-		hasDoll: 	() => !!tile.dollId
-	}
-};
+export const getDataModel = tile => ({
+	getId: 		() => tile.id,
+	//getXY:	() => getXYFromId(tile.id),
+	hasWall: 	() => !!tile.wall,
+	hasDoll: 	() => !!tile.dollId
+});
 
 // better alternative?
 // https://verekia.com/react/logic-less-jsx/
 
 export class TileDataModel {
 	constructor(tile) {
-		this.tile = tile
+		this.tile = tile;
 	}
 
 	get id() {

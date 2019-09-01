@@ -2,7 +2,7 @@ import { configureStore } from 'redux-starter-kit';
 import throttle from 'lodash/throttle';
 // import { createStore } from 'redux'
 import reducer from './rootReducer';
-import {loadState, saveState} from "./localStorage";
+import {loadState, saveState} from './localStorage';
 
 
 const configureAppStore = () => {

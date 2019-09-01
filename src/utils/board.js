@@ -2,7 +2,7 @@ import produce from 'immer';
 import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as levelUtil from './level';
-import * as tilesDef from "./tileDef";
+import * as tilesDef from './tileDef';
 
 // things we could/should(?) get from store... (but how?)
 // - tiles
@@ -10,7 +10,7 @@ import * as tilesDef from "./tileDef";
 
 export const forEachTile = (tiles, callback) => {
 	forEach(tiles, (tile, tileId) => {
-		callback(tile, tileId)
+		callback(tile, tileId);
 	});
 };
 
@@ -18,8 +18,10 @@ export const forEachTile = (tiles, callback) => {
 export const forEachTileInRange = (startTileId, range, boardSize, callback) => {
 	const {x:startTileX, y:startTileY} = tileUtil.getXYFromId(startTileId);
 	const {width, height} = boardSize;
-	for (let x = Math.max(startTileX - range, 0); x <= Math.min(startTileX + range, width - 1); x++) {
-		for (let y = Math.max(startTileY - range, 0); y <= Math.min(startTileY + range, height - 1); y++) {
+	for (let x = Math.max(startTileX - range, 0);
+		x <= Math.min(startTileX + range, width - 1); x++) {
+		for (let y = Math.max(startTileY - range, 0);
+			y <= Math.min(startTileY + range, height - 1); y++) {
 			callback(x,y);
 		}
 	}
@@ -31,9 +33,9 @@ export const forEachTileInRange = (startTileId, range, boardSize, callback) => {
 // - just cardinal directions (NSEW)
 
 export const getDistance = (startTileId, endTileId) => {
-  const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
-  const { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
-  return Math.abs(startX - endX) + Math.abs(startY - endY);
+	const { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
+	const { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
+	return Math.abs(startX - endX) + Math.abs(startY - endY);
 };
 
 // Supercover lines
@@ -48,28 +50,28 @@ export const getDistance = (startTileId, endTileId) => {
 export const getTilesIdsOnLOF = (startTileId, endTileId) => {
 	const lineTiles = [];
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
-	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
+	const { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
 
-	const dx = endX-startX, dy = endY-startY;
-	let nx = Math.abs(dx), ny = Math.abs(dy);
-	let sign_x = dx > 0 ? 1 : -1, sign_y = dy > 0 ? 1 : -1;
+	const dx = endX - startX, dy = endY - startY;
+	const nx = Math.abs(dx), ny = Math.abs(dy);
+	const signX = dx > 0 ? 1 : -1, signY = dy > 0 ? 1 : -1;
 
 	for (let ix = 0, iy = 0; ix < nx || iy < ny;) {
 		//if ((0.5+ix) / nx === (0.5+iy) / ny) {
-		if ((1+2*ix) * ny === (1+2*iy) * nx) {
+		if ((1 + 2 * ix) * ny === (1 + 2 * iy) * nx) {
 			// next step is diagonal
-			startX += sign_x;
-			startY += sign_y;
+			startX += signX;
+			startY += signY;
 			ix++;
 			iy++;
 		//} else if ((0.5+ix) / nx < (0.5+iy) / ny) {
-		} else if ((1+2*ix) * ny < (1+2*iy) * nx) {
+		} else if ((1 + 2 * ix) * ny < (1 + 2 * iy) * nx) {
 			// next step is horizontal
-			startX += sign_x;
+			startX += signX;
 			ix++;
 		} else {
 			// next step is vertical
-			startY += sign_y;
+			startY += signY;
 			iy++;
 		}
 		lineTiles.push(tileUtil.getIdFromXY(startX, startY));
@@ -83,67 +85,67 @@ export const getTilesIdsOnLOF = (startTileId, endTileId) => {
 
 // no so good for us
 
-export const getTilesIdsOnLOF_NOTUSED = (startTileId, endTileId) => {
-  const lineTiles = [];
+export const getTilesIdsOnLOFnotUsed = (startTileId, endTileId) => {
+	const lineTiles = [];
 	let { x: startX, y: startY } = tileUtil.getXYFromId(startTileId);
-	let { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
+	const { x: endX, y: endY } = tileUtil.getXYFromId(endTileId);
 
-  const dx = Math.abs(endX - startX),
-      dy = Math.abs(endY - startY),
-	    sx = startX < endX ? 1 : -1,
-	    sy = startY < endY ? 1 : -1;
+	const dx = Math.abs(endX - startX),
+			dy = Math.abs(endY - startY),
+			sx = startX < endX ? 1 : -1,
+			sy = startY < endY ? 1 : -1;
 
-	let err = (dx>dy ? dx : -dy)/2;
-    	//err = dx + dy;
+	let err = (dx > dy ? dx : -dy) / 2;
+			//err = dx + dy;
 
-  while (!(startX === endX && startY === endY)) {
-    let e2 = err;
+	while (!(startX === endX && startY === endY)) {
+		const e2 = err;
 		// let e2 = 2 * err;
-    if (e2 > -dx) { // e2 >= dy
-      err -= dy; // +=
-      startX += sx;
-    }
-    if (e2 < dy) { // e2 <= dx
-      err += dx; //
-      startY += sy;
-    }
+		if (e2 > -dx) { // e2 >= dy
+			err -= dy; // +=
+			startX += sx;
+		}
+		if (e2 < dy) { // e2 <= dx
+			err += dx; //
+			startY += sy;
+		}
 
 		lineTiles.push(tileUtil.getIdFromXY(startX, startY));
 	}
 
-  return lineTiles;
+	return lineTiles;
 };
 
 export const createWall = () => tilesDef.getInitialStats(tilesDef.WALL);
 
 export const prepareData = levelId => {
-  console.log('prepareBoardData');
+	console.log('prepareBoardData');
 
-  const level = levelUtil.getLevel(levelId);
-  const { width, height } = level.size;
-  const boardSize = width * height;
+	const level = levelUtil.getLevel(levelId);
+	const { width, height } = level.size;
+	const boardSize = width * height;
 
-  const tiles = Array(boardSize)
-    .fill()
-    .reduce(function(map, currentValue, index) {
-      const id = tileUtil.getIdFromIndex(index, level.size);
-      map[id] = {
-        id: id
-      };
-      return map;
-    }, {});
+	const tiles = Array(boardSize)
+		.fill()
+		.reduce((previousValue, currentValue, index) => {
+			const id = tileUtil.getIdFromIndex(index, level.size);
+			previousValue[id] = {
+				id
+			};
+			return previousValue;
+		}, {});
 
 	// we don't needed immer here...
-  const updatedTiles = produce(tiles, draft => {
-    level.walls.forEach(wall => {
-      draft[wall.tile].wall = createWall();
-    });
-    level.dolls.forEach(doll => {
-      draft[doll.tile].dollId = doll.id;
-    });
-  });
+	const updatedTiles = produce(tiles, draft => {
+		level.walls.forEach(wall => {
+			draft[wall.tile].wall = createWall(); // eslint-disable-line no-param-reassign
+		});
+		level.dolls.forEach(doll => {
+			draft[doll.tile].dollId = doll.id;
+		});
+	});
 
-  return [ updatedTiles, width, height];
+	return [ updatedTiles, width, height];
 };
 
 // Map vs Object, mutation, spread, assign... with in depth discussion in comments section

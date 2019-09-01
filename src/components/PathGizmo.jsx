@@ -30,7 +30,7 @@ const PathGizmo = ({startTileId, paths}) => {
 				points={pointsAsArray.join(' ')}
 			/>
 		</StyledPathGizmo>
-	)
+	);
 };
 
 export default PathGizmo;

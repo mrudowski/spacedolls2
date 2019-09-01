@@ -45,9 +45,7 @@ export default function Level() {
   const toggleAttackAction = () => dispatch(actions.actions.toggleAction(ATTACK));
 
   // move to utils?
-  const isDollSelected = () => {
-    return selectedTile && selectedTile.dollId;
-  };
+  const isDollSelected = () => selectedTile && selectedTile.dollId;
 
   const levelData = getLevel(currentLevelId);
 

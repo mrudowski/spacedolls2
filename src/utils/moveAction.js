@@ -1,8 +1,8 @@
+import jsgraphs from 'js-graph-algorithms';
 import * as tileUtil from './tile';
 import * as boardUtil from './board';
 import * as dollUtil from './doll';
 // import * as pathFinderUtil from './pathFinder';
-import jsgraphs from 'js-graph-algorithms';
 
 console.log('moveAction module');
 
@@ -42,14 +42,17 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 		const tileId = tileUtil.getIdFromXY(x,y);
 		const tileDM = tileUtil.getDataModel(tiles[tileId]);
 		if (isWalkable(tileDM)) {
-			return 1
-		} else {
-			return 99;
+			return 1;
 		}
+		return 99;
 	};
 
 	const addEdge = (index, x, y) => {
-		tilesAsGraph.addEdge(new jsgraphs.Edge(index, tileUtil.getIndexFromXY(x, y, boardSize), walkableAsWeight(x, y)));
+		tilesAsGraph.addEdge(new jsgraphs.Edge(
+			index,
+			tileUtil.getIndexFromXY(x, y, boardSize),
+			walkableAsWeight(x, y)
+		));
 	};
 
 	const tilesIdsToCheck = [];
@@ -86,17 +89,22 @@ export const getRangeTilesIds = (tiles, startTile, boardSize) => {
 	});
 
 	const { x: startX, y: startY } = tileUtil.getXYFromId(startTile.id);
-	const dijkstra = new jsgraphs.Dijkstra(tilesAsGraph, tileUtil.getIndexFromXY(startX, startY, boardSize));
+	const dijkstra = new jsgraphs.Dijkstra(
+		tilesAsGraph,
+		tileUtil.getIndexFromXY(startX, startY, boardSize)
+	);
 
 	const rangeTilesIds = [],
 				paths = {};
-	for(let v = 0; v < tilesAsGraph.V; v++){
-		if(dijkstra.hasPathTo(v)){
+	for (let v = 0; v < tilesAsGraph.V; v++) {
+		if (dijkstra.hasPathTo(v)) {
 			const distance = dijkstra.distanceTo(v);
 			if (distance > 0 && distance < range) {
 				rangeTilesIds.push(tileUtil.getIdFromIndex(v, boardSize));
-				const path = dijkstra.pathTo(v).map(edge => tileUtil.getIdFromIndex(edge.to(), boardSize));
-				const endTileId = path[path.length-1];
+				const path = dijkstra.pathTo(v).map(edge =>
+					tileUtil.getIdFromIndex(edge.to(), boardSize)
+				);
+				const endTileId = path[path.length - 1];
 				paths[endTileId] = path;
 			}
 		}

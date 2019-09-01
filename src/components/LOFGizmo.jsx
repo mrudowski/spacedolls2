@@ -29,7 +29,7 @@ const LOFGizmo = ({startTileId}) => {
 				points={`${x1},${y1} ${x2},${y2}`}
 			/>
 		</StyledLOFGizmo>
-	)
+	);
 };
 
 export default LOFGizmo;

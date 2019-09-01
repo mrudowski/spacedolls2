@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from '../styled/TileInfo';
-import * as tilesDef from "../utils/tileDef";
-import * as tileUtil from "../utils/tile";
+import * as tilesDef from '../utils/tileDef';
+import * as tileUtil from '../utils/tile';
 
 const getOccupiedBy = tile => {
   const tileDM = tileUtil.getDataModel(tile);

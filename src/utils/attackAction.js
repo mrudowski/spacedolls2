@@ -14,16 +14,16 @@ console.log('attackAction module');
 export const getRangeTilesIds = (tiles, startTile) => {
 	const dollId = dollUtil.getDollFromTile(startTile);
 	//for now - soon it will be weapon stats
-  const range = dollUtil.getAttackRange(dollId);
-  const affectWalls = dollUtil.getDollMetaData(dollId).stats.affectWalls;
+	const range = dollUtil.getAttackRange(dollId);
+	const affectWalls = dollUtil.getDollMetaData(dollId).stats.affectWalls;
 	const overDoll = dollUtil.getDollMetaData(dollId).stats.aboveHeads;
 
-  const isWallIncluded = tileId => {
-  	const tileDM = tileUtil.getDataModel(tiles[tileId]);
+	const isWallIncluded = tileId => {
+		const tileDM = tileUtil.getDataModel(tiles[tileId]);
 		if (affectWalls) {
 			return true;
 		}
-		return !tileDM.hasWall()
+		return !tileDM.hasWall();
 	};
 
 	const isCleanLOF = (startTileId, endTileId) => {

@@ -5,7 +5,7 @@ import actions from '../redux/actions';
 import * as tileUtil from '../utils/tile';
 import * as moveActionUtil from '../utils/moveAction';
 import {StyledGizmo, StyledMoveGizmoTile} from '../styled/Gizmos';
-import PathGizmo from "./PathGizmo";
+import PathGizmo from './PathGizmo';
 
 const MoveGizmo = () => {
   const selectedTile = useSelector(board.selectors.getSelectedTile);

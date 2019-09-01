@@ -26,7 +26,7 @@ const DevGizmo = () => {
           key={`tile-${tileId}`}
           onClick={() => dispatch(board.actions.toggleWall(tileId))}
         />
-      )
+      );
     });
     return tilesToRender;
   };

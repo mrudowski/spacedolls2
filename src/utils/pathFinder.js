@@ -1,5 +1,5 @@
 import EasyStar from 'easystarjs';
-import * as boardUtil from "../utils/board";
+import * as boardUtil from '../utils/board';
 import * as tileUtil from './tile';
 // import store from '../redux/store';
 

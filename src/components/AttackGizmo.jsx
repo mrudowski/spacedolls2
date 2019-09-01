@@ -38,10 +38,10 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 				<StyledAttackGizmoTile
 					$x={x}
 					$y={y}
-					$borderRight={tilesIds.indexOf(tileUtil.getIdFromXY(x+1, y)) === -1}
-					$borderBottom={tilesIds.indexOf(tileUtil.getIdFromXY(x, y+1)) === -1}
-					$borderLeft={tilesIds.indexOf(tileUtil.getIdFromXY(x-1, y)) === -1}
-					$borderTop={tilesIds.indexOf(tileUtil.getIdFromXY(x, y-1)) === -1}
+					$borderRight={tilesIds.indexOf(tileUtil.getIdFromXY(x + 1, y)) === -1}
+					$borderBottom={tilesIds.indexOf(tileUtil.getIdFromXY(x, y + 1)) === -1}
+					$borderLeft={tilesIds.indexOf(tileUtil.getIdFromXY(x - 1, y)) === -1}
+					$borderTop={tilesIds.indexOf(tileUtil.getIdFromXY(x, y - 1)) === -1}
 					key={`range-tile-${tileId}`}
 					onClick={() => dispatch(actions.effects.attack(tileId))}
 					onMouseOver={() => showFODGizmo(tileId)}

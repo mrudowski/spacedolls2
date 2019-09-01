@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components';
 import { rgba, math } from 'polished';
 import sizes from '../theme/sizes';
 import colors from '../theme/colors';
-import { tileBase } from '../styled/common';
+import { tileBase } from './common';
 
 const dollSize = math(`${sizes.tileSize} - 8`);
 
@@ -15,11 +15,10 @@ const Doll = styled.div`
   margin: 4px 0 0 4px;
   border-radius: 50%;
 
-  background-color: ${props => {
-    return props.$team === 'dolls'
+  background-color: ${props => (props.$team === 'dolls'
       ? rgba(colors.team.dolls, 0.4)
-      : rgba(colors.team.aliens, 0.35);
-  }};
+      : rgba(colors.team.aliens, 0.35)
+  )};
   
   &:before {
     content: '';
@@ -46,6 +45,7 @@ const Doll = styled.div`
         }
     `;
 		}
+    return css``;
   }};
 `;
 

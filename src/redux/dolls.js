@@ -51,9 +51,9 @@ const getSelectedDollId = createSelector(
 
 const getSelectedDollData = createSelector(
   [getDolls, getSelectedDollId],
-  (dolls, dollId) => {
+  (dollsById, dollId) => {
     if (dollId) {
-      return dolls[dollId];
+      return dollsById[dollId];
     }
     return null;
   }

@@ -3,20 +3,20 @@ import { useSelector } from 'react-redux';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import actions, {MOVE, ATTACK} from '../redux/actions';
+import * as boardUtil from '../utils/board';
 import Tile from './Tile';
 import Wall from './Wall';
 import Doll from './Doll';
 import MoveGizmo from './MoveGizmo';
-import AttackGizmoContainer from "./AttackGizmoContainer";
-import * as boardUtil from "../utils/board";
+import AttackGizmoContainer from './AttackGizmoContainer';
 
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
-import DevGizmo from "./DevGizmo";
+import DevGizmo from './DevGizmo';
 
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
-	const dollId = useSelector(dolls.selectors.getSelectedDollId);
+	const selectedDollId = useSelector(dolls.selectors.getSelectedDollId);
   // this is the same selector like parent node Level... better by prop?
   const activeAction = useSelector(actions.selectors.getActiveAction);
 
@@ -34,7 +34,14 @@ const Board = () => {
     const dollsToRender = [];
     boardUtil.forEachTile(tiles, (tile, tileId) => {
       const selected = tileId === selectedTileId;
-      tilesToRender.push(<Tile id={tileId} key={`tile-${tileId}`} selected={selected} hasDoll={tile.dollId} />);
+      tilesToRender.push(
+        <Tile
+          id={tileId}
+          key={`tile-${tileId}`}
+          selected={selected}
+          hasDoll={tile.dollId}
+        />
+      );
 
       // TODO hasDoll
       if (tile.wall) {
@@ -48,7 +55,12 @@ const Board = () => {
       } else if (tile.dollId) {
         const dollId = tile.dollId;
         dollsToRender.push(
-          <Doll data={dollsData[dollId]} tileId={tileId} selected={selected} key={`doll-${dollId}`} />
+          <Doll
+            data={dollsData[dollId]}
+            tileId={tileId}
+            selected={selected}
+            key={`doll-${dollId}`}
+          />
         );
       }
     });
@@ -65,7 +77,7 @@ const Board = () => {
     <Styled.Board $width={boardWidth} $height={boardHeight}>
       {renderAll(tiles, dollsData, selectedTileId)}
       {activeAction === MOVE && <MoveGizmo />}
-      {(activeAction === ATTACK && dollId) &&
+      {(activeAction === ATTACK && selectedDollId) &&
         <AttackGizmoContainer
           tiles={tiles}
           selectedTile={selectedTile}
