@@ -7,11 +7,11 @@ const dolls = {
       hp: 10,
       move: 2,
       // light blaster
-      attack: 5,
-			attackRange: 10,
-			affectWalls: false,
-			fieldOfDestruction: 1,
-			aboveHeads: false,
+      attackStrength: 5,
+      attackRange: 10,
+      affectWalls: false,
+      fieldOfDestruction: 1,
+      aboveHeads: false,
       medic: 0,
       medicRange: 0,
       defense: 1
@@ -25,11 +25,11 @@ const dolls = {
       hp: 12,
       move: 1,
       // bazooka
-      attack: 10, // should be part of weapon stats
+      attackStrength: 10, // should be part of weapon stats
       attackRange: 10,
       affectWalls: true,
-			fieldOfDestruction: 2,
-			aboveHeads: true,
+      fieldOfDestruction: 2,
+      aboveHeads: true,
       // through dolls and wall
       // spread fire?
       medic: 0,
@@ -46,11 +46,11 @@ const dolls = {
       hp: 8,
       move: 3,
       // swords
-      attack: 5, // should be stronger?
-			attackRange: 1,
-			affectWalls: false,
-			fieldOfDestruction: 1,
-			aboveHeads: false,
+      attackStrength: 5, // should be stronger?
+      attackRange: 1,
+      affectWalls: false,
+      fieldOfDestruction: 1,
+      aboveHeads: false,
       medic: 0,
       medicRange: 0,
       defense: 0
@@ -64,11 +64,11 @@ const dolls = {
       hp: 7,
       move: 2,
       // nothing?
-      attack: 0,
-			attackRange: 0,
-			affectWalls: false,
-			fieldOfDestruction: 0,
-			aboveHeads: false,
+      attackStrength: 0,
+      attackRange: 0,
+      affectWalls: false,
+      fieldOfDestruction: 0,
+      aboveHeads: false,
       medic: 5,
       medicRange: 1,
       defense: 0

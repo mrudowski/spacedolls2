@@ -12,10 +12,11 @@ const AttackGizmo = ({rangeTilesIds, startTileId, FOD}) => {
 
 	// useState should be good enough but it would re-render component
 	// + good: "heavy" getRangeTilesIds is parent (container) component
-	// - bad: we still re-render all gizmo tiles on hover...
-	// Other way?
+	// - bad: we still re-render all its tiles on hover...
+	// Current idea
 	// 1. dispatch action by redux to child component? (knowing that it probably should not be part of global state)
-	// 2. ?
+	// Other way?
+	// ?
 
 	console.log('AttackGizmo');
 

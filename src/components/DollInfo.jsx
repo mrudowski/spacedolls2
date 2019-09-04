@@ -5,7 +5,7 @@ import {getDollMetaData} from '../utils/doll';
 import dolls from '../redux/dolls';
 
 const DollInfo = () => {
-  const data = useSelector(dolls.selectors.getSelectedDollData);
+  const data = useSelector(dolls.selectors.getSelectedDoll);
 
   console.log('DollInfo');
 
@@ -21,7 +21,7 @@ const DollInfo = () => {
       HP: {data.hp}<br/>
       MoveRange: {data.meta.stats.move}<br/>
       AttackRange: {data.meta.stats.attackRange}<br/>
-      AttackStrength: {data.meta.stats.attack}<br/>
+      AttackStrength: {data.meta.stats.attackStrange}<br/>
       FieldOfDestruction: {data.meta.stats.fieldOfDestruction}<br/>
     </StyledDollInfo>
   );

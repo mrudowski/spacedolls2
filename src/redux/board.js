@@ -32,6 +32,40 @@ const board = createSlice({
 			sourceTile.dollId = null;
 			state.selectedTileId = destinationTile.id;
 		},
+		dealDamageToTile: (state, action) => {
+			const {
+				tileId,
+				attackStrength,
+				damageRatio
+			} = action.payload;
+			//target.hp = target.hp - 5;
+			console.log('dealDamage', action);
+
+			const tile = state.tiles[tileId];
+			const tileDM = tileUtil.getDataModel(tile);
+			// // if (targetTileDM.hasDoll()) {
+			// //
+			// // }
+			if (tileDM.hasWall()) {
+				const target = tileDM.getWall();
+				console.log('WALL ATTACKED');
+				//const totalDamage = damageSource.attackStrength * damageRatio - target.defenseStrength;
+				const totalDamage = attackStrength;
+				console.log('totalDamage',totalDamage);
+				target.hp = target.hp - totalDamage;
+
+				// hurt or destroy
+			}
+
+			if (tileDM.hasDoll()) {
+				const dollId = tileDM.getDollId();
+				// const dollsById = dolls.selectors.getDolls(getState());
+				//console.log('DOLL ATTACKED', dollsById[dollId], value.damage);
+				console.log('DOLL ATTACKED', 'good place to dealDamage?');
+				// good place?
+			}
+
+		},
 		toggleWall: (state, action) => {
 			const tileId = action.payload;
 			const tile = state.tiles[tileId];

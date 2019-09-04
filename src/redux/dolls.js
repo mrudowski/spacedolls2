@@ -1,6 +1,6 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
-import { getLevel } from '../utils/level';
-import { getDollMetaData } from '../utils/doll';
+import * as levelUtil  from '../utils/level';
+import * as dollUtil from '../utils/doll';
 import board from './board';
 
 const dolls = createSlice({
@@ -8,15 +8,17 @@ const dolls = createSlice({
   initialState: {},
   reducers: {
     create: (state, action) => {
+      // TODO should be based on redux state levelId
       const levelId = action.payload;
-      const level = getLevel(levelId);
+      const level = levelUtil.getLevel(levelId);
 
       level.dolls.forEach(doll => {
         state[doll.id] = {
           id: doll.id,
           team: doll.team,
-          meta: getDollMetaData(doll.id), // ref or as util only?
-          hp: getDollMetaData(doll.id).stats.hp
+          // TODO remove meta data
+          meta: dollUtil.getDollMetaData(doll.id), // ref or as util only?
+          hp: dollUtil.getDollMetaData(doll.id).stats.hp
         };
       });
     }
@@ -49,7 +51,7 @@ const getSelectedDollId = createSelector(
   }
 );
 
-const getSelectedDollData = createSelector(
+const getSelectedDoll = createSelector(
   [getDolls, getSelectedDollId],
   (dollsById, dollId) => {
     if (dollId) {
@@ -59,10 +61,31 @@ const getSelectedDollData = createSelector(
   }
 );
 
+const getSelectedDollDM = createSelector(
+  [getSelectedDoll],
+  (selectedDoll) => {
+    if (selectedDoll) {
+      return dollUtil.getDataModel(selectedDoll);
+    }
+    return null;
+  }
+);
+
+// const getDollDM = createSelector(
+//   [getDoll],
+//   (dollsById, dollId) => {
+//     if (dollId) {
+//       return dollsById[dollId];
+//     }
+//     return null;
+//   }
+// );
+
 dolls.selectors = {
   getDolls, // overwrite?
   getSelectedDollId,
-  getSelectedDollData, // getActive
+  getSelectedDoll, // getActive
+  getSelectedDollDM,
 };
 
 export default dolls;

@@ -26,7 +26,7 @@ const actions = createSlice({
 		},
 		setHoveredTileId: (state, action) => {
 			state.hoveredTileId = action.payload;
-		}
+		},
 	}
 });
 
@@ -52,41 +52,31 @@ const moveSelectedDollTo = destinationTileId =>
 		}));
 	};
 
-
-// for now only
 const attack = (targetTileId, FOD) =>
 	(dispatch, getState) => {
-		const tiles = board.selectors.getTiles(getState());
-		// if tileId empty then nothing?
+		// TODO if tileId empty then nothing?
+		// const tiles = board.selectors.getTiles(getState());
 		// if tilesId wall or doll then attack?
-
-		// TODO move calcDemage to other function?
-
 		const boardSize = board.selectors.getSize(getState());
-		const FODTilesIds = [];
-		// TODO get forEachTileInRangeGetId // getXY
+		const selectedDollDM = dolls.selectors.getSelectedDollDM(getState());
+
+		// TODO some place to optimisation because we calculate it again here...
+		const damageMap = [];
 		boardUtil.forEachTileInRange(targetTileId, FOD - 1, boardSize, (x, y) => {
 			const tileId = tileUtil.getIdFromXY(x, y);
 			const distance = boardUtil.getDistance(targetTileId, tileId);
 			const damage = 1 / (distance + 1);
-			FODTilesIds.push({tileId, damage});
-		});
-		console.log('FOD', FODTilesIds);
-		FODTilesIds.forEach(value => {
-			const tileDM = tileUtil.getDataModel(tiles[value.tileId]);
-			if (tileDM.hasDoll()) {
-				const dollId = tileDM.getDollId();
-				const dollsById = dolls.selectors.getDolls(getState());
-				console.log('DOLL ATTACKED', dollsById[dollId], value.damage);
-			}
-			if (tileDM.hasWall()) {
-				const wall = tileDM.getWall();
-				console.log('WALL ATTACKED', wall, value.damage);
-			}
-
+			damageMap.push({tileId, damage});
 		});
 
-
+		damageMap.forEach(({tileId, damageRatio}) => {
+			dispatch(board.actions.dealDamageToTile({
+				tileId,
+				attackStrength: selectedDollDM.getAttackStrength(),
+				// damageSource: null,
+				damageRatio,
+			}));
+		});
 	};
 
 actions.effects = {

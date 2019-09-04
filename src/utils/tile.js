@@ -35,13 +35,16 @@ export const getIndexFromXY = (x, y, size) =>
 // and could be use be them
 // but maybe it should be selector in first place?
 
+// tight couple with redux state structure that it should be selector...
+// only function here - do not duplicate data
+
 export const getDataModel = tile => ({
-	getId: 		() => tile.id,
+	getId: 		() => tile.id, // only function here - do not duplicate simple data?
 	//getXY:	() => getXYFromId(tile.id),
 	hasWall: 	() => !!tile.wall,
 	hasDoll: 	() => !!tile.dollId,
-	getDollId: 	() => tile.dollId,
-	getWall: 	() => tile.wall
+	getDollId: 	() => tile.dollId, // only function here - do not duplicate simple data?
+	getWall: 	() => tile.wall  // only function here - do not duplicate simple data?
 });
 
 // better alternative?
