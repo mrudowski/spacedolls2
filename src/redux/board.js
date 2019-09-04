@@ -1,6 +1,7 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
 import * as boardUtil from '../utils/board';
 import * as tileUtil from '../utils/tile';
+import actions from './actions';
 
 const board = createSlice({
 	slice: 'board',
@@ -32,7 +33,7 @@ const board = createSlice({
 			sourceTile.dollId = null;
 			state.selectedTileId = destinationTile.id;
 		},
-		dealDamageToTile: (state, action) => {
+		dealDamageToWall: (state, action) => {
 			const {
 				tileId,
 				attackStrength,
@@ -96,12 +97,49 @@ const getSelectedTile = createSelector(
 	}
 );
 
+const getTileDMById = tileId =>
+	createSelector(
+	[getTiles],
+		tiles => tiles[tileId]
+	);
+
 board.selectors = {
 	// replacing board.selectors.getBoard,
 	getSize,
 	getTiles,
 	getSelectedTileId,
 	getSelectedTile,
+	getTileDMById,
+};
+
+
+// effects
+
+const dealDamageToTile = ({tileId, attackStrength}) =>
+	(dispatch, getState) => {
+		// TODO in one call? not needed?
+		const tiles = board.selectors.getTiles(getState());
+		const tileDM = tileUtil.getDataModel(tiles[tileId]);
+		const tileDM2 = board.selectors.getTileDMById(tileId)(getState());
+
+		console.log('tileDM2', tileDM2);
+
+		if (tileDM.hasWall()) {
+			dispatch(board.actions.dealDamageToWall({
+				tileId,
+				attackStrength
+			}));
+		}
+
+		if (tileDM.hasDoll()) {
+			const dollId = tileDM.getDollId();
+			// const dollsById = dolls.selectors.getDolls(getState());
+			console.log('DOLL ATTACKED', dollId, 'TODO');
+		}
+	};
+
+board.effects = {
+	dealDamageToTile,
 };
 
 export default board;

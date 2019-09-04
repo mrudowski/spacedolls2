@@ -69,7 +69,7 @@ const attack = (targetTileId, FOD) =>
 		});
 
 		damageMap.forEach(({tileId, distance}) => {
-			dispatch(board.actions.dealDamageToTile({
+			dispatch(board.effects.dealDamageToTile({
 				tileId,
 				attackStrength: (selectedDollDM.getAttackStrength() - distance)
 			}));
