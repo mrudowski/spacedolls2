@@ -1,13 +1,15 @@
 import React from 'react';
-import * as dollUtil from '../utils/doll';
+import { useSelector } from 'react-redux';
+import dolls from '../redux/dolls';
 import * as attackActionUtil from '../utils/attackAction';
 import AttackGizmo from './AttackGizmo';
+
 
 // FOD - field of destruction
 
 const AttackGizmoContainer = ({tiles, selectedTile}) => {
-	const dollId = dollUtil.getDollFromTile(selectedTile);
-	const FOD = dollUtil.getDollMetaData(dollId).stats.fieldOfDestruction;
+	const dollDM = useSelector(dolls.selectors.getSelectedDollDM);
+	const FOD = dollDM.getFOD();
 
 	// functions
 

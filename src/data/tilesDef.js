@@ -3,16 +3,14 @@ const tilesDef = {
     id: 'wall',
     title: 'Wall',
     stats: {
-      hp: 10,
-      defense: 0
+      hp: 5,
     }
   },
   strongWall: {
     id: 'strongWall',
     title: 'Strong wall',
     stats: {
-      hp: 100,
-      defense: 100
+      hp: 10,
     }
   },
 };

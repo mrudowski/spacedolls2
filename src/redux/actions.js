@@ -64,17 +64,14 @@ const attack = (targetTileId, FOD) =>
 		const damageMap = [];
 		boardUtil.forEachTileInRange(targetTileId, FOD - 1, boardSize, (x, y) => {
 			const tileId = tileUtil.getIdFromXY(x, y);
-			const distance = boardUtil.getDistance(targetTileId, tileId);
-			const damage = 1 / (distance + 1);
-			damageMap.push({tileId, damage});
+			const distance = boardUtil.getDistance(targetTileId, tileId) - 1;
+			damageMap.push({tileId, distance});
 		});
 
-		damageMap.forEach(({tileId, damageRatio}) => {
+		damageMap.forEach(({tileId, distance}) => {
 			dispatch(board.actions.dealDamageToTile({
 				tileId,
-				attackStrength: selectedDollDM.getAttackStrength(),
-				// damageSource: null,
-				damageRatio,
+				attackStrength: (selectedDollDM.getAttackStrength() - distance)
 			}));
 		});
 	};

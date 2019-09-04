@@ -16,5 +16,6 @@ export const getDollFromTile = tile => tile.dollId;
 export const getDataModel = doll => ({
   // get all props without function wrappers?
   ...doll,
-  getAttackStrength:  () => getDollMetaData(doll.id).stats.attackStrength,
+  getAttackStrength: () => getDollMetaData(doll.id).stats.attackStrength,
+  getFOD: () => getDollMetaData(doll.id).stats.FOD,
 });

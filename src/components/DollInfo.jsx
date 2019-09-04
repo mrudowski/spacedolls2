@@ -22,7 +22,7 @@ const DollInfo = () => {
       MoveRange: {data.meta.stats.move}<br/>
       AttackRange: {data.meta.stats.attackRange}<br/>
       AttackStrength: {data.meta.stats.attackStrange}<br/>
-      FieldOfDestruction: {data.meta.stats.fieldOfDestruction}<br/>
+      FieldOfDestruction: {metaData.stats.FOD}<br/>
     </StyledDollInfo>
   );
 };

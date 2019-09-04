@@ -36,31 +36,23 @@ const board = createSlice({
 			const {
 				tileId,
 				attackStrength,
-				damageRatio
 			} = action.payload;
-			//target.hp = target.hp - 5;
-			console.log('dealDamage', action);
-
 			const tile = state.tiles[tileId];
 			const tileDM = tileUtil.getDataModel(tile);
-			// // if (targetTileDM.hasDoll()) {
-			// //
-			// // }
+
 			if (tileDM.hasWall()) {
 				const target = tileDM.getWall();
-				console.log('WALL ATTACKED');
-				//const totalDamage = damageSource.attackStrength * damageRatio - target.defenseStrength;
-				const totalDamage = attackStrength;
-				console.log('totalDamage',totalDamage);
-				target.hp = target.hp - totalDamage;
-
-				// hurt or destroy
+				const result  = target.hp - attackStrength;
+				if (result > 0) {
+					target.hp = result;
+				} else {
+					tileDM.destroyWall();
+				}
 			}
 
 			if (tileDM.hasDoll()) {
 				const dollId = tileDM.getDollId();
 				// const dollsById = dolls.selectors.getDolls(getState());
-				//console.log('DOLL ATTACKED', dollsById[dollId], value.damage);
 				console.log('DOLL ATTACKED', 'good place to dealDamage?');
 				// good place?
 			}
@@ -75,9 +67,9 @@ const board = createSlice({
 			}
 			// TODO the same function as in prepareData
 			if (tileDM.hasWall()) {
-				tile.wall = null;
+				tileDM.destroyWall();
 			} else {
-				tile.wall = boardUtil.createWall();
+				tileDM.createWall();
 			}
 		},
 	}

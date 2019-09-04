@@ -2,7 +2,6 @@ import produce from 'immer';
 import forEach from 'lodash/each';
 import * as tileUtil from './tile';
 import * as levelUtil from './level';
-import * as tilesDef from './tileDef';
 
 // things we could/should(?) get from store... (but how?)
 // - tiles
@@ -116,8 +115,6 @@ export const getTilesIdsOnLOFnotUsed = (startTileId, endTileId) => {
 	return lineTiles;
 };
 
-export const createWall = () => tilesDef.getInitialStats(tilesDef.WALL);
-
 export const prepareData = levelId => {
 	console.log('prepareBoardData');
 
@@ -138,7 +135,8 @@ export const prepareData = levelId => {
 	// we don't needed immer here...
 	const updatedTiles = produce(tiles, draft => {
 		level.walls.forEach(wall => {
-			draft[wall.tile].wall = createWall(); // eslint-disable-line no-param-reassign
+			const tileDM = tileUtil.getDataModel(draft[wall.tile]);
+			tileDM.createWall();
 		});
 		level.dolls.forEach(doll => {
 			draft[doll.tile].dollId = doll.id;

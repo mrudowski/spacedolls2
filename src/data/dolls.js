@@ -4,17 +4,16 @@ const dolls = {
     race: 'human',
     codeName: 'Toi',
     stats: {
-      hp: 10,
+      hp: 2,
       move: 2,
       // light blaster
-      attackStrength: 5,
-      attackRange: 10,
+      attackStrength: 1,
+      attackRange: 8,
       affectWalls: false,
-      fieldOfDestruction: 1,
+      FOD: 1,
       aboveHeads: false,
       medic: 0,
       medicRange: 0,
-      defense: 1
     }
   },
   cleo: {
@@ -22,13 +21,13 @@ const dolls = {
     race: 'human',
     codeName: 'Cleo',
     stats: {
-      hp: 12,
+      hp: 4,
       move: 1,
       // bazooka
-      attackStrength: 10, // should be part of weapon stats
+      attackStrength: 2, // should be part of weapon stats
       attackRange: 10,
       affectWalls: true,
-      fieldOfDestruction: 2,
+      FOD: 2,
       aboveHeads: true,
       // through dolls and wall
       // spread fire?
@@ -43,13 +42,13 @@ const dolls = {
     race: 'alien',
     codeName: 'Xantia',
     stats: {
-      hp: 8,
+      hp: 3,
       move: 3,
       // swords
       attackStrength: 5, // should be stronger?
       attackRange: 1,
       affectWalls: false,
-      fieldOfDestruction: 1,
+      FOD: 1,
       aboveHeads: false,
       medic: 0,
       medicRange: 0,
@@ -61,13 +60,13 @@ const dolls = {
     race: 'alien',
     codeName: 'Io',
     stats: {
-      hp: 7,
+      hp: 2,
       move: 2,
       // nothing?
       attackStrength: 0,
       attackRange: 0,
       affectWalls: false,
-      fieldOfDestruction: 0,
+      FOD: 0,
       aboveHeads: false,
       medic: 5,
       medicRange: 1,
