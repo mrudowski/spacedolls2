@@ -7,7 +7,7 @@ const dolls = {
       hp: 2,
       move: 2,
       // light blaster
-      attackStrength: 1,
+      attackStrength: 2,
       attackRange: 8,
       affectWalls: false,
       FOD: 1,
@@ -24,13 +24,13 @@ const dolls = {
       hp: 4,
       move: 1,
       // bazooka
-      attackStrength: 2, // should be part of weapon stats
+      attackStrength: 3,
       attackRange: 10,
       affectWalls: true,
       FOD: 2,
       aboveHeads: true,
       // through dolls and wall
-      // spread fire?
+      // spread fire? with random ? or when flammable tile
       medic: 0,
       medicRange: 0,
       defense: 2
@@ -45,7 +45,7 @@ const dolls = {
       hp: 3,
       move: 3,
       // swords
-      attackStrength: 5, // should be stronger?
+      attackStrength: 1,
       attackRange: 1,
       affectWalls: false,
       FOD: 1,

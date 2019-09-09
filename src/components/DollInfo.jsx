@@ -21,7 +21,7 @@ const DollInfo = () => {
       HP: {data.hp}<br/>
       MoveRange: {data.meta.stats.move}<br/>
       AttackRange: {data.meta.stats.attackRange}<br/>
-      AttackStrength: {data.meta.stats.attackStrange}<br/>
+      AttackStrength: {data.meta.stats.attackStrength}<br/>
       FieldOfDestruction: {metaData.stats.FOD}<br/>
     </StyledDollInfo>
   );

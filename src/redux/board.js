@@ -1,7 +1,7 @@
 import { createSlice, createSelector } from 'redux-starter-kit';
+import dolls from './dolls';
 import * as boardUtil from '../utils/board';
 import * as tileUtil from '../utils/tile';
-import actions from './actions';
 
 const board = createSlice({
 	slice: 'board',
@@ -33,6 +33,14 @@ const board = createSlice({
 			sourceTile.dollId = null;
 			state.selectedTileId = destinationTile.id;
 		},
+		removeDoll: (state, action) => {
+			const tileId = action.payload;
+			const tile = state.tiles[tileId];
+			// by utils too?
+			tile.dollId = null;
+
+			// TODO we should removed it (mark as KIA) from other place too like characters roster etc
+		},
 		dealDamageToWall: (state, action) => {
 			const {
 				tileId,
@@ -40,24 +48,13 @@ const board = createSlice({
 			} = action.payload;
 			const tile = state.tiles[tileId];
 			const tileDM = tileUtil.getDataModel(tile);
-
-			if (tileDM.hasWall()) {
-				const target = tileDM.getWall();
-				const result  = target.hp - attackStrength;
-				if (result > 0) {
-					target.hp = result;
-				} else {
-					tileDM.destroyWall();
-				}
+			const wall = tileDM.getWall();
+			const result  = wall.hp - attackStrength;
+			if (result > 0) {
+				wall.hp = result; // immer
+			} else {
+				tileDM.destroyWall();
 			}
-
-			if (tileDM.hasDoll()) {
-				const dollId = tileDM.getDollId();
-				// const dollsById = dolls.selectors.getDolls(getState());
-				console.log('DOLL ATTACKED', 'good place to dealDamage?');
-				// good place?
-			}
-
 		},
 		toggleWall: (state, action) => {
 			const tileId = action.payload;
@@ -66,7 +63,6 @@ const board = createSlice({
 			if (tileDM.hasDoll()) {
 				return;
 			}
-			// TODO the same function as in prepareData
 			if (tileDM.hasWall()) {
 				tileDM.destroyWall();
 			} else {
@@ -100,7 +96,7 @@ const getSelectedTile = createSelector(
 const getTileDMById = tileId =>
 	createSelector(
 	[getTiles],
-		tiles => tiles[tileId]
+		tiles => tileUtil.getDataModel(tiles[tileId])
 	);
 
 board.selectors = {
@@ -117,12 +113,7 @@ board.selectors = {
 
 const dealDamageToTile = ({tileId, attackStrength}) =>
 	(dispatch, getState) => {
-		// TODO in one call? not needed?
-		const tiles = board.selectors.getTiles(getState());
-		const tileDM = tileUtil.getDataModel(tiles[tileId]);
-		const tileDM2 = board.selectors.getTileDMById(tileId)(getState());
-
-		console.log('tileDM2', tileDM2);
+		const tileDM = board.selectors.getTileDMById(tileId)(getState());
 
 		if (tileDM.hasWall()) {
 			dispatch(board.actions.dealDamageToWall({
@@ -133,8 +124,11 @@ const dealDamageToTile = ({tileId, attackStrength}) =>
 
 		if (tileDM.hasDoll()) {
 			const dollId = tileDM.getDollId();
-			// const dollsById = dolls.selectors.getDolls(getState());
-			console.log('DOLL ATTACKED', dollId, 'TODO');
+			dispatch(dolls.effects.dealDamageToDoll({
+				tileId,
+				dollId,
+				attackStrength
+			}));
 		}
 	};
 

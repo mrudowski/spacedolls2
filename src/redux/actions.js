@@ -64,7 +64,7 @@ const attack = (targetTileId, FOD) =>
 		const damageMap = [];
 		boardUtil.forEachTileInRange(targetTileId, FOD - 1, boardSize, (x, y) => {
 			const tileId = tileUtil.getIdFromXY(x, y);
-			const distance = boardUtil.getDistance(targetTileId, tileId) - 1;
+			const distance = boardUtil.getDistance(targetTileId, tileId);
 			damageMap.push({tileId, distance});
 		});
 

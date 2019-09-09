@@ -21,16 +21,14 @@ const dolls = createSlice({
           hp: dollUtil.getDollMetaData(doll.id).stats.hp
         };
       });
-    }
+    },
+    hurtDoll: (state, action) => {
+      const {dollId, attackStrength} = action.payload;
+      const doll = state[dollId];
+      doll.hp = attackStrength; // immer
+    },
   }
 });
-
-// not used
-// dolls.selectors.getDollById = id =>
-//   createSelector(
-//     [getDolls],
-//     dolls => dolls[id]
-//   );
 
 // export const getDollTeam = (levelId, id) => {
 //   console.log('>>', id, getLevel(levelId).dolls[3].team);
@@ -71,6 +69,13 @@ const getSelectedDollDM = createSelector(
   }
 );
 
+
+const getDollById = id =>
+  createSelector(
+    [getDolls],
+    dollsById => dollsById[id]
+  );
+
 // const getDollDM = createSelector(
 //   [getDoll],
 //   (dollsById, dollId) => {
@@ -86,6 +91,31 @@ dolls.selectors = {
   getSelectedDollId,
   getSelectedDoll, // getActive
   getSelectedDollDM,
+  getDollById,
+};
+
+// effects
+
+const dealDamageToDoll = ({dollId, tileId, attackStrength}) =>
+  (dispatch, getState) => {
+    const doll = dolls.selectors.getDollById(dollId)(getState());
+    const result = doll.hp - attackStrength;
+
+    // over and over between board and dolls...
+    // it should be one common reducers for it
+
+    if (result > 0) {
+      dispatch(dolls.actions.hurtDoll({
+        dollId,
+        attackStrength
+      }));
+    } else {
+      dispatch(board.actions.removeDoll(tileId));
+    }
+  };
+
+dolls.effects = {
+  dealDamageToDoll,
 };
 
 export default dolls;
