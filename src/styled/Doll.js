@@ -1,12 +1,24 @@
+import React from 'react';
 import styled, {css} from 'styled-components';
 import { rgba, math } from 'polished';
+import posed, {PoseGroup} from 'react-pose';
 import sizes from '../theme/sizes';
 import colors from '../theme/colors';
 import { tileBase } from './common';
 
 const dollSize = math(`${sizes.tileSize} - 8`);
 
-const Doll = styled.div`
+
+
+const DollPosed = posed.div({
+  // hidden: { opacity: 0.5 },
+  // visible: { opacity: 1 },
+  enter: { opacity: 1 },
+  exit: { opacity: 0 }
+});
+
+
+const Doll = styled(DollPosed)`
   ${tileBase};
 
   width: ${dollSize};

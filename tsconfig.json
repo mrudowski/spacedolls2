@@ -18,8 +18,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react"
-    // added by me for test
-    // "noImplicitAny": false
   },
   "include": [
     "src"

@@ -13,6 +13,7 @@ import AttackGizmoContainer from './AttackGizmoContainer';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 import DevGizmo from './DevGizmo';
+import { PoseGroup } from 'react-pose';
 
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);
@@ -68,7 +69,11 @@ const Board = () => {
       <React.Fragment>
         <div>{tilesToRender}</div>
         <div>{wallsToRender}</div>
-        <div>{dollsToRender}</div>
+        <div>
+          <PoseGroup animateOnMount={true} flipMove={false}>
+            {dollsToRender}
+          </PoseGroup>
+        </div>
       </React.Fragment>
     );
   };
