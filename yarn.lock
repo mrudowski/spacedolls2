@@ -9289,9 +9289,10 @@ styled-normalize@8.0.6:
   version "8.0.6"
   resolved "https://registry.yarnpkg.com/styled-normalize/-/styled-normalize-8.0.6.tgz#f27f87292f46aa79ad6db6339aff5db529df3c91"
 
-styled-reboot@latest:
+styled-reboot@4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/styled-reboot/-/styled-reboot-4.0.3.tgz#d749e922b9359bbd8dcf60354997241d8c03bd0b"
+  integrity sha512-xU2MtOYn7yqdOhwyFfX4MVAMGOhgbYb6wEsbKRe8xEXwsQ+y3FACyiFun7GPnn2deM7f3Q4wgtiV32TkpazBXw==
 
 styled-reset@2.0.16:
   version "2.0.16"
