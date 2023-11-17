@@ -14,7 +14,7 @@ React turn based tactics playground | 2019
 - some new animation engine https://www.react-spring.io/ or https://github.com/FormidableLabs/react-animations
 - ~~Blueprint~~ (or ~~AntDesign~~ or anything other than Bootstrap/Reactstrap to try and learn new tricks)
 - [Blueprint colors](https://blueprintjs.com/docs/#core/colors)
-- edited and running on public codesandbox
+- edited and running on public [codesandbox](https://codesandbox.io/s/github/mrudowski/spacedolls2) 
 - connected and hosted on public github repo
 - with working Redux tools and history preview
 - for fun and learn
