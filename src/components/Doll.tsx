@@ -1,7 +1,6 @@
 import React from 'react';
 import StyledDoll from '../styled/Doll';
 import { getXYFromId } from '../utils/tile';
-import {PoseGroup} from "react-pose";
 
 interface DollData {
   team: string;
@@ -18,7 +17,15 @@ const Doll:React.FunctionComponent<Props> = ({ data, tileId, selected, ...restPr
   console.log('restProps',restProps);
   const {x, y} = getXYFromId(tileId);
   return (
-    <StyledDoll key='doll' $x={x} $y={y} $team={data.team} $selected={selected} pose={selected ? 'visible' : 'hidden'} {...restProps}>
+    <StyledDoll
+        key='doll'
+        $x={x}
+        $y={y}
+        $team={data.team}
+        $selected={selected}
+        pose={selected ? 'visible' : 'hidden'}
+        {...restProps}
+    >
       {data.hp}
     </StyledDoll>
   );

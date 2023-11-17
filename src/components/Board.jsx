@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { PoseGroup } from 'react-pose';
 import dolls from '../redux/dolls';
 import board from '../redux/board';
 import actions, {MOVE, ATTACK} from '../redux/actions';
@@ -13,7 +14,6 @@ import AttackGizmoContainer from './AttackGizmoContainer';
 // https://medium.com/inturn-eng/naming-styled-components-d7097950a245
 import * as Styled from '../styled/Board';
 import DevGizmo from './DevGizmo';
-import { PoseGroup } from 'react-pose';
 
 const Board = () => {
   const dollsData = useSelector(dolls.selectors.getDolls);

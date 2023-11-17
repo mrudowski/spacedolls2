@@ -1,6 +1,8 @@
 # SpaceDolls
 
-React turn based tactics playground
+React turn based tactics playground | 2019
+
+![Screenshot](screenshot.png)
 
 ## Main assumptions
 
@@ -10,9 +12,9 @@ React turn based tactics playground
 - ~~sass support~~ (work fine, but let's try without it)
 - only https://www.styled-components.com/
 - some new animation engine https://www.react-spring.io/ or https://github.com/FormidableLabs/react-animations
-- ~~Blueprint~~ (or ~~AntDesign~~ or antything other then Bootstrap/Reactstrap to try and learn new tricks)
+- ~~Blueprint~~ (or ~~AntDesign~~ or anything other than Bootstrap/Reactstrap to try and learn new tricks)
 - [Blueprint colors](https://blueprintjs.com/docs/#core/colors)
-- edited and runing on public codesandbox
+- edited and running on public codesandbox
 - connected and hosted on public github repo
 - with working Redux tools and history preview
 - for fun and learn
@@ -21,13 +23,13 @@ React turn based tactics playground
 
 - no font icons?
 - no ajax for now
-- with tests?
-- Redux hooks without any optimization (memoizing) for now
+- with tests
+- Redux hooks without any optimization (memorizing) for now
 
 ### Other things (and thinks) that came out during the process
 
 - we need `polished` because styled component isn't enough :(
-- reboot, normalized, reset... we still do the same things in differents tech
+- reboot, normalized, reset... we still do the same things in different tech
 - `Immutable`, `Immer` ... - I finally understand the big 'Why' behind you
 - do I really still need `lodash`?
 - es6 `Map` is... but I will try again

@@ -1,14 +1,11 @@
-import React from 'react';
 import styled, {css} from 'styled-components';
 import { rgba, math } from 'polished';
-import posed, {PoseGroup} from 'react-pose';
+import posed from 'react-pose';
 import sizes from '../theme/sizes';
 import colors from '../theme/colors';
 import { tileBase } from './common';
 
 const dollSize = math(`${sizes.tileSize} - 8`);
-
-
 
 const DollPosed = posed.div({
   // hidden: { opacity: 0.5 },

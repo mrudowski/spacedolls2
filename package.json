@@ -22,7 +22,6 @@
     "react-dom": "16.8.6",
     "react-pose": "^4.0.8",
     "react-redux": "7.1.0",
-    "react-scripts": "^3.1.1",
     "redux": "4.0.1",
     "redux-starter-kit": "0.6.3",
     "styled-components": "4.3.2",
@@ -32,11 +31,14 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.0.1",
+    "patch-package": "^8.0.0",
+    "react-scripts": "^5.0.1",
     "typescript": "^3.6.2"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postinstall": "patch-package",
     "test": "craco test --env=jsdom",
     "eject": "react-scripts eject"
   },
